@@ -256,24 +256,9 @@ class LicenseManager {
         #if DEBUG
         if hasMockedLicense { return mockedTrialStartDate.map(trialState) ?? state }
         #endif
-        if keychain.value(account: Self.keychainKeyAccount) != nil {
-            let lastValidationResult = defaults.bool(forKey: "lastValidationResult")
-            guard lastValidationResult else { return .trialExpired }
-            if let variant = keychain.value(account: Self.keychainVariantAccount),
-               let maxVersion = Self.versionLimitedVariants[variant] {
-                let currentVersion = currentAppVersion()
-                if currentVersion.compare(maxVersion, options: .numeric) == .orderedDescending {
-                    return .proExpired
-                }
-            }
-            return .pro
-        }
-        return computeTrialState()
-    }
-
-    private func computeTrialState() -> LicenseState {
-        guard let start = trialStartDate else { return .trialNotStarted }
-        return trialState(start)
+        // Personal build: Pro never expires. Setup still runs as `.trialNotStarted` until the permissions
+        // are granted and `startTrialIfNeeded()` records a start date.
+        return trialStartDate == nil ? .trialNotStarted : .pro
     }
 
     private func trialState(_ trialStart: Date) -> LicenseState {
