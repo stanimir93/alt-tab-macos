@@ -217,10 +217,7 @@ class Application: NSObject {
 
     func quit() {
         // only let power users quit Finder if they opt-in
-        if !canBeQuit() {
-            NSSound.beep()
-            return
-        }
+        guard canBeQuit() else { return }
         if alreadyRequestedToQuit {
             runningApplication.forceTerminate()
         } else {

@@ -273,10 +273,7 @@ class Window {
     }
 
     func close() {
-        if !canBeClosed() {
-            NSSound.beep()
-            return
-        }
+        guard canBeClosed() else { return }
         if let altTabWindow = altTabWindow() {
             altTabWindow.close()
             return
@@ -308,17 +305,14 @@ class Window {
     }
 
     /// Every one of these commands is an AX write. A window kept on WindowServer evidence alone has no
-    /// element to write to, so it fails safely with the same beep an ineligible window gets rather than
+    /// element to write to, so it does nothing, the same as for an ineligible window, rather than
     /// force-unwrapping nil.
     func canBeMinDeminOrFullscreened() -> Bool {
         return !self.isWindowlessApp && !self.isTabbed && (axUiElement != nil || altTabWindow() != nil)
     }
 
     func minDemin() {
-        guard canBeMinDeminOrFullscreened() else {
-            NSSound.beep()
-            return
-        }
+        guard canBeMinDeminOrFullscreened() else { return }
         if let altTabWindow = altTabWindow() {
             self.isMinimized ? altTabWindow.deminiaturize(nil) : altTabWindow.miniaturize(nil)
             return
@@ -342,10 +336,7 @@ class Window {
     }
 
     func toggleFullscreen() {
-        guard canBeMinDeminOrFullscreened() else {
-            NSSound.beep()
-            return
-        }
+        guard canBeMinDeminOrFullscreened() else { return }
         if let altTabWindow = altTabWindow() {
             altTabWindow.toggleFullScreen(nil)
             return

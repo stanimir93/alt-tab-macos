@@ -920,7 +920,6 @@ static void *_SRStyleGuideObservingContext = &_SRStyleGuideObservingContext;
 
 - (void)playAlert
 {
-    NSBeep();
 }
 
 - (void)propagateValue:(id)aValue forBinding:(NSString *)aBinding

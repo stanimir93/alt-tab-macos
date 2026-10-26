@@ -45,6 +45,17 @@ class App: AppCenterApplication {
         super.init()
         _ = Self.activity
         delegate = self
+        Self.silenceUnhandledKeys()
+    }
+
+    /// AltTab never beeps. AppKit plays the alert sound when a key reaches the end of the responder chain
+    /// unhandled (`NSResponder.noResponder(for:)` calls `NSBeep` for `keyDown:`). The switcher panel is key
+    /// while it is up, so every key that isn't a shortcut beeped, including the first keystrokes typed right
+    /// after a switch. Replacing that method with a no-op silences it for every window of the app.
+    private static func silenceUnhandledKeys() {
+        guard let method = class_getInstanceMethod(NSResponder.self, #selector(NSResponder.noResponder(for:))) else { return }
+        let silent: @convention(block) (NSResponder, Selector) -> Void = { _, _ in }
+        method_setImplementation(method, imp_implementationWithBlock(silent))
     }
 
     required init?(coder: NSCoder) {
