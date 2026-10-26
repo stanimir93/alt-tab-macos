@@ -222,6 +222,7 @@ class TilesView {
     private static func stopKeyRepeatTimers() {
         let shortcutIndex = SwitcherSession.current?.shortcutIndex ?? 0
         KeyRepeatTimer.stopTimerForRepeatingKey(Preferences.indexToName("nextWindowShortcut", shortcutIndex))
+        KeyRepeatTimer.stopTimerForRepeatingKey(Preferences.indexToName("reverseNextWindowShortcut", shortcutIndex))
         KeyRepeatTimer.stopTimerForRepeatingKey("previousWindowShortcut")
     }
 

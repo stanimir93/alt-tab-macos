@@ -452,6 +452,16 @@ class App: AppCenterApplication {
         }
     }
 
+    static func showUiOrCycleSelectionBackwards(_ shortcutIndex: Int) {
+        defer { KeyRepeatTimer.startRepeatingKeyReverseNextWindow() }
+        guard let session = SwitcherSession.current, session.shortcutIndex == shortcutIndex else {
+            showUiOrCycleSelection(shortcutIndex, false)
+            Windows.selectLastDisplayedWindow()
+            return
+        }
+        cycleSelection(.trailing)
+    }
+
     static func buildUiAndShowPanel(_ listChangedSincePress: Bool = false) {
         MainThreadStall.step()
         guard SwitcherSession.isActive else { return }

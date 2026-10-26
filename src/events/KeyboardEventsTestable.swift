@@ -6,6 +6,7 @@ class KeyboardEventsTestable {
         var ids = [String: Int]()
         (0..<Preferences.maxShortcutCount).forEach { ids[Preferences.indexToName("nextWindowShortcut", $0)] = $0 }
         (0..<Preferences.maxShortcutCount).forEach { ids[Preferences.indexToName("holdShortcut", $0)] = Preferences.maxShortcutCount + $0 }
+        (0..<Preferences.maxShortcutCount).forEach { ids[Preferences.indexToName("reverseNextWindowShortcut", $0)] = 2 * Preferences.maxShortcutCount + $0 }
         return ids
     }
 }
@@ -75,7 +76,7 @@ private func logKeyboardEvent(_ globalId: Int?, _ shortcutState: ShortcutState?,
 /// already cycled, so the release commits one tile past what was asked and every alt-tab from then on
 /// ping-pongs against a window the user never picked, seen live. Run again after the loop, for a session this
 /// very event opened with the modifier already back up.
-private func settleLostHoldRelease(_ recordedHoldRelease: Bool = false) {
+func settleLostHoldRelease(_ recordedHoldRelease: Bool = false) {
     guard let session = SwitcherSession.current else { return }
     ControlsTab.shortcuts[Preferences.indexToName("holdShortcut", session.shortcutIndex)]?
         .settleLostRelease(recordedHoldRelease)

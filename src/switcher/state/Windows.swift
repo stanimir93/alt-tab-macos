@@ -470,6 +470,13 @@ class Windows {
         return ids
     }
 
+    /// The reverse summon lands where one step back from the first window would, like native ⌘⇧⇥.
+    static func selectLastDisplayedWindow() {
+        guard let session = SwitcherSession.current, let index = list.lastIndex(where: { shouldDisplay($0) }) else { return }
+        session.userPickedSelection = true
+        updateSelectedAndHoveredWindowIndex(index)
+    }
+
     static func selectedWindowIndexAfterCycling(_ step: Int) -> Int {
         let currentIndex = SwitcherSession.current?.selectedIndex ?? 0
         if list.count == 0 || !list.contains(where: { shouldDisplay($0) }) { return currentIndex }

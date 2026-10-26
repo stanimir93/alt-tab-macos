@@ -37,6 +37,14 @@ class KeyRepeatTimer {
         }
     }
 
+    static func startRepeatingKeyReverseNextWindow() {
+        let reverseShortcutName = Preferences.indexToName("reverseNextWindowShortcut", SwitcherSession.current?.shortcutIndex ?? 0)
+        guard let shortcut = KeyboardEvents.reverseShortcuts[reverseShortcutName] else { return }
+        startTimerForRepeatingKey(shortcut) {
+            App.cycleSelection(.trailing)
+        }
+    }
+
     static func stopTimerForRepeatingKey(_ shortcutName: String) {
         if shortcutName == currentTimerShortcutName {
             Logger.debug { shortcutName }

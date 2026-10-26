@@ -27,6 +27,13 @@ class KeyboardEvents {
     /// `escapeEventTap` is enabled at all (see `updateEscapeAbsorptionTap`).
     static var anyShortcutUsesEscape = false
 
+    /// Each nextWindowShortcut with ⇧ added (⌘⇧⇥ for ⌘⇥) summons the switcher on its last window, then
+    /// cycles backwards, like the native reverse switcher. `NativeHotkeyResolver` disables native ⌘⇧⇥
+    /// whenever ⌘⇥ is bound, and previousWindowShortcut is local, so without these the chord does nothing
+    /// while the switcher is closed. They derive from nextWindowShortcut and have no setting of their own,
+    /// so they stay out of `ControlsTab.shortcuts` and its conflict checks.
+    private(set) static var reverseShortcuts = [String: ATShortcut]()
+
     private static let inputEventHandler: CGEventTapCallBack = { _, type, cgEvent, _ in
         switch type {
         case .flagsChanged:
@@ -90,10 +97,51 @@ class KeyboardEvents {
         }
     }
 
+    /// The reverse hotkeys are dropped before registering `controlId`: Carbon refuses a chord that is
+    /// already registered, and the reverse of one shortcut can be exactly the chord another is set to.
     static func addGlobalShortcut(_ controlId: String, _ shortcut: Shortcut) {
         addGlobalHandlerIfNeeded(shortcut)
+        unregisterReverseShortcuts()
         registerHotKeyIfNeeded(controlId, shortcut)
+        registerReverseShortcuts()
         ModifierReleaseLog.setSwitchingChords(switchingChords())
+    }
+
+    private static func unregisterReverseShortcuts() {
+        reverseShortcuts.values.forEach { unregisterHotKeyIfNeeded($0.id, $0.shortcut) }
+        reverseShortcuts = [:]
+    }
+
+    private static func registerReverseShortcuts(excluding removedControlId: String? = nil) {
+        let globals = ControlsTab.shortcuts.values.filter { $0.scope == .global && $0.id != removedControlId }
+        for next in globals where next.id.hasPrefix("nextWindowShortcut") {
+            guard let reverse = reverseShortcut(next), !globals.contains(where: { chord($0) == chord(reverse) }) else { continue }
+            reverseShortcuts[reverse.id] = reverse
+            if !globalShortcutsAreDisabled { registerHotKeyIfNeeded(reverse.id, reverse.shortcut) }
+        }
+    }
+
+    private static func reverseShortcut(_ next: ATShortcut) -> ATShortcut? {
+        guard next.shortcut.keyCode != .none, !next.shortcut.modifierFlags.contains(.shift) else { return nil }
+        let shortcut = Shortcut(code: next.shortcut.keyCode, modifierFlags: next.shortcut.modifierFlags.union(.shift),
+                                characters: nil, charactersIgnoringModifiers: nil)
+        let index = Preferences.nameToIndex(next.id)
+        return ATShortcut(shortcut, Preferences.indexToName("reverseNextWindowShortcut", index), .global, .down, index)
+    }
+
+    private static func reverseShortcut(_ globalId: Int) -> ATShortcut? {
+        reverseShortcuts.values.first { KeyboardEventsTestable.globalShortcutsIds[$0.id] == globalId }
+    }
+
+    private static func handleReverseShortcut(_ reverse: ATShortcut, _ state: ShortcutState) {
+        reverse.state = state
+        guard state == .down else {
+            KeyRepeatTimer.stopTimerForRepeatingKey(reverse.id)
+            return
+        }
+        settleLostHoldRelease()
+        guard reverse.shouldTrigger() else { return }
+        reverse.executeAction(false)
     }
 
     private static func claimRecordedRelease(_ globalId: Int) -> Bool {
@@ -120,6 +168,8 @@ class KeyboardEvents {
 
     static func removeGlobalShortcut(_ controlId: String, _ shortcut: Shortcut) {
         unregisterHotKeyIfNeeded(controlId, shortcut)
+        unregisterReverseShortcuts()
+        registerReverseShortcuts(excluding: controlId)
         removeHandlerIfNeeded()
         ModifierReleaseLog.setSwitchingChords(switchingChords(excluding: controlId))
     }
@@ -128,7 +178,7 @@ class KeyboardEvents {
         if shouldDisable != globalShortcutsAreDisabled {
             let fn = shouldDisable ? unregisterHotKeyIfNeeded : registerHotKeyIfNeeded
             for shortcutId in KeyboardEventsTestable.globalShortcutsIds.keys {
-                if let shortcut = ControlsTab.shortcuts[shortcutId]?.shortcut {
+                if let shortcut = (ControlsTab.shortcuts[shortcutId] ?? reverseShortcuts[shortcutId])?.shortcut {
                     fn(shortcutId, shortcut)
                 }
             }
@@ -261,6 +311,10 @@ class KeyboardEvents {
                 var id = EventHotKeyID()
                 GetEventParameter(event, EventParamName(kEventParamDirectObject), EventParamType(typeEventHotKeyID), nil, MemoryLayout<EventHotKeyID>.size, nil, &id)
                 let globalId = Int(id.id)
+                if let reverse = KeyboardEvents.reverseShortcut(globalId) {
+                    KeyboardEvents.handleReverseShortcut(reverse, .down)
+                    return noErr
+                }
                 handleKeyboardEvent(globalId, .down, nil, nil, false, nil,
                                     KeyboardEvents.claimRecordedRelease(globalId))
                 return noErr
@@ -271,6 +325,10 @@ class KeyboardEvents {
             InstallEventHandler(shortcutEventTarget, { (_: EventHandlerCallRef?, event: EventRef?, _: UnsafeMutableRawPointer?) -> OSStatus in
                 var id = EventHotKeyID()
                 GetEventParameter(event, EventParamName(kEventParamDirectObject), EventParamType(typeEventHotKeyID), nil, MemoryLayout<EventHotKeyID>.size, nil, &id)
+                if let reverse = KeyboardEvents.reverseShortcut(Int(id.id)) {
+                    KeyboardEvents.handleReverseShortcut(reverse, .up)
+                    return noErr
+                }
                 handleKeyboardEvent(Int(id.id), .up, nil, nil, false)
                 return noErr
             }, eventTypes.count, &eventTypes, nil, &hotKeyReleasedEventHandler)
