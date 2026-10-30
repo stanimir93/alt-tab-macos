@@ -8,7 +8,7 @@ class Preferences {
             "shortcutCount": "2",
             "nextWindowGesture": GesturePreference.disabled.indexAsString,
             "focusWindowShortcut": defaultShortcut(returnKeyEquivalent()),
-            "previousWindowShortcut": defaultShortcut("⇧"),
+            "previousWindowShortcut": defaultShortcut("⇧⇥"),
             "cancelShortcut": defaultShortcut("⎋"),
             "closeWindowShortcut": defaultShortcut("W"),
             "minDeminWindowShortcut": defaultShortcut("M"),
@@ -22,7 +22,7 @@ class Preferences {
             "mouseHoverEnabled": "false",
             "cursorFollowFocus": CursorFollowFocus.never.indexAsString,
             "hideColoredCircles": "false",
-            "windowDisplayDelay": "100",
+            "windowDisplayDelay": "125",
             "appearanceStyle": AppearanceStylePreference.thumbnails.indexAsString,
             "appearanceSize": AppearanceSizePreference.auto.indexAsString,
             "appearanceTheme": AppearanceThemePreference.system.indexAsString,
@@ -33,7 +33,7 @@ class Preferences {
             "previewFadeInAnimation": "true",
             "startAtLogin": "true",
             "menubarIcon": MenubarIconPreference.outlined.indexAsString,
-            "menubarIconShown": "true",
+            "menubarIconShown": "false",
             "language": LanguagePreference.systemDefault.indexAsString,
             "exceptions": defaultExceptions(),
             "updatePolicy": UpdatePolicyPreference.autoCheck.indexAsString,
@@ -48,14 +48,14 @@ class Preferences {
             "settingsWindowShownOnFirstLaunch": "false",
         ]
         (0..<maxShortcutCount).forEach { index in
-            values[indexToName("holdShortcut", index)] = defaultShortcut("⌥")
+            values[indexToName("holdShortcut", index)] = defaultShortcut(index == 0 ? "⌘" : "⌥")
             values[indexToName("nextWindowShortcut", index)] = defaultShortcut(index == 0 ? "⇥" : (index == 1 ? keyAboveTabDependingOnInputSource() : ""))
         }
         (0...maxShortcutCount).forEach { index in
             values[indexToName("appsToShow", index)] = index == 1 ? AppsToShowPreference.active.indexAsString : (index == 2 ? AppsToShowPreference.nonActive.indexAsString : AppsToShowPreference.all.indexAsString)
             values[indexToName("spacesToShow", index)] = SpacesToShowPreference.all.indexAsString
             values[indexToName("screensToShow", index)] = ScreensToShowPreference.all.indexAsString
-            values[indexToName("showMinimizedWindows", index)] = ShowHowPreference.show.indexAsString
+            values[indexToName("showMinimizedWindows", index)] = (index == 0 ? ShowHowPreference.hide : ShowHowPreference.show).indexAsString
             values[indexToName("showHiddenWindows", index)] = ShowHowPreference.show.indexAsString
             values[indexToName("showFullscreenWindows", index)] = ShowHowPreference.show.indexAsString
             values[indexToName("showWindowlessApps", index)] = ShowHowPreference.showAtTheEnd.indexAsString
