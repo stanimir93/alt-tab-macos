@@ -15,13 +15,13 @@
 "All Windows" = "すべてのウインドウ";
 "Allowed" = "許可";
 "Alphabetical Order" = "アルファベット順";
-"AltTab is ready" = "AltTab の準備ができました";
-"AltTab is running without Screen Recording permissions. %@ won’t show." = "AltTab は画面収録の権限なしで動作しています。%@は表示されません。";
-"AltTab preferences file is a symlink. macOS doesn’t support symlink for preferences. Please use a valid file instead of a symlink here:" = "AltTab の設定ファイルがシンボリックリンクです。macOS は設定にシンボリックリンクをサポートしていません。ここではシンボリックリンクではなく通常のファイルを使用してください:";
-"AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:" = "AltTab の設定ファイルにあなたのアカウントで書き込みできません。ここでファイルの所有者と権限を修正してください:";
-"AltTab requires some permissions" = "AltTab にはいくつかのアクセス権が必要です";
-"AltTab requires this permission to focus windows for you." = "ウインドウを前面に表示するために、AltTab にはこのアクセス権が必要です。";
-"AltTab requires this permission to show you pictures of each window." = "各ウインドウの画像を表示するために、AltTab にはこのアクセス権が必要です。";
+"AltTab is ready" = "BetterAltTab の準備ができました";
+"AltTab is running without Screen Recording permissions. %@ won’t show." = "BetterAltTab は画面収録の権限なしで動作しています。%@は表示されません。";
+"AltTab preferences file is a symlink. macOS doesn’t support symlink for preferences. Please use a valid file instead of a symlink here:" = "BetterAltTab の設定ファイルがシンボリックリンクです。macOS は設定にシンボリックリンクをサポートしていません。ここではシンボリックリンクではなく通常のファイルを使用してください:";
+"AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:" = "BetterAltTab の設定ファイルにあなたのアカウントで書き込みできません。ここでファイルの所有者と権限を修正してください:";
+"AltTab requires some permissions" = "BetterAltTab にはいくつかのアクセス権が必要です";
+"AltTab requires this permission to focus windows for you." = "ウインドウを前面に表示するために、BetterAltTab にはこのアクセス権が必要です。";
+"AltTab requires this permission to show you pictures of each window." = "各ウインドウの画像を表示するために、BetterAltTab にはこのアクセス権が必要です。";
 "Always" = "常に";
 "App Icons" = "App アイコン";
 "App is hidden" = "App は非表示";
@@ -67,7 +67,7 @@
 "Large" = "大";
 "Light" = "ライト";
 "Lunch" = "昼食";
-"macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. AltTab cannot use them.\n\nYour change would assign one of these to: %@." = "macOS は ⌘⌥⎋、⌘⌥⇧⎋、⌘⌥⇧⌃⎋ を強制終了用に予約しており、解除できません。AltTab では使用できません。\n\n変更しようとしている割り当て: %@。";
+"macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. AltTab cannot use them.\n\nYour change would assign one of these to: %@." = "macOS は ⌘⌥⎋、⌘⌥⇧⎋、⌘⌥⇧⌃⎋ を強制終了用に予約しており、解除できません。BetterAltTab では使用できません。\n\n変更しようとしている割り当て: %@。";
 "Medium" = "中";
 "Menubar icon" = "メニューバーアイコン";
 "Middle" = "中央";
@@ -84,7 +84,7 @@
 "Only 1 shortcut" = "ショートカットは1個のみ";
 "Only on different screen" = "別の画面のときのみ";
 "Photos" = "写真";
-"Please drag AltTab into the Applications folder manually." = "AltTab を手動でアプリケーションフォルダにドラッグしてください。";
+"Please drag AltTab into the Applications folder manually." = "BetterAltTab を手動でアプリケーションフォルダにドラッグしてください。";
 "press" = "押す";
 "Press %@ any time" = "いつでも %@ を押してください";
 "Quit %@" = "%@ を終了";
@@ -98,7 +98,7 @@
 "Screen including menu bar" = "メニューバーを含む画面";
 "Screen including mouse" = "マウスのある画面";
 "Screen Recording" = "画面収録";
-"Screen showing AltTab" = "AltTab を表示する画面";
+"Screen showing AltTab" = "BetterAltTab を表示する画面";
 "Search" = "検索";
 "Select next window" = "次のウインドウを選択";
 "Select previous window" = "前のウインドウを選択";
@@ -160,4 +160,4 @@
 "Windows will show as app icons" = "ウインドウは App アイコンで表示されます";
 "Without Pro" = "Proなし";
 "Work" = "仕事";
-"Your settings reset every time AltTab restarts." = "AltTab を再起動するたびに設定がリセットされます。";
+"Your settings reset every time AltTab restarts." = "BetterAltTab を再起動するたびに設定がリセットされます。";

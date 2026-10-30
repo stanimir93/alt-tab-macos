@@ -15,10 +15,10 @@
 "All Windows" = "모든 윈도우";
 "Allowed" = "허용됨";
 "Alphabetical Order" = "알파벳 순서";
-"AltTab is ready" = "AltTab 준비 완료";
+"AltTab is ready" = "BetterAltTab 준비 완료";
 "AltTab is running without Screen Recording permissions. %@ won’t show." = "AltTab이 화면 녹화 권한 없이 실행 중입니다. %@이(가) 표시되지 않습니다.";
-"AltTab preferences file is a symlink. macOS doesn’t support symlink for preferences. Please use a valid file instead of a symlink here:" = "AltTab 환경설정 파일이 심볼릭 링크입니다. macOS는 환경설정에 심볼릭 링크를 지원하지 않습니다. 여기에서 심볼릭 링크 대신 올바른 파일을 사용하십시오:";
-"AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:" = "AltTab 환경설정 파일을 사용자 계정에서 쓸 수 없습니다. 여기에서 파일의 소유자와 권한을 수정하십시오:";
+"AltTab preferences file is a symlink. macOS doesn’t support symlink for preferences. Please use a valid file instead of a symlink here:" = "BetterAltTab 환경설정 파일이 심볼릭 링크입니다. macOS는 환경설정에 심볼릭 링크를 지원하지 않습니다. 여기에서 심볼릭 링크 대신 올바른 파일을 사용하십시오:";
+"AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:" = "BetterAltTab 환경설정 파일을 사용자 계정에서 쓸 수 없습니다. 여기에서 파일의 소유자와 권한을 수정하십시오:";
 "AltTab requires some permissions" = "AltTab에 몇 가지 권한이 필요합니다";
 "AltTab requires this permission to focus windows for you." = "윈도우를 앞으로 가져오려면 AltTab에 이 권한이 필요합니다.";
 "AltTab requires this permission to show you pictures of each window." = "각 윈도우의 이미지를 보여 주려면 AltTab에 이 권한이 필요합니다.";

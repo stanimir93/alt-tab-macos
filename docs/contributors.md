@@ -1,4 +1,4 @@
-AltTabSwitcher is a fork of [AltTab](https://github.com/lwouis/alt-tab-macos). These people built and translated AltTab, and so most of this app.
+BetterAltTab is a fork of [AltTab](https://github.com/lwouis/alt-tab-macos). These people built and translated AltTab, and so most of this app.
 
 ## [Developed the app](https://github.com/lwouis/alt-tab-macos/graphs/contributors)
 

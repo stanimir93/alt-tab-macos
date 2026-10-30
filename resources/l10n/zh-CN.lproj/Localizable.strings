@@ -15,13 +15,13 @@
 "All Windows" = "所有窗口";
 "Allowed" = "允许";
 "Alphabetical Order" = "按字母顺序";
-"AltTab is ready" = "AltTab 已准备就绪";
-"AltTab is running without Screen Recording permissions. %@ won’t show." = "AltTab 正在运行但未获得屏幕录制权限。%@将无法显示。";
-"AltTab preferences file is a symlink. macOS doesn’t support symlink for preferences. Please use a valid file instead of a symlink here:" = "AltTab 的偏好设置文件是一个符号链接。macOS 不支持用符号链接保存偏好设置。请在此处使用正常文件，而不是符号链接：";
-"AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:" = "AltTab 的偏好设置文件无法被你的账户写入。请在此处修正该文件的所有者和权限：";
-"AltTab requires some permissions" = "AltTab 需要一些权限";
-"AltTab requires this permission to focus windows for you." = "AltTab 需要此权限才能为你将窗口切换到前台。";
-"AltTab requires this permission to show you pictures of each window." = "AltTab 需要此权限才能向你显示每个窗口的画面。";
+"AltTab is ready" = "BetterAltTab 已准备就绪";
+"AltTab is running without Screen Recording permissions. %@ won’t show." = "BetterAltTab 正在运行但未获得屏幕录制权限。%@将无法显示。";
+"AltTab preferences file is a symlink. macOS doesn’t support symlink for preferences. Please use a valid file instead of a symlink here:" = "BetterAltTab 的偏好设置文件是一个符号链接。macOS 不支持用符号链接保存偏好设置。请在此处使用正常文件，而不是符号链接：";
+"AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:" = "BetterAltTab 的偏好设置文件无法被你的账户写入。请在此处修正该文件的所有者和权限：";
+"AltTab requires some permissions" = "BetterAltTab 需要一些权限";
+"AltTab requires this permission to focus windows for you." = "BetterAltTab 需要此权限才能为你将窗口切换到前台。";
+"AltTab requires this permission to show you pictures of each window." = "BetterAltTab 需要此权限才能向你显示每个窗口的画面。";
 "Always" = "始终";
 "App Icons" = "应用图标";
 "App is hidden" = "应用已隐藏";
@@ -67,7 +67,7 @@
 "Large" = "大";
 "Light" = "浅色";
 "Lunch" = "午餐";
-"macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. AltTab cannot use them.\n\nYour change would assign one of these to: %@." = "macOS 将 ⌘⌥⎋、⌘⌥⇧⎋ 和 ⌘⌥⇧⌃⎋ 保留用于强制退出，无法解除绑定。AltTab 无法使用它们。\n\n您的更改会将其中之一分配给：%@。";
+"macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. AltTab cannot use them.\n\nYour change would assign one of these to: %@." = "macOS 将 ⌘⌥⎋、⌘⌥⇧⎋ 和 ⌘⌥⇧⌃⎋ 保留用于强制退出，无法解除绑定。BetterAltTab 无法使用它们。\n\n您的更改会将其中之一分配给：%@。";
 "Medium" = "中";
 "Menubar icon" = "菜单栏图标";
 "Middle" = "中间";
@@ -84,7 +84,7 @@
 "Only 1 shortcut" = "仅 1 个快捷键";
 "Only on different screen" = "仅在不同屏幕上";
 "Photos" = "照片";
-"Please drag AltTab into the Applications folder manually." = "请手动将 AltTab 拖动到应用程序文件夹。";
+"Please drag AltTab into the Applications folder manually." = "请手动将 BetterAltTab 拖动到应用程序文件夹。";
 "press" = "按下";
 "Press %@ any time" = "随时按 %@";
 "Quit %@" = "退出 %@";
@@ -98,7 +98,7 @@
 "Screen including menu bar" = "包含菜单栏的屏幕";
 "Screen including mouse" = "包含鼠标的屏幕";
 "Screen Recording" = "屏幕录制";
-"Screen showing AltTab" = "显示 AltTab 的屏幕";
+"Screen showing AltTab" = "显示 BetterAltTab 的屏幕";
 "Search" = "搜索";
 "Select next window" = "选择下一个窗口";
 "Select previous window" = "选择上一个窗口";
@@ -160,4 +160,4 @@
 "Windows will show as app icons" = "窗口将显示为应用图标";
 "Without Pro" = "不使用 Pro";
 "Work" = "工作";
-"Your settings reset every time AltTab restarts." = "每次重新启动 AltTab 时，你的设置都会被重置。";
+"Your settings reset every time AltTab restarts." = "每次重新启动 BetterAltTab 时，你的设置都会被重置。";

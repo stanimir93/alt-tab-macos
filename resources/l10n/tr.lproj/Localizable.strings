@@ -15,13 +15,13 @@
 "All Windows" = "Tüm Pencereler";
 "Allowed" = "İzin verildi";
 "Alphabetical Order" = "Alfabetik sıra";
-"AltTab is ready" = "AltTab hazır";
-"AltTab is running without Screen Recording permissions. %@ won’t show." = "AltTab, Ekran Kaydı izinleri olmadan çalışıyor. %@ gösterilmeyecek.";
-"AltTab preferences file is a symlink. macOS doesn’t support symlink for preferences. Please use a valid file instead of a symlink here:" = "AltTab tercih dosyası bir sembolik bağlantı. macOS, tercihler için sembolik bağlantıları desteklemez. Lütfen burada sembolik bağlantı yerine geçerli bir dosya kullanın:";
-"AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:" = "AltTab tercih dosyası hesabın tarafından yazılamıyor. Lütfen burada dosyanın sahibini ve izinlerini düzeltin:";
-"AltTab requires some permissions" = "AltTab'in bazı izinlere ihtiyacı var";
-"AltTab requires this permission to focus windows for you." = "AltTab'in pencereleri sizin için öne getirmesi için bu izin gerekir.";
-"AltTab requires this permission to show you pictures of each window." = "AltTab'in size her pencerenin görüntüsünü göstermesi için bu izin gerekir.";
+"AltTab is ready" = "BetterAltTab hazır";
+"AltTab is running without Screen Recording permissions. %@ won’t show." = "BetterAltTab, Ekran Kaydı izinleri olmadan çalışıyor. %@ gösterilmeyecek.";
+"AltTab preferences file is a symlink. macOS doesn’t support symlink for preferences. Please use a valid file instead of a symlink here:" = "BetterAltTab tercih dosyası bir sembolik bağlantı. macOS, tercihler için sembolik bağlantıları desteklemez. Lütfen burada sembolik bağlantı yerine geçerli bir dosya kullanın:";
+"AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:" = "BetterAltTab tercih dosyası hesabın tarafından yazılamıyor. Lütfen burada dosyanın sahibini ve izinlerini düzeltin:";
+"AltTab requires some permissions" = "BetterAltTab'in bazı izinlere ihtiyacı var";
+"AltTab requires this permission to focus windows for you." = "BetterAltTab'in pencereleri sizin için öne getirmesi için bu izin gerekir.";
+"AltTab requires this permission to show you pictures of each window." = "BetterAltTab'in size her pencerenin görüntüsünü göstermesi için bu izin gerekir.";
 "Always" = "Her zaman";
 "App Icons" = "Uygulama simgeleri";
 "App is hidden" = "Uygulama gizli";
@@ -67,7 +67,7 @@
 "Large" = "Büyük";
 "Light" = "Açık";
 "Lunch" = "Öğle yemeği";
-"macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. AltTab cannot use them.\n\nYour change would assign one of these to: %@." = "macOS, ⌘⌥⎋, ⌘⌥⇧⎋ ve ⌘⌥⇧⌃⎋ tuşlarını Çıkmaya Zorla için ayırmıştır ve bunların bağlantısı kaldırılamaz. AltTab bunları kullanamaz.\n\nYaptığınız değişiklik bunlardan birini şuna atayacaktır: %@.";
+"macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. AltTab cannot use them.\n\nYour change would assign one of these to: %@." = "macOS, ⌘⌥⎋, ⌘⌥⇧⎋ ve ⌘⌥⇧⌃⎋ tuşlarını Çıkmaya Zorla için ayırmıştır ve bunların bağlantısı kaldırılamaz. BetterAltTab bunları kullanamaz.\n\nYaptığınız değişiklik bunlardan birini şuna atayacaktır: %@.";
 "Medium" = "Orta";
 "Menubar icon" = "Menü çubuğu simgesi";
 "Middle" = "Orta";
@@ -84,7 +84,7 @@
 "Only 1 shortcut" = "Yalnızca 1 kısayol";
 "Only on different screen" = "Yalnızca farklı ekranda";
 "Photos" = "Fotoğraflar";
-"Please drag AltTab into the Applications folder manually." = "Lütfen AltTab’ı el ile Uygulamalar klasörüne sürükleyin.";
+"Please drag AltTab into the Applications folder manually." = "Lütfen BetterAltTab’ı el ile Uygulamalar klasörüne sürükleyin.";
 "press" = "bas";
 "Press %@ any time" = "İstediğiniz zaman %@ tuşlarına basın";
 "Quit %@" = "%@ uygulamasından çık";
@@ -98,7 +98,7 @@
 "Screen including menu bar" = "Menü çubuğunu içeren ekran";
 "Screen including mouse" = "Fareyi içeren ekran";
 "Screen Recording" = "Ekran Kaydı";
-"Screen showing AltTab" = "AltTab’ı gösteren ekran";
+"Screen showing AltTab" = "BetterAltTab’ı gösteren ekran";
 "Search" = "Ara";
 "Select next window" = "Sonraki pencereyi seç";
 "Select previous window" = "Önceki pencereyi seç";
@@ -160,4 +160,4 @@
 "Windows will show as app icons" = "Pencereler uygulama simgeleri olarak gösterilecek";
 "Without Pro" = "Pro olmadan";
 "Work" = "İş";
-"Your settings reset every time AltTab restarts." = "Ayarların her AltTab yeniden başlatıldığında sıfırlanıyor.";
+"Your settings reset every time AltTab restarts." = "Ayarların her BetterAltTab yeniden başlatıldığında sıfırlanıyor.";

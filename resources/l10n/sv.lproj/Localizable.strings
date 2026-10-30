@@ -15,13 +15,13 @@
 "All Windows" = "Alla fönster";
 "Allowed" = "Tillåten";
 "Alphabetical Order" = "Alfabetisk ordning";
-"AltTab is ready" = "AltTab är redo";
-"AltTab is running without Screen Recording permissions. %@ won’t show." = "AltTab körs utan behörighet för Skärminspelning. %@ visas inte.";
+"AltTab is ready" = "BetterAltTab är redo";
+"AltTab is running without Screen Recording permissions. %@ won’t show." = "BetterAltTab körs utan behörighet för Skärminspelning. %@ visas inte.";
 "AltTab preferences file is a symlink. macOS doesn’t support symlink for preferences. Please use a valid file instead of a symlink here:" = "AltTabs inställningsfil är en symbolisk länk. macOS stöder inte symboliska länkar för inställningar. Använd en giltig fil i stället för en symbolisk länk här:";
 "AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:" = "AltTabs inställningsfil går inte att skriva till med ditt konto. Korrigera filens ägare och behörigheter här:";
-"AltTab requires some permissions" = "AltTab behöver några behörigheter";
-"AltTab requires this permission to focus windows for you." = "AltTab behöver den här behörigheten för att ta fram fönster åt dig.";
-"AltTab requires this permission to show you pictures of each window." = "AltTab behöver den här behörigheten för att visa en bild av varje fönster.";
+"AltTab requires some permissions" = "BetterAltTab behöver några behörigheter";
+"AltTab requires this permission to focus windows for you." = "BetterAltTab behöver den här behörigheten för att ta fram fönster åt dig.";
+"AltTab requires this permission to show you pictures of each window." = "BetterAltTab behöver den här behörigheten för att visa en bild av varje fönster.";
 "Always" = "Alltid";
 "App Icons" = "Appikoner";
 "App is hidden" = "App är dold";
@@ -67,7 +67,7 @@
 "Large" = "Stor";
 "Light" = "Ljus";
 "Lunch" = "Lunch";
-"macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. AltTab cannot use them.\n\nYour change would assign one of these to: %@." = "macOS reserverar ⌘⌥⎋, ⌘⌥⇧⎋ och ⌘⌥⇧⌃⎋ för Tvinga att avsluta och de kan inte frigöras. AltTab kan inte använda dem.\n\nDin ändring skulle tilldela ett av dessa till: %@.";
+"macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. AltTab cannot use them.\n\nYour change would assign one of these to: %@." = "macOS reserverar ⌘⌥⎋, ⌘⌥⇧⎋ och ⌘⌥⇧⌃⎋ för Tvinga att avsluta och de kan inte frigöras. BetterAltTab kan inte använda dem.\n\nDin ändring skulle tilldela ett av dessa till: %@.";
 "Medium" = "Mellan";
 "Menubar icon" = "Menyradsikon";
 "Middle" = "Mitten";
@@ -84,7 +84,7 @@
 "Only 1 shortcut" = "Bara 1 kortkommando";
 "Only on different screen" = "Endast på annan skärm";
 "Photos" = "Bilder";
-"Please drag AltTab into the Applications folder manually." = "Dra AltTab till mappen Program manuellt.";
+"Please drag AltTab into the Applications folder manually." = "Dra BetterAltTab till mappen Program manuellt.";
 "press" = "tryck";
 "Press %@ any time" = "Tryck på %@ när som helst";
 "Quit %@" = "Avsluta %@";
@@ -98,7 +98,7 @@
 "Screen including menu bar" = "Skärm som innehåller menyraden";
 "Screen including mouse" = "Skärm som innehåller musen";
 "Screen Recording" = "Skärminspelning";
-"Screen showing AltTab" = "Skärm som visar AltTab";
+"Screen showing AltTab" = "Skärm som visar BetterAltTab";
 "Search" = "Sök";
 "Select next window" = "Välj nästa fönster";
 "Select previous window" = "Välj föregående fönster";
@@ -160,4 +160,4 @@
 "Windows will show as app icons" = "Fönster visas som appikoner";
 "Without Pro" = "Utan Pro";
 "Work" = "Arbete";
-"Your settings reset every time AltTab restarts." = "Dina inställningar återställs varje gång AltTab startas om.";
+"Your settings reset every time AltTab restarts." = "Dina inställningar återställs varje gång BetterAltTab startas om.";

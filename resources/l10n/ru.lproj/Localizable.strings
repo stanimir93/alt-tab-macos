@@ -15,13 +15,13 @@
 "All Windows" = "Все окна";
 "Allowed" = "Разрешено";
 "Alphabetical Order" = "По алфавиту";
-"AltTab is ready" = "AltTab готов";
-"AltTab is running without Screen Recording permissions. %@ won’t show." = "AltTab работает без разрешения на запись экрана. %@ не будут отображаться.";
-"AltTab preferences file is a symlink. macOS doesn’t support symlink for preferences. Please use a valid file instead of a symlink here:" = "Файл настроек AltTab является символической ссылкой. macOS не поддерживает символические ссылки для настроек. Используйте здесь обычный файл вместо символической ссылки:";
-"AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:" = "Файл настроек AltTab недоступен для записи под вашей учётной записью. Исправьте владельца и права доступа к файлу здесь:";
-"AltTab requires some permissions" = "AltTab нужны некоторые разрешения";
-"AltTab requires this permission to focus windows for you." = "Это разрешение нужно AltTab, чтобы выводить окна на передний план.";
-"AltTab requires this permission to show you pictures of each window." = "Это разрешение нужно AltTab, чтобы показывать изображение каждого окна.";
+"AltTab is ready" = "BetterAltTab готов";
+"AltTab is running without Screen Recording permissions. %@ won’t show." = "BetterAltTab работает без разрешения на запись экрана. %@ не будут отображаться.";
+"AltTab preferences file is a symlink. macOS doesn’t support symlink for preferences. Please use a valid file instead of a symlink here:" = "Файл настроек BetterAltTab является символической ссылкой. macOS не поддерживает символические ссылки для настроек. Используйте здесь обычный файл вместо символической ссылки:";
+"AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:" = "Файл настроек BetterAltTab недоступен для записи под вашей учётной записью. Исправьте владельца и права доступа к файлу здесь:";
+"AltTab requires some permissions" = "BetterAltTab нужны некоторые разрешения";
+"AltTab requires this permission to focus windows for you." = "Это разрешение нужно BetterAltTab, чтобы выводить окна на передний план.";
+"AltTab requires this permission to show you pictures of each window." = "Это разрешение нужно BetterAltTab, чтобы показывать изображение каждого окна.";
 "Always" = "Всегда";
 "App Icons" = "Значки приложений";
 "App is hidden" = "Приложение скрыто";
@@ -67,7 +67,7 @@
 "Large" = "Большой";
 "Light" = "Светлая";
 "Lunch" = "Обед";
-"macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. AltTab cannot use them.\n\nYour change would assign one of these to: %@." = "macOS резервирует ⌘⌥⎋, ⌘⌥⇧⎋ и ⌘⌥⇧⌃⎋ для «Завершить принудительно», и их нельзя отвязать. AltTab не может их использовать.\n\nВаше изменение назначит одно из них на: %@.";
+"macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. AltTab cannot use them.\n\nYour change would assign one of these to: %@." = "macOS резервирует ⌘⌥⎋, ⌘⌥⇧⎋ и ⌘⌥⇧⌃⎋ для «Завершить принудительно», и их нельзя отвязать. BetterAltTab не может их использовать.\n\nВаше изменение назначит одно из них на: %@.";
 "Medium" = "Средний";
 "Menubar icon" = "Значок в строке меню";
 "Middle" = "Середина";
@@ -84,7 +84,7 @@
 "Only 1 shortcut" = "Всего 1 сочетание";
 "Only on different screen" = "Только на другом экране";
 "Photos" = "Фото";
-"Please drag AltTab into the Applications folder manually." = "Перетащите AltTab в папку «Программы» вручную.";
+"Please drag AltTab into the Applications folder manually." = "Перетащите BetterAltTab в папку «Программы» вручную.";
 "press" = "нажать";
 "Press %@ any time" = "Нажимайте %@ в любой момент";
 "Quit %@" = "Завершить %@";
@@ -98,7 +98,7 @@
 "Screen including menu bar" = "Экран со строкой меню";
 "Screen including mouse" = "Экран с курсором мыши";
 "Screen Recording" = "Запись экрана";
-"Screen showing AltTab" = "Экран с AltTab";
+"Screen showing AltTab" = "Экран с BetterAltTab";
 "Search" = "Поиск";
 "Select next window" = "Выбрать следующее окно";
 "Select previous window" = "Выбрать предыдущее окно";
@@ -160,4 +160,4 @@
 "Windows will show as app icons" = "Окна будут показаны как значки приложений";
 "Without Pro" = "Без Pro";
 "Work" = "Работа";
-"Your settings reset every time AltTab restarts." = "Ваши настройки сбрасываются при каждом перезапуске AltTab.";
+"Your settings reset every time AltTab restarts." = "Ваши настройки сбрасываются при каждом перезапуске BetterAltTab.";

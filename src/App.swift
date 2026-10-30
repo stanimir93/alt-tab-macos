@@ -11,7 +11,7 @@ class App: NSApplication {
     static let bundleURL = Bundle.main.bundleURL
     static let name = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as! String
     static let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
-    static let repository = "https://github.com/stanimir93/alt-tab-macos"
+    static let repository = "https://github.com/stanimir93/BetterAltTab"
     static let appIcon: CGImage = {
         let url = Bundle.main.url(forResource: "app", withExtension: "png")!
         let source = CGImageSourceCreateWithURL(url as CFURL, nil)!

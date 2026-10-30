@@ -15,13 +15,13 @@
 "All Windows" = "All Windows";
 "Allowed" = "Allowed";
 "Alphabetical Order" = "Alphabetical Order";
-"AltTab is ready" = "AltTab is ready";
-"AltTab is running without Screen Recording permissions. %@ won’t show." = "AltTab is running without Screen Recording permissions. %@ won’t show.";
-"AltTab preferences file is a symlink. macOS doesn’t support symlink for preferences. Please use a valid file instead of a symlink here:" = "AltTab preferences file is a symlink. macOS doesn’t support symlink for preferences. Please use a valid file instead of a symlink here:";
-"AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:" = "AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:";
-"AltTab requires some permissions" = "AltTab requires some permissions";
-"AltTab requires this permission to focus windows for you." = "AltTab requires this permission to focus windows for you.";
-"AltTab requires this permission to show you pictures of each window." = "AltTab requires this permission to show you pictures of each window.";
+"AltTab is ready" = "BetterAltTab is ready";
+"AltTab is running without Screen Recording permissions. %@ won’t show." = "BetterAltTab is running without Screen Recording permissions. %@ won’t show.";
+"AltTab preferences file is a symlink. macOS doesn’t support symlink for preferences. Please use a valid file instead of a symlink here:" = "BetterAltTab preferences file is a symlink. macOS doesn’t support symlink for preferences. Please use a valid file instead of a symlink here:";
+"AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:" = "BetterAltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:";
+"AltTab requires some permissions" = "BetterAltTab requires some permissions";
+"AltTab requires this permission to focus windows for you." = "BetterAltTab requires this permission to focus windows for you.";
+"AltTab requires this permission to show you pictures of each window." = "BetterAltTab requires this permission to show you pictures of each window.";
 "Always" = "Always";
 "App Icons" = "App Icons";
 "App is hidden" = "App is hidden";
@@ -67,7 +67,7 @@
 "Large" = "Large";
 "Light" = "Light";
 "Lunch" = "Lunch";
-"macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. AltTab cannot use them.\n\nYour change would assign one of these to: %@." = "macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. AltTab cannot use them.\n\nYour change would assign one of these to: %@.";
+"macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. AltTab cannot use them.\n\nYour change would assign one of these to: %@." = "macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. BetterAltTab cannot use them.\n\nYour change would assign one of these to: %@.";
 "Medium" = "Medium";
 "Menubar icon" = "Menubar icon";
 "Middle" = "Middle";
@@ -84,7 +84,7 @@
 "Only 1 shortcut" = "Only 1 shortcut";
 "Only on different screen" = "Only on different screen";
 "Photos" = "Photos";
-"Please drag AltTab into the Applications folder manually." = "Please drag AltTab into the Applications folder manually.";
+"Please drag AltTab into the Applications folder manually." = "Please drag BetterAltTab into the Applications folder manually.";
 "press" = "press";
 "Press %@ any time" = "Press %@ any time";
 "Quit %@" = "Quit %@";
@@ -98,7 +98,7 @@
 "Screen including menu bar" = "Screen including menu bar";
 "Screen including mouse" = "Screen including mouse";
 "Screen Recording" = "Screen Recording";
-"Screen showing AltTab" = "Screen showing AltTab";
+"Screen showing AltTab" = "Screen showing BetterAltTab";
 "Search" = "Search";
 "Select next window" = "Select next window";
 "Select previous window" = "Select previous window";
@@ -160,4 +160,4 @@
 "Windows will show as app icons" = "Windows will show as app icons";
 "Without Pro" = "Without Pro";
 "Work" = "Work";
-"Your settings reset every time AltTab restarts." = "Your settings reset every time AltTab restarts.";
+"Your settings reset every time AltTab restarts." = "Your settings reset every time BetterAltTab restarts.";

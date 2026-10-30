@@ -15,13 +15,13 @@
 "All Windows" = "Alle vensters";
 "Allowed" = "Toegestaan";
 "Alphabetical Order" = "Alfabetische volgorde";
-"AltTab is ready" = "AltTab is klaar";
-"AltTab is running without Screen Recording permissions. %@ won’t show." = "AltTab werkt zonder toegang voor Schermopname. %@ worden niet weergegeven.";
-"AltTab preferences file is a symlink. macOS doesn’t support symlink for preferences. Please use a valid file instead of a symlink here:" = "Het voorkeurenbestand van AltTab is een symbolische koppeling. macOS ondersteunt geen symbolische koppelingen voor voorkeuren. Gebruik hier een geldig bestand in plaats van een symbolische koppeling:";
-"AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:" = "Het voorkeurenbestand van AltTab is niet beschrijfbaar voor je account. Herstel hier de eigenaar en de rechten van het bestand:";
-"AltTab requires some permissions" = "AltTab heeft enkele toestemmingen nodig";
-"AltTab requires this permission to focus windows for you." = "AltTab heeft deze toestemming nodig om vensters voor je naar voren te halen.";
-"AltTab requires this permission to show you pictures of each window." = "AltTab heeft deze toestemming nodig om je een afbeelding van elk venster te tonen.";
+"AltTab is ready" = "BetterAltTab is klaar";
+"AltTab is running without Screen Recording permissions. %@ won’t show." = "BetterAltTab werkt zonder toegang voor Schermopname. %@ worden niet weergegeven.";
+"AltTab preferences file is a symlink. macOS doesn’t support symlink for preferences. Please use a valid file instead of a symlink here:" = "Het voorkeurenbestand van BetterAltTab is een symbolische koppeling. macOS ondersteunt geen symbolische koppelingen voor voorkeuren. Gebruik hier een geldig bestand in plaats van een symbolische koppeling:";
+"AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:" = "Het voorkeurenbestand van BetterAltTab is niet beschrijfbaar voor je account. Herstel hier de eigenaar en de rechten van het bestand:";
+"AltTab requires some permissions" = "BetterAltTab heeft enkele toestemmingen nodig";
+"AltTab requires this permission to focus windows for you." = "BetterAltTab heeft deze toestemming nodig om vensters voor je naar voren te halen.";
+"AltTab requires this permission to show you pictures of each window." = "BetterAltTab heeft deze toestemming nodig om je een afbeelding van elk venster te tonen.";
 "Always" = "Altijd";
 "App Icons" = "App-symbolen";
 "App is hidden" = "App is verborgen";
@@ -67,7 +67,7 @@
 "Large" = "Groot";
 "Light" = "Licht";
 "Lunch" = "Lunch";
-"macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. AltTab cannot use them.\n\nYour change would assign one of these to: %@." = "macOS reserveert ⌘⌥⎋, ⌘⌥⇧⎋ en ⌘⌥⇧⌃⎋ voor Geforceerd stoppen en deze kunnen niet worden vrijgegeven. AltTab kan ze niet gebruiken.\n\nJe wijziging zou er een toewijzen aan: %@.";
+"macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. AltTab cannot use them.\n\nYour change would assign one of these to: %@." = "macOS reserveert ⌘⌥⎋, ⌘⌥⇧⎋ en ⌘⌥⇧⌃⎋ voor Geforceerd stoppen en deze kunnen niet worden vrijgegeven. BetterAltTab kan ze niet gebruiken.\n\nJe wijziging zou er een toewijzen aan: %@.";
 "Medium" = "Middelgroot";
 "Menubar icon" = "Menubalksymbool";
 "Middle" = "Midden";
@@ -84,7 +84,7 @@
 "Only 1 shortcut" = "Slechts 1 sneltoets";
 "Only on different screen" = "Alleen op een ander scherm";
 "Photos" = "Foto’s";
-"Please drag AltTab into the Applications folder manually." = "Sleep AltTab handmatig naar de map Programma's.";
+"Please drag AltTab into the Applications folder manually." = "Sleep BetterAltTab handmatig naar de map Programma's.";
 "press" = "drukken";
 "Press %@ any time" = "Druk op elk moment op %@";
 "Quit %@" = "%@ stoppen";
@@ -98,7 +98,7 @@
 "Screen including menu bar" = "Scherm met menubalk";
 "Screen including mouse" = "Scherm met muis";
 "Screen Recording" = "Schermopname";
-"Screen showing AltTab" = "Scherm dat AltTab toont";
+"Screen showing AltTab" = "Scherm dat BetterAltTab toont";
 "Search" = "Zoeken";
 "Select next window" = "Selecteer volgend venster";
 "Select previous window" = "Selecteer vorig venster";
@@ -160,4 +160,4 @@
 "Windows will show as app icons" = "Vensters worden als app-symbolen getoond";
 "Without Pro" = "Zonder Pro";
 "Work" = "Werk";
-"Your settings reset every time AltTab restarts." = "Je instellingen worden bij elke herstart van AltTab teruggezet.";
+"Your settings reset every time AltTab restarts." = "Je instellingen worden bij elke herstart van BetterAltTab teruggezet.";

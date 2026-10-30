@@ -15,13 +15,13 @@
 "All Windows" = "Semua Jendela";
 "Allowed" = "Diizinkan";
 "Alphabetical Order" = "Urutan Abjad";
-"AltTab is ready" = "AltTab sudah siap";
-"AltTab is running without Screen Recording permissions. %@ won’t show." = "AltTab berjalan tanpa izin Perekaman Layar. %@ tidak akan ditampilkan.";
-"AltTab preferences file is a symlink. macOS doesn’t support symlink for preferences. Please use a valid file instead of a symlink here:" = "Berkas preferensi AltTab adalah tautan simbolik. macOS tidak mendukung tautan simbolik untuk preferensi. Harap gunakan berkas yang valid alih-alih tautan simbolik di sini:";
-"AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:" = "Berkas preferensi AltTab tidak dapat ditulis oleh akun Anda. Harap perbaiki kepemilikan dan izin berkas di sini:";
-"AltTab requires some permissions" = "AltTab memerlukan beberapa izin";
-"AltTab requires this permission to focus windows for you." = "AltTab memerlukan izin ini untuk membawa jendela ke depan untuk Anda.";
-"AltTab requires this permission to show you pictures of each window." = "AltTab memerlukan izin ini untuk menampilkan gambar setiap jendela.";
+"AltTab is ready" = "BetterAltTab sudah siap";
+"AltTab is running without Screen Recording permissions. %@ won’t show." = "BetterAltTab berjalan tanpa izin Perekaman Layar. %@ tidak akan ditampilkan.";
+"AltTab preferences file is a symlink. macOS doesn’t support symlink for preferences. Please use a valid file instead of a symlink here:" = "Berkas preferensi BetterAltTab adalah tautan simbolik. macOS tidak mendukung tautan simbolik untuk preferensi. Harap gunakan berkas yang valid alih-alih tautan simbolik di sini:";
+"AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:" = "Berkas preferensi BetterAltTab tidak dapat ditulis oleh akun Anda. Harap perbaiki kepemilikan dan izin berkas di sini:";
+"AltTab requires some permissions" = "BetterAltTab memerlukan beberapa izin";
+"AltTab requires this permission to focus windows for you." = "BetterAltTab memerlukan izin ini untuk membawa jendela ke depan untuk Anda.";
+"AltTab requires this permission to show you pictures of each window." = "BetterAltTab memerlukan izin ini untuk menampilkan gambar setiap jendela.";
 "Always" = "Selalu";
 "App Icons" = "Ikon Aplikasi";
 "App is hidden" = "Aplikasi disembunyikan";
@@ -67,7 +67,7 @@
 "Large" = "Besar";
 "Light" = "Terang";
 "Lunch" = "Makan siang";
-"macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. AltTab cannot use them.\n\nYour change would assign one of these to: %@." = "macOS mencadangkan ⌘⌥⎋, ⌘⌥⇧⎋, dan ⌘⌥⇧⌃⎋ untuk Paksa Keluar dan tidak dapat dilepaskan. AltTab tidak dapat menggunakannya.\n\nPerubahan Anda akan menetapkan salah satunya ke: %@.";
+"macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. AltTab cannot use them.\n\nYour change would assign one of these to: %@." = "macOS mencadangkan ⌘⌥⎋, ⌘⌥⇧⎋, dan ⌘⌥⇧⌃⎋ untuk Paksa Keluar dan tidak dapat dilepaskan. BetterAltTab tidak dapat menggunakannya.\n\nPerubahan Anda akan menetapkan salah satunya ke: %@.";
 "Medium" = "Sedang";
 "Menubar icon" = "Ikon bilah menu";
 "Middle" = "Tengah";
@@ -84,7 +84,7 @@
 "Only 1 shortcut" = "Hanya 1 pintasan";
 "Only on different screen" = "Hanya pada layar berbeda";
 "Photos" = "Foto";
-"Please drag AltTab into the Applications folder manually." = "Seret AltTab ke folder Aplikasi secara manual.";
+"Please drag AltTab into the Applications folder manually." = "Seret BetterAltTab ke folder Aplikasi secara manual.";
 "press" = "tekan";
 "Press %@ any time" = "Tekan %@ kapan saja";
 "Quit %@" = "Keluar dari %@";
@@ -98,7 +98,7 @@
 "Screen including menu bar" = "Layar termasuk bilah menu";
 "Screen including mouse" = "Layar termasuk tetikus";
 "Screen Recording" = "Perekaman Layar";
-"Screen showing AltTab" = "Layar yang menampilkan AltTab";
+"Screen showing AltTab" = "Layar yang menampilkan BetterAltTab";
 "Search" = "Cari";
 "Select next window" = "Pilih jendela berikutnya";
 "Select previous window" = "Pilih jendela sebelumnya";
@@ -160,4 +160,4 @@
 "Windows will show as app icons" = "Jendela akan ditampilkan sebagai ikon aplikasi";
 "Without Pro" = "Tanpa Pro";
 "Work" = "Kerja";
-"Your settings reset every time AltTab restarts." = "Pengaturan Anda diatur ulang setiap kali AltTab dimulai ulang.";
+"Your settings reset every time AltTab restarts." = "Pengaturan Anda diatur ulang setiap kali BetterAltTab dimulai ulang.";

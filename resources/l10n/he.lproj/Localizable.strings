@@ -15,13 +15,13 @@
 "All Windows" = "כל החלונות";
 "Allowed" = "מותר";
 "Alphabetical Order" = "סדר אלפביתי";
-"AltTab is ready" = "AltTab מוכן";
-"AltTab is running without Screen Recording permissions. %@ won’t show." = "AltTab פועל ללא הרשאות הקלטת מסך. %@ לא יוצגו.";
-"AltTab preferences file is a symlink. macOS doesn’t support symlink for preferences. Please use a valid file instead of a symlink here:" = "קובץ ההגדרות של AltTab הוא קישור סימבולי. macOS אינו תומך בקישורים סימבוליים עבור הגדרות. אנא השתמש בקובץ תקין במקום קישור סימבולי כאן:";
-"AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:" = "קובץ ההגדרות של AltTab אינו ניתן לכתיבה על ידי החשבון שלך. אנא תקן את הבעלות וההרשאות של הקובץ כאן:";
-"AltTab requires some permissions" = "AltTab זקוק לכמה הרשאות";
-"AltTab requires this permission to focus windows for you." = "AltTab זקוק להרשאה זו כדי להביא חלונות לחזית עבורך.";
-"AltTab requires this permission to show you pictures of each window." = "AltTab זקוק להרשאה זו כדי להציג לך תמונה של כל חלון.";
+"AltTab is ready" = "BetterAltTab מוכן";
+"AltTab is running without Screen Recording permissions. %@ won’t show." = "BetterAltTab פועל ללא הרשאות הקלטת מסך. %@ לא יוצגו.";
+"AltTab preferences file is a symlink. macOS doesn’t support symlink for preferences. Please use a valid file instead of a symlink here:" = "קובץ ההגדרות של BetterAltTab הוא קישור סימבולי. macOS אינו תומך בקישורים סימבוליים עבור הגדרות. אנא השתמש בקובץ תקין במקום קישור סימבולי כאן:";
+"AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:" = "קובץ ההגדרות של BetterAltTab אינו ניתן לכתיבה על ידי החשבון שלך. אנא תקן את הבעלות וההרשאות של הקובץ כאן:";
+"AltTab requires some permissions" = "BetterAltTab זקוק לכמה הרשאות";
+"AltTab requires this permission to focus windows for you." = "BetterAltTab זקוק להרשאה זו כדי להביא חלונות לחזית עבורך.";
+"AltTab requires this permission to show you pictures of each window." = "BetterAltTab זקוק להרשאה זו כדי להציג לך תמונה של כל חלון.";
 "Always" = "תמיד";
 "App Icons" = "סמלי יישומים";
 "App is hidden" = "יישום מוסתר";
@@ -67,7 +67,7 @@
 "Large" = "גדול";
 "Light" = "בהיר";
 "Lunch" = "ארוחת צהריים";
-"macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. AltTab cannot use them.\n\nYour change would assign one of these to: %@." = "macOS שומר את ⌘⌥⎋, ⌘⌥⇧⎋ ו-⌘⌥⇧⌃⎋ עבור כפיית יציאה ולא ניתן לבטל את שיוכם. AltTab אינו יכול להשתמש בהם.\n\nהשינוי שלך ישייך אחד מהם ל: %@.";
+"macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. AltTab cannot use them.\n\nYour change would assign one of these to: %@." = "macOS שומר את ⌘⌥⎋, ⌘⌥⇧⎋ ו-⌘⌥⇧⌃⎋ עבור כפיית יציאה ולא ניתן לבטל את שיוכם. BetterAltTab אינו יכול להשתמש בהם.\n\nהשינוי שלך ישייך אחד מהם ל: %@.";
 "Medium" = "בינוני";
 "Menubar icon" = "סמל שורת התפריטים";
 "Middle" = "אמצע";
@@ -84,7 +84,7 @@
 "Only 1 shortcut" = "1 קיצור בלבד";
 "Only on different screen" = "רק במסך אחר";
 "Photos" = "תמונות";
-"Please drag AltTab into the Applications folder manually." = "גרור את AltTab לתיקיית היישומים באופן ידני.";
+"Please drag AltTab into the Applications folder manually." = "גרור את BetterAltTab לתיקיית היישומים באופן ידני.";
 "press" = "לחץ";
 "Press %@ any time" = "יש ללחוץ על %@ בכל עת";
 "Quit %@" = "צא מ-%@";
@@ -98,7 +98,7 @@
 "Screen including menu bar" = "מסך הכולל את שורת התפריטים";
 "Screen including mouse" = "מסך הכולל את העכבר";
 "Screen Recording" = "הקלטת מסך";
-"Screen showing AltTab" = "מסך המציג את AltTab";
+"Screen showing AltTab" = "מסך המציג את BetterAltTab";
 "Search" = "חיפוש";
 "Select next window" = "בחר בחלון הבא";
 "Select previous window" = "בחר בחלון הקודם";
@@ -160,4 +160,4 @@
 "Windows will show as app icons" = "חלונות יוצגו כסמלי יישומים";
 "Without Pro" = "בלי Pro";
 "Work" = "עבודה";
-"Your settings reset every time AltTab restarts." = "ההגדרות שלך מתאפסות בכל פעם ש‑AltTab מופעל מחדש.";
+"Your settings reset every time AltTab restarts." = "ההגדרות שלך מתאפסות בכל פעם ש‑BetterAltTab מופעל מחדש.";

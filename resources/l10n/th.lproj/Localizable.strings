@@ -15,13 +15,13 @@
 "All Windows" = "ทุกหน้าต่าง";
 "Allowed" = "อนุญาต";
 "Alphabetical Order" = "เรียงตามตัวอักษร";
-"AltTab is ready" = "AltTab พร้อมแล้ว";
-"AltTab is running without Screen Recording permissions. %@ won’t show." = "AltTab กำลังทำงานโดยไม่มีสิทธิ์การบันทึกหน้าจอ %@จะไม่แสดง";
-"AltTab preferences file is a symlink. macOS doesn’t support symlink for preferences. Please use a valid file instead of a symlink here:" = "ไฟล์การตั้งค่าของ AltTab เป็นลิงก์สัญลักษณ์ macOS ไม่รองรับลิงก์สัญลักษณ์สำหรับการตั้งค่า โปรดใช้ไฟล์ที่ถูกต้องแทนลิงก์สัญลักษณ์ที่นี่:";
-"AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:" = "ไฟล์การตั้งค่าของ AltTab ไม่สามารถเขียนได้ด้วยบัญชีของคุณ โปรดแก้ไขเจ้าของและสิทธิ์ของไฟล์ที่นี่:";
-"AltTab requires some permissions" = "AltTab ต้องการสิทธิ์บางอย่าง";
-"AltTab requires this permission to focus windows for you." = "AltTab ต้องการสิทธิ์นี้เพื่อนำหน้าต่างขึ้นมาด้านหน้าให้คุณ";
-"AltTab requires this permission to show you pictures of each window." = "AltTab ต้องการสิทธิ์นี้เพื่อแสดงภาพของแต่ละหน้าต่างให้คุณ";
+"AltTab is ready" = "BetterAltTab พร้อมแล้ว";
+"AltTab is running without Screen Recording permissions. %@ won’t show." = "BetterAltTab กำลังทำงานโดยไม่มีสิทธิ์การบันทึกหน้าจอ %@จะไม่แสดง";
+"AltTab preferences file is a symlink. macOS doesn’t support symlink for preferences. Please use a valid file instead of a symlink here:" = "ไฟล์การตั้งค่าของ BetterAltTab เป็นลิงก์สัญลักษณ์ macOS ไม่รองรับลิงก์สัญลักษณ์สำหรับการตั้งค่า โปรดใช้ไฟล์ที่ถูกต้องแทนลิงก์สัญลักษณ์ที่นี่:";
+"AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:" = "ไฟล์การตั้งค่าของ BetterAltTab ไม่สามารถเขียนได้ด้วยบัญชีของคุณ โปรดแก้ไขเจ้าของและสิทธิ์ของไฟล์ที่นี่:";
+"AltTab requires some permissions" = "BetterAltTab ต้องการสิทธิ์บางอย่าง";
+"AltTab requires this permission to focus windows for you." = "BetterAltTab ต้องการสิทธิ์นี้เพื่อนำหน้าต่างขึ้นมาด้านหน้าให้คุณ";
+"AltTab requires this permission to show you pictures of each window." = "BetterAltTab ต้องการสิทธิ์นี้เพื่อแสดงภาพของแต่ละหน้าต่างให้คุณ";
 "Always" = "เสมอ";
 "App Icons" = "ไอคอนแอป";
 "App is hidden" = "แอปถูกซ่อน";
@@ -67,7 +67,7 @@
 "Large" = "ใหญ่";
 "Light" = "สว่าง";
 "Lunch" = "มื้อกลางวัน";
-"macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. AltTab cannot use them.\n\nYour change would assign one of these to: %@." = "macOS สงวน ⌘⌥⎋, ⌘⌥⇧⎋ และ ⌘⌥⇧⌃⎋ ไว้สำหรับการบังคับออก และไม่สามารถยกเลิกการกำหนดได้ AltTab ไม่สามารถใช้ปุ่มเหล่านี้\n\nการเปลี่ยนแปลงของคุณจะกำหนดปุ่มหนึ่งในเหล่านี้ให้กับ: %@";
+"macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. AltTab cannot use them.\n\nYour change would assign one of these to: %@." = "macOS สงวน ⌘⌥⎋, ⌘⌥⇧⎋ และ ⌘⌥⇧⌃⎋ ไว้สำหรับการบังคับออก และไม่สามารถยกเลิกการกำหนดได้ BetterAltTab ไม่สามารถใช้ปุ่มเหล่านี้\n\nการเปลี่ยนแปลงของคุณจะกำหนดปุ่มหนึ่งในเหล่านี้ให้กับ: %@";
 "Medium" = "ปานกลาง";
 "Menubar icon" = "ไอคอนแถบเมนู";
 "Middle" = "ตรงกลาง";
@@ -84,7 +84,7 @@
 "Only 1 shortcut" = "ทางลัดเพียง 1 ชุด";
 "Only on different screen" = "เฉพาะบนหน้าจอที่ต่างกัน";
 "Photos" = "รูปภาพ";
-"Please drag AltTab into the Applications folder manually." = "โปรดลาก AltTab ไปยังโฟลเดอร์ Applications ด้วยตนเอง";
+"Please drag AltTab into the Applications folder manually." = "โปรดลาก BetterAltTab ไปยังโฟลเดอร์ Applications ด้วยตนเอง";
 "press" = "กด";
 "Press %@ any time" = "กด %@ ได้ทุกเมื่อ";
 "Quit %@" = "ออกจาก %@";
@@ -98,7 +98,7 @@
 "Screen including menu bar" = "หน้าจอที่มีแถบเมนู";
 "Screen including mouse" = "หน้าจอที่มีเมาส์";
 "Screen Recording" = "การบันทึกหน้าจอ";
-"Screen showing AltTab" = "หน้าจอที่แสดง AltTab";
+"Screen showing AltTab" = "หน้าจอที่แสดง BetterAltTab";
 "Search" = "ค้นหา";
 "Select next window" = "เลือกหน้าต่างถัดไป";
 "Select previous window" = "เลือกหน้าต่างก่อนหน้า";
@@ -160,4 +160,4 @@
 "Windows will show as app icons" = "หน้าต่างจะแสดงเป็นไอคอนแอป";
 "Without Pro" = "ไม่มี Pro";
 "Work" = "งาน";
-"Your settings reset every time AltTab restarts." = "การตั้งค่าของคุณจะถูกรีเซ็ตทุกครั้งที่ AltTab เริ่มทำงานใหม่";
+"Your settings reset every time AltTab restarts." = "การตั้งค่าของคุณจะถูกรีเซ็ตทุกครั้งที่ BetterAltTab เริ่มทำงานใหม่";

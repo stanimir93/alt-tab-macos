@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
   <!--
-    AltTabSwitcher app icon. Source of truth for resources/icons/app/app.png.
+    BetterAltTab app icon. Source of truth for resources/icons/app/app.png.
     Render with: swift design/render-icons.swift
     Shape: macOS icon grid, an 824x824 squircle centred on 1024x1024.
     Each corner is a superellipse quarter (extent 250, exponent 2.4) fitted to Apple's template outline (its nominal 185 corner radius).

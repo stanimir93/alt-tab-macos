@@ -15,13 +15,13 @@
 "All Windows" = "كل النوافذ";
 "Allowed" = "مسموح";
 "Alphabetical Order" = "ترتيب أبجدي";
-"AltTab is ready" = "AltTab جاهز";
-"AltTab is running without Screen Recording permissions. %@ won’t show." = "يعمل AltTab بدون أذونات تسجيل الشاشة. لن تظهر %@.";
-"AltTab preferences file is a symlink. macOS doesn’t support symlink for preferences. Please use a valid file instead of a symlink here:" = "ملف إعدادات AltTab هو رابط رمزي. لا يدعم macOS الروابط الرمزية للإعدادات. الرجاء استخدام ملف صالح بدلاً من رابط رمزي هنا:";
-"AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:" = "ملف إعدادات AltTab غير قابل للكتابة بواسطة حسابك. الرجاء تصحيح المالك والأذونات لهذا الملف هنا:";
-"AltTab requires some permissions" = "يحتاج AltTab إلى بعض الأذونات";
-"AltTab requires this permission to focus windows for you." = "يحتاج AltTab إلى هذا الإذن لإحضار النوافذ إلى المقدمة.";
-"AltTab requires this permission to show you pictures of each window." = "يحتاج AltTab إلى هذا الإذن ليعرض لك صورة لكل نافذة.";
+"AltTab is ready" = "BetterAltTab جاهز";
+"AltTab is running without Screen Recording permissions. %@ won’t show." = "يعمل BetterAltTab بدون أذونات تسجيل الشاشة. لن تظهر %@.";
+"AltTab preferences file is a symlink. macOS doesn’t support symlink for preferences. Please use a valid file instead of a symlink here:" = "ملف إعدادات BetterAltTab هو رابط رمزي. لا يدعم macOS الروابط الرمزية للإعدادات. الرجاء استخدام ملف صالح بدلاً من رابط رمزي هنا:";
+"AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:" = "ملف إعدادات BetterAltTab غير قابل للكتابة بواسطة حسابك. الرجاء تصحيح المالك والأذونات لهذا الملف هنا:";
+"AltTab requires some permissions" = "يحتاج BetterAltTab إلى بعض الأذونات";
+"AltTab requires this permission to focus windows for you." = "يحتاج BetterAltTab إلى هذا الإذن لإحضار النوافذ إلى المقدمة.";
+"AltTab requires this permission to show you pictures of each window." = "يحتاج BetterAltTab إلى هذا الإذن ليعرض لك صورة لكل نافذة.";
 "Always" = "دائمًا";
 "App Icons" = "أيقونات التطبيقات";
 "App is hidden" = "التطبيق مخفي";
@@ -67,7 +67,7 @@
 "Large" = "كبير";
 "Light" = "فاتح";
 "Lunch" = "غداء";
-"macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. AltTab cannot use them.\n\nYour change would assign one of these to: %@." = "يحجز macOS ⌘⌥⎋ و⌘⌥⇧⎋ و⌘⌥⇧⌃⎋ لإنهاء بالقوة ولا يمكن إلغاء ربطها. لا يمكن لـ AltTab استخدامها.\n\nسيؤدي تغييرك إلى تعيين أحدها إلى: %@.";
+"macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. AltTab cannot use them.\n\nYour change would assign one of these to: %@." = "يحجز macOS ⌘⌥⎋ و⌘⌥⇧⎋ و⌘⌥⇧⌃⎋ لإنهاء بالقوة ولا يمكن إلغاء ربطها. لا يمكن لـ BetterAltTab استخدامها.\n\nسيؤدي تغييرك إلى تعيين أحدها إلى: %@.";
 "Medium" = "متوسط";
 "Menubar icon" = "أيقونة شريط القائمة";
 "Middle" = "الوسط";
@@ -84,7 +84,7 @@
 "Only 1 shortcut" = "1 اختصار فقط";
 "Only on different screen" = "فقط على شاشة مختلفة";
 "Photos" = "صور";
-"Please drag AltTab into the Applications folder manually." = "يرجى سحب AltTab إلى مجلد التطبيقات يدويًا.";
+"Please drag AltTab into the Applications folder manually." = "يرجى سحب BetterAltTab إلى مجلد التطبيقات يدويًا.";
 "press" = "اضغط";
 "Press %@ any time" = "اضغط على %@ في أي وقت";
 "Quit %@" = "إنهاء %@";
@@ -98,7 +98,7 @@
 "Screen including menu bar" = "الشاشة التي تتضمن شريط القائمة";
 "Screen including mouse" = "الشاشة التي تتضمن الفأرة";
 "Screen Recording" = "تسجيل الشاشة";
-"Screen showing AltTab" = "الشاشة التي تعرض AltTab";
+"Screen showing AltTab" = "الشاشة التي تعرض BetterAltTab";
 "Search" = "البحث";
 "Select next window" = "تحديد النافذة التالية";
 "Select previous window" = "تحديد النافذة السابقة";
@@ -160,4 +160,4 @@
 "Windows will show as app icons" = "ستظهر النوافذ كأيقونات تطبيقات";
 "Without Pro" = "بدون Pro";
 "Work" = "عمل";
-"Your settings reset every time AltTab restarts." = "تتم إعادة تعيين إعداداتك في كل مرة يُعاد فيها تشغيل AltTab.";
+"Your settings reset every time AltTab restarts." = "تتم إعادة تعيين إعداداتك في كل مرة يُعاد فيها تشغيل BetterAltTab.";

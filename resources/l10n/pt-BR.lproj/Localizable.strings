@@ -15,13 +15,13 @@
 "All Windows" = "Todas as janelas";
 "Allowed" = "Permitido";
 "Alphabetical Order" = "Ordem alfabética";
-"AltTab is ready" = "O AltTab está pronto";
-"AltTab is running without Screen Recording permissions. %@ won’t show." = "O AltTab está em execução sem permissão de Gravação de Tela. %@ não serão exibidas.";
-"AltTab preferences file is a symlink. macOS doesn’t support symlink for preferences. Please use a valid file instead of a symlink here:" = "O arquivo de preferências do AltTab é um link simbólico. O macOS não oferece suporte a links simbólicos para preferências. Use um arquivo válido em vez de um link simbólico aqui:";
-"AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:" = "O arquivo de preferências do AltTab não pode ser gravado pela sua conta. Corrija o proprietário e as permissões do arquivo aqui:";
-"AltTab requires some permissions" = "O AltTab precisa de algumas permissões";
-"AltTab requires this permission to focus windows for you." = "O AltTab precisa desta permissão para trazer as janelas para a frente.";
-"AltTab requires this permission to show you pictures of each window." = "O AltTab precisa desta permissão para mostrar uma imagem de cada janela.";
+"AltTab is ready" = "O BetterAltTab está pronto";
+"AltTab is running without Screen Recording permissions. %@ won’t show." = "O BetterAltTab está em execução sem permissão de Gravação de Tela. %@ não serão exibidas.";
+"AltTab preferences file is a symlink. macOS doesn’t support symlink for preferences. Please use a valid file instead of a symlink here:" = "O arquivo de preferências do BetterAltTab é um link simbólico. O macOS não oferece suporte a links simbólicos para preferências. Use um arquivo válido em vez de um link simbólico aqui:";
+"AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:" = "O arquivo de preferências do BetterAltTab não pode ser gravado pela sua conta. Corrija o proprietário e as permissões do arquivo aqui:";
+"AltTab requires some permissions" = "O BetterAltTab precisa de algumas permissões";
+"AltTab requires this permission to focus windows for you." = "O BetterAltTab precisa desta permissão para trazer as janelas para a frente.";
+"AltTab requires this permission to show you pictures of each window." = "O BetterAltTab precisa desta permissão para mostrar uma imagem de cada janela.";
 "Always" = "Sempre";
 "App Icons" = "Ícones de Apps";
 "App is hidden" = "App oculto";
@@ -67,7 +67,7 @@
 "Large" = "Grande";
 "Light" = "Clara";
 "Lunch" = "Almoço";
-"macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. AltTab cannot use them.\n\nYour change would assign one of these to: %@." = "O macOS reserva ⌘⌥⎋, ⌘⌥⇧⎋ e ⌘⌥⇧⌃⎋ para Forçar Encerrar e eles não podem ser desvinculados. O AltTab não pode usá-los.\n\nSua alteração atribuiria um deles a: %@.";
+"macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. AltTab cannot use them.\n\nYour change would assign one of these to: %@." = "O macOS reserva ⌘⌥⎋, ⌘⌥⇧⎋ e ⌘⌥⇧⌃⎋ para Forçar Encerrar e eles não podem ser desvinculados. O BetterAltTab não pode usá-los.\n\nSua alteração atribuiria um deles a: %@.";
 "Medium" = "Médio";
 "Menubar icon" = "Ícone na barra de menus";
 "Middle" = "Meio";
@@ -84,7 +84,7 @@
 "Only 1 shortcut" = "Apenas 1 atalho";
 "Only on different screen" = "Apenas em outra tela";
 "Photos" = "Fotos";
-"Please drag AltTab into the Applications folder manually." = "Arraste o AltTab para a pasta Aplicativos manualmente.";
+"Please drag AltTab into the Applications folder manually." = "Arraste o BetterAltTab para a pasta Aplicativos manualmente.";
 "press" = "pressione";
 "Press %@ any time" = "Pressione %@ a qualquer momento";
 "Quit %@" = "Encerrar %@";
@@ -98,7 +98,7 @@
 "Screen including menu bar" = "Tela que contém a barra de menus";
 "Screen including mouse" = "Tela que contém o mouse";
 "Screen Recording" = "Gravação de Tela";
-"Screen showing AltTab" = "Tela exibindo o AltTab";
+"Screen showing AltTab" = "Tela exibindo o BetterAltTab";
 "Search" = "Buscar";
 "Select next window" = "Selecionar próxima janela";
 "Select previous window" = "Selecionar janela anterior";
@@ -160,4 +160,4 @@
 "Windows will show as app icons" = "As janelas serão exibidas como ícones de apps";
 "Without Pro" = "Sem Pro";
 "Work" = "Trabalho";
-"Your settings reset every time AltTab restarts." = "Suas configurações são redefinidas sempre que o AltTab reinicia.";
+"Your settings reset every time AltTab restarts." = "Suas configurações são redefinidas sempre que o BetterAltTab reinicia.";

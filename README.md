@@ -1,8 +1,8 @@
-<p align="center"><img src="resources/icons/app/app.png" alt="AltTabSwitcher icon" width="128"/></p>
+<p align="center"><img src="resources/icons/app/app.png" alt="BetterAltTab icon" width="128"/></p>
 
-# AltTabSwitcher
+# BetterAltTab
 
-AltTabSwitcher is a window switcher for macOS: press <kbd>⌘</kbd> <kbd>⇥</kbd> and it shows every open window, not only every app, so you can jump straight to the one you want.
+BetterAltTab is a window switcher for macOS: press <kbd>⌘</kbd> <kbd>⇥</kbd> and it shows every open window, not only every app, so you can jump straight to the one you want.
 
 It is a personal, simplified fork of [AltTab](https://github.com/lwouis/alt-tab-macos) by [lwouis](https://github.com/lwouis) and its contributors. Nearly all of the code is theirs. This fork is not affiliated with or supported by the AltTab project; if you want the maintained app, use AltTab.
 
@@ -48,17 +48,17 @@ There are no prebuilt downloads. You need a Mac with Xcode installed (the app it
    xcodebuild -project alt-tab-macos.xcodeproj -scheme Release -derivedDataPath DerivedData
    ```
 
-5. Quit AltTabSwitcher if it's running, then copy the app to `/Applications` and open it:
+5. Quit BetterAltTab if it's running, then copy the app to `/Applications` and open it:
 
    ```sh
-   ditto DerivedData/Build/Products/Release/AltTabSwitcher.app /Applications/AltTabSwitcher.app
-   open /Applications/AltTabSwitcher.app
+   ditto DerivedData/Build/Products/Release/BetterAltTab.app /Applications/BetterAltTab.app
+   open /Applications/BetterAltTab.app
    ```
 
 For development, `ai/build.sh` builds the Debug scheme and `ai/test.sh` runs the unit tests. [AGENTS.md](AGENTS.md) has the coding conventions.
 
 ## Credits and license
 
-AltTabSwitcher is based on [AltTab](https://alt-tab.app) by [lwouis](https://github.com/lwouis) ([source](https://github.com/lwouis/alt-tab-macos)), built by [these contributors](docs/contributors.md). It uses the third-party libraries listed in [docs/acknowledgments.md](docs/acknowledgments.md).
+BetterAltTab is based on [AltTab](https://alt-tab.app) by [lwouis](https://github.com/lwouis) ([source](https://github.com/lwouis/alt-tab-macos)), built by [these contributors](docs/contributors.md). It uses the third-party libraries listed in [docs/acknowledgments.md](docs/acknowledgments.md).
 
 Like AltTab, it is free software under the [GNU General Public License v3](LICENCE.md).
