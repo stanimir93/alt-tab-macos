@@ -2,6 +2,8 @@
 
 # BetterAltTab
 
+**Website: [stanimir93.github.io/BetterAltTab](https://stanimir93.github.io/BetterAltTab/)**
+
 BetterAltTab is a window switcher for macOS: press <kbd>⌘</kbd> <kbd>⇥</kbd> and it shows every open window, not only every app, so you can jump straight to the one you want.
 
 It is a personal, simplified fork of [AltTab](https://github.com/lwouis/alt-tab-macos) by [lwouis](https://github.com/lwouis) and its contributors. Nearly all of the code is theirs. This fork is not affiliated with or supported by the AltTab project; if you want the maintained app, use AltTab.

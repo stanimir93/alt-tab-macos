@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BetterAltTab: see every window on your Mac with ⌘⇥</title>
+  <meta name="description" content="BetterAltTab is a free window switcher for macOS. Press ⌘⇥ to see every open window, not just every app. Every feature included, nothing sent anywhere.">
+  <meta property="og:title" content="BetterAltTab">
+  <meta property="og:description" content="A free window switcher for macOS. Press ⌘⇥ to see every open window, not just every app.">
+  <meta property="og:image" content="https://stanimir93.github.io/BetterAltTab/assets/icon-256.png">
+  <link rel="icon" type="image/png" href="assets/favicon-64.png">
+  <link rel="apple-touch-icon" href="assets/icon-256.png">
+  <style>
+    :root {
+      --bg: #f7f6fb;
+      --surface: #ffffff;
+      --text: #17142b;
+      --muted: #5d5a73;
+      --line: rgba(23, 20, 43, 0.09);
+      --indigo: #4a2cc4;
+      --violet: #5135c8;
+      --teal: #11a69c;
+      --grad: linear-gradient(135deg, #3a1688 0%, #5135c8 48%, #11a69c 100%);
+      --code-bg: #efedf7;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f0d1a;
+        --surface: #191628;
+        --text: #f1effa;
+        --muted: #a8a4bf;
+        --line: rgba(255, 255, 255, 0.09);
+        --code-bg: #221e36;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      font: 17px/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+    a { color: var(--violet); }
+    @media (prefers-color-scheme: dark) { a { color: #a593ff; } }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 20px 0; }
+    nav .brand { display: flex; align-items: center; gap: 10px; font-weight: 650; text-decoration: none; color: var(--text); }
+    nav .brand img { width: 28px; height: 28px; }
+    nav .links a { color: var(--muted); text-decoration: none; margin-left: 22px; font-size: 15px; }
+    nav .links a:hover { color: var(--text); }
+
+    .hero { text-align: center; padding: 56px 0 24px; }
+    .hero img.icon { width: 132px; height: 132px; filter: drop-shadow(0 14px 28px rgba(58, 22, 136, 0.28)); }
+    .hero h1 { font-size: clamp(40px, 7vw, 64px); line-height: 1.05; letter-spacing: -0.03em; margin: 22px 0 14px; }
+    .hero h1 span { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .hero p.lead { font-size: clamp(18px, 2.4vw, 22px); color: var(--muted); max-width: 640px; margin: 0 auto 30px; }
+    kbd {
+      display: inline-block; min-width: 1.6em; padding: 0 0.4em; border-radius: 6px;
+      font: 600 0.9em/1.5 -apple-system, BlinkMacSystemFont, sans-serif; text-align: center;
+      background: var(--surface); border: 1px solid var(--line); box-shadow: 0 1px 0 var(--line);
+    }
+    .buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: 12px;
+      font-weight: 600; font-size: 16px; text-decoration: none; transition: transform 0.15s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn.primary { background: var(--grad); color: #fff; box-shadow: 0 8px 22px rgba(81, 53, 200, 0.32); }
+    .btn.secondary { background: var(--surface); color: var(--text); border: 1px solid var(--line); }
+    .note { color: var(--muted); font-size: 14px; margin-top: 14px; }
+
+    /* A drawing of the switcher: window thumbnails in a row, one selected */
+    .demo { display: flex; justify-content: center; padding: 48px 0 72px; }
+    .stage {
+      position: relative; width: 100%; max-width: 900px; aspect-ratio: 16 / 8.2; border-radius: 22px; overflow: hidden;
+      background: var(--grad); box-shadow: 0 30px 70px rgba(23, 20, 43, 0.25);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .stage::before {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(circle at 20% 15%, rgba(255,255,255,0.22), transparent 45%),
+                  radial-gradient(circle at 85% 90%, rgba(255,255,255,0.12), transparent 40%);
+    }
+    .panel {
+      position: relative; display: flex; gap: 10px; padding: 12px; border-radius: 18px;
+      background: rgba(28, 26, 38, 0.72); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+      width: 86%;
+    }
+    .tile { flex: 1; padding: 8px; border-radius: 12px; min-width: 0; }
+    .tile.selected { background: rgba(255,255,255,0.16); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.18); }
+    .tile .title { display: flex; align-items: center; gap: 6px; margin-bottom: 7px; color: #fff; font-size: clamp(9px, 1.25vw, 12px); white-space: nowrap; overflow: hidden; }
+    .tile .title i { flex: none; width: 1.35em; height: 1.35em; border-radius: 0.35em; }
+    .tile .title b { font-weight: 500; overflow: hidden; text-overflow: ellipsis; }
+    .shot { aspect-ratio: 4 / 3; border-radius: 7px; overflow: hidden; background: #fff; display: flex; flex-direction: column; }
+    .shot .bar { height: 12%; background: #ececf1; display: flex; align-items: center; gap: 4%; padding-left: 5%; }
+    .shot .bar s { width: 5%; aspect-ratio: 1; border-radius: 50%; background: #c9c7d3; text-decoration: none; }
+    .shot .body { flex: 1; padding: 8%; display: flex; flex-direction: column; gap: 9%; }
+    .shot .body u { display: block; height: 9%; border-radius: 99px; background: #e3e1ec; text-decoration: none; }
+    .shot.dark { background: #22202e; } .shot.dark .bar { background: #2e2b3c; } .shot.dark .body u { background: #3a3650; }
+    .shot.mail .body { flex-direction: row; gap: 6%; } .shot.mail .col { flex: 1; display: flex; flex-direction: column; gap: 9%; }
+    .shot.mail .col u { height: 9%; }
+    .shot.photo .body { background: linear-gradient(160deg, #ffb27a, #ff6f91 60%, #8f5ad8); }
+    .shot.photo .body u { background: rgba(255,255,255,0.45); width: 55%; }
+    .hint { position: absolute; bottom: 5%; left: 0; right: 0; text-align: center; color: rgba(255,255,255,0.88); font-size: clamp(11px, 1.6vw, 15px); }
+    .hint kbd { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.25); color: #fff; box-shadow: none; }
+
+    section h2 { font-size: clamp(28px, 4vw, 38px); letter-spacing: -0.02em; text-align: center; margin: 0 0 10px; }
+    section p.sub { text-align: center; color: var(--muted); margin: 0 auto 36px; max-width: 620px; }
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 16px; padding-bottom: 80px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 24px; }
+    .card .glyph {
+      width: 40px; height: 40px; border-radius: 11px; display: flex; align-items: center; justify-content: center;
+      background: var(--grad); color: #fff; font-size: 20px; margin-bottom: 14px;
+    }
+    .card h3 { margin: 0 0 6px; font-size: 18px; }
+    .card p { margin: 0; color: var(--muted); font-size: 15.5px; }
+
+    .install { padding-bottom: 80px; }
+    .steps { max-width: 760px; margin: 0 auto; counter-reset: step; }
+    .step { position: relative; padding: 0 0 26px 52px; }
+    .step::before {
+      counter-increment: step; content: counter(step); position: absolute; left: 0; top: 0;
+      width: 34px; height: 34px; border-radius: 50%; background: var(--grad); color: #fff;
+      display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px;
+    }
+    .step h3 { margin: 4px 0 6px; font-size: 17px; }
+    .step p { margin: 0 0 8px; color: var(--muted); font-size: 15.5px; }
+    pre {
+      margin: 0; padding: 14px 16px; border-radius: 12px; background: var(--code-bg); overflow-x: auto;
+      font: 13.5px/1.55 ui-monospace, "SF Mono", Menlo, monospace; border: 1px solid var(--line);
+    }
+    code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.9em; }
+    .perm { max-width: 760px; margin: 10px auto 0; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 22px; font-size: 15.5px; color: var(--muted); }
+    .perm b { color: var(--text); }
+
+    footer { border-top: 1px solid var(--line); padding: 32px 0 48px; color: var(--muted); font-size: 14.5px; text-align: center; }
+    footer p { margin: 6px 0; }
+    @media (max-width: 640px) {
+      nav .links a.hide-sm { display: none; }
+      .panel { gap: 6px; padding: 8px; width: 94%; }
+      .tile:nth-child(4) { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="#"><img src="assets/favicon-64.png" alt="">BetterAltTab</a>
+      <div class="links">
+        <a class="hide-sm" href="#features">Features</a>
+        <a class="hide-sm" href="#install">Install</a>
+        <a href="https://github.com/stanimir93/BetterAltTab">GitHub</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <img class="icon" src="assets/icon-256.png" alt="BetterAltTab app icon">
+      <h1>Every window,<br><span>one keystroke away</span></h1>
+      <p class="lead">BetterAltTab is a free window switcher for macOS. Press <kbd>⌘</kbd> <kbd>⇥</kbd> to see every open window, not just every app, and jump straight to the one you want.</p>
+      <div class="buttons">
+        <a class="btn primary" href="#install">Install BetterAltTab</a>
+        <a class="btn secondary" href="https://github.com/stanimir93/BetterAltTab">View on GitHub</a>
+      </div>
+      <p class="note">Free and open source · macOS 12 or later</p>
+    </header>
+
+    <div class="demo" aria-hidden="true">
+      <div class="stage">
+        <div class="panel">
+          <div class="tile">
+            <div class="title"><i style="background:#1f8bff"></i><b>Trip notes.md</b></div>
+            <div class="shot"><div class="bar"><s></s><s></s><s></s></div><div class="body"><u style="width:70%"></u><u></u><u style="width:85%"></u><u style="width:50%"></u></div></div>
+          </div>
+          <div class="tile selected">
+            <div class="title"><i style="background:#ff9f0a"></i><b>Inbox · 3 unread</b></div>
+            <div class="shot mail"><div class="bar"><s></s><s></s><s></s></div><div class="body"><div class="col"><u></u><u></u><u></u><u></u></div><div class="col" style="flex:2"><u style="width:60%"></u><u></u><u style="width:80%"></u></div></div></div>
+          </div>
+          <div class="tile">
+            <div class="title"><i style="background:#30d158"></i><b>Terminal</b></div>
+            <div class="shot dark"><div class="bar"><s></s><s></s><s></s></div><div class="body"><u style="width:45%"></u><u style="width:75%"></u><u style="width:30%"></u><u style="width:60%"></u></div></div>
+          </div>
+          <div class="tile">
+            <div class="title"><i style="background:#ff375f"></i><b>Holiday photos</b></div>
+            <div class="shot photo"><div class="bar"><s></s><s></s><s></s></div><div class="body"><u></u></div></div>
+          </div>
+        </div>
+        <div class="hint">Hold <kbd>⌘</kbd>, tap <kbd>⇥</kbd> to move, let go to switch</div>
+      </div>
+    </div>
+
+    <section id="features">
+      <h2>Simple, and all yours</h2>
+      <p class="sub">Built on AltTab, the popular open-source switcher, with fewer settings and nothing held back.</p>
+      <div class="features">
+        <div class="card"><div class="glyph">⧉</div><h3>Every window, with previews</h3><p>See a live thumbnail of each window, including several windows of the same app, and pick the right one at a glance.</p></div>
+        <div class="card"><div class="glyph">⌘</div><h3>Works the way you expect</h3><p><kbd>⌘</kbd> <kbd>⇥</kbd> opens it, <kbd>⌘</kbd> <kbd>⇧</kbd> <kbd>⇥</kbd> goes back, and releasing <kbd>⌘</kbd> switches. Arrow keys, search and mouse clicks work too.</p></div>
+        <div class="card"><div class="glyph">★</div><h3>Every feature included</h3><p>No Pro version, no trial and no license key. Everything is free.</p></div>
+        <div class="card"><div class="glyph">⛨</div><h3>Nothing leaves your Mac</h3><p>No crash reports, no analytics, no feedback forms and no update checks. It never connects to a server.</p></div>
+        <div class="card"><div class="glyph">⚙</div><h3>One page of settings</h3><p>Shortcut, which windows to show, theme, delay and start at login. Sensible defaults for everything else.</p></div>
+        <div class="card"><div class="glyph">♪</div><h3>Quiet</h3><p>It never plays the macOS alert sound, however fast you type.</p></div>
+      </div>
+    </section>
+
+    <section id="install" class="install">
+      <h2>Install</h2>
+      <p class="sub">BetterAltTab is built from source, which takes a few minutes. You need a Mac with <a href="https://apps.apple.com/app/xcode/id497799835">Xcode</a> installed.</p>
+      <div class="steps">
+        <div class="step">
+          <h3>Get the code</h3>
+          <pre>git clone https://github.com/stanimir93/BetterAltTab.git
+cd BetterAltTab</pre>
+        </div>
+        <div class="step">
+          <h3>Create a signing certificate (once per Mac)</h3>
+          <p>A stable signature lets macOS remember the app's permissions when you rebuild it.</p>
+          <pre>scripts/codesign/setup_local.sh</pre>
+        </div>
+        <div class="step">
+          <h3>Tell the build to use it</h3>
+          <p>Create <code>config/local.xcconfig</code> with:</p>
+          <pre>CODE_SIGN_IDENTITY = Local Self-Signed
+OTHER_CODE_SIGN_FLAGS = --timestamp=none --deep --options runtime</pre>
+        </div>
+        <div class="step">
+          <h3>Build</h3>
+          <pre>xcodebuild -project alt-tab-macos.xcodeproj -scheme Release -derivedDataPath DerivedData</pre>
+        </div>
+        <div class="step">
+          <h3>Copy it to Applications and open it</h3>
+          <pre>ditto DerivedData/Build/Products/Release/BetterAltTab.app /Applications/BetterAltTab.app
+open /Applications/BetterAltTab.app</pre>
+        </div>
+      </div>
+      <div class="perm">
+        On first launch macOS asks for two permissions in System Settings › Privacy &amp; Security.
+        <b>Accessibility</b> is required: it lets BetterAltTab see and switch windows.
+        <b>Screen Recording</b> is optional: it lets the switcher show window thumbnails.
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="wrap">
+      <p>BetterAltTab is based on <a href="https://github.com/lwouis/alt-tab-macos">AltTab</a> by lwouis and its <a href="https://github.com/stanimir93/BetterAltTab/blob/master/docs/contributors.md">contributors</a>. It isn't affiliated with the AltTab project.</p>
+      <p>Free software under the <a href="https://github.com/stanimir93/BetterAltTab/blob/master/LICENCE.md">GNU GPL v3</a>.</p>
+    </div>
+  </footer>
+</body>
+</html>
