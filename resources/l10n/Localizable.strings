@@ -16,17 +16,8 @@
 /* No comment provided by engineer. */
 "4-finger Vertical Swipe" = "4-finger Vertical Swipe";
 
-/* No comment provided by engineer. */
-"A debug profile (versions, settings, hardware) is attached to help diagnose the issue." = "A debug profile (versions, settings, hardware) is attached to help diagnose the issue.";
-
 /* Illustration: page.recipe1 */
 "A little time." = "A little time.";
-
-/* No comment provided by engineer. */
-"A new version of AltTab is available" = "A new version of AltTab is available";
-
-/* Menubar option. %@ is AltTab */
-"About %@" = "About %@";
 
 /* No comment provided by engineer. */
 "Accessibility" = "Accessibility";
@@ -39,21 +30,6 @@
 
 /* No comment provided by engineer. */
 "Active screen" = "Active screen";
-
-/* No comment provided by engineer. */
-"Add a pattern" = "Add a pattern";
-
-/* No comment provided by engineer. */
-"Add a running app" = "Add a running app";
-
-/* No comment provided by engineer. */
-"Add an app from disk" = "Add an app from disk";
-
-/* No comment provided by engineer. */
-"Additional controls" = "Additional controls";
-
-/* No comment provided by engineer. */
-"After keys are released" = "After keys are released";
 
 /* No comment provided by engineer. */
 "All apps" = "All apps";
@@ -72,9 +48,6 @@
 
 /* No comment provided by engineer. */
 "Alphabetical Order" = "Alphabetical Order";
-
-/* No comment provided by engineer. */
-"AltTab crashed last time you used it. Sending a crash report will help get the issue fixed" = "AltTab crashed last time you used it. Sending a crash report will help get the issue fixed";
 
 /* Onboarding popover */
 "AltTab is ready" = "AltTab is ready";
@@ -98,19 +71,7 @@
 "AltTab requires this permission to show you pictures of each window." = "AltTab requires this permission to show you pictures of each window.";
 
 /* No comment provided by engineer. */
-"AltTab will show if the window is currently minimized or fullscreen with a status icon." = "AltTab will show if the window is currently minimized or fullscreen with a status icon.";
-
-/* No comment provided by engineer. */
 "Always" = "Always";
-
-/* No comment provided by engineer. */
-"Always send crash reports" = "Always send crash reports";
-
-/* No comment provided by engineer. */
-"and press" = "and press";
-
-/* No comment provided by engineer. */
-"Animations" = "Animations";
 
 /* Illustration: style.app-icons */
 "App Icons" = "App Icons";
@@ -125,9 +86,6 @@
 "App under the cursor" = "App under the cursor";
 
 /* No comment provided by engineer. */
-"Apparition delay of Switcher" = "Apparition delay of Switcher";
-
-/* No comment provided by engineer. */
 "Appearance" = "Appearance";
 
 /* No comment provided by engineer. */
@@ -137,16 +95,7 @@
 "Application Name - Window Title" = "Application Name - Window Title";
 
 /* No comment provided by engineer. */
-"Applies in other Appearances" = "Applies in other Appearances";
-
-/* No comment provided by engineer. */
 "Arrow keys" = "Arrow keys";
-
-/* No comment provided by engineer. */
-"Arrow keys already assigned to other actions:\n%@" = "Arrow keys already assigned to other actions:\n%@";
-
-/* No comment provided by engineer. */
-"Ask whether to send crash reports" = "Ask whether to send crash reports";
 
 /* No comment provided by engineer. */
 "Auto" = "Auto";
@@ -154,41 +103,11 @@
 /* Illustration: size.auto */
 "Auto Size" = "Auto Size";
 
-/* No comment provided by engineer. */
-"Auto-install updates periodically" = "Auto-install updates periodically";
-
 /* Illustration: window.breakfast */
 "Breakfast" = "Breakfast";
 
 /* No comment provided by engineer. */
-"Brief description of the bug" = "Brief description of the bug";
-
-/* No comment provided by engineer. */
-"Brief description of the change" = "Brief description of the change";
-
-/* No comment provided by engineer. */
-"Bundle ID" = "Bundle ID";
-
-/* No comment provided by engineer. */
 "Cancel" = "Cancel";
-
-/* No comment provided by engineer. */
-"Capture windows in the background" = "Capture windows in the background";
-
-/* No comment provided by engineer. */
-"Check for updates now…" = "Check for updates now…";
-
-/* No comment provided by engineer. */
-"Check for updates periodically" = "Check for updates periodically";
-
-/* Menubar option */
-"Check for updates…" = "Check for updates…";
-
-/* Menubar option */
-"Check permissions…" = "Check permissions…";
-
-/* Onboarding popover; opens Settings on Appearance */
-"Choose a style" = "Choose a style";
 
 /* Permissions window button */
 "Close" = "Close";
@@ -202,32 +121,14 @@
 /* Permissions window */
 "Continue without thumbnails" = "Continue without thumbnails";
 
-/* No comment provided by engineer. */
-"Controls" = "Controls";
-
 /* LetsMove replacement alert */
 "Could not move to Applications folder" = "Could not move to Applications folder";
 
 /* No comment provided by engineer. */
-"Couldn't submit feedback" = "Couldn't submit feedback";
-
-/* No comment provided by engineer. */
-"Crash reports policy" = "Crash reports policy";
-
-/* No comment provided by engineer. */
-"Create GitHub issue" = "Create GitHub issue";
-
-/* No comment provided by engineer. */
-"Cursor follows focus" = "Cursor follows focus";
-
-/* No comment provided by engineer. */
-"Customize more…" = "Customize more…";
-
-/* No comment provided by engineer. */
 "Dark" = "Dark";
 
-/* Menubar option */
-"Debug tools" = "Debug tools";
+/* No comment provided by engineer. */
+"Delay before the switcher appears" = "Delay before the switcher appears";
 
 /* Name of the Accessibility permission since macOS 27: the first half of \"Device Control and Data Access\", as System Settings shows it */
 "Device Control" = "Device Control";
@@ -241,47 +142,11 @@
 /* LetsMove replacement alert */
 "Do Not Move" = "Do Not Move";
 
-/* No comment provided by engineer. */
-"Don't hide" = "Don't hide";
-
-/* No comment provided by engineer. */
-"Done" = "Done";
-
-/* No comment provided by engineer. */
-"Don’t check for updates periodically" = "Don’t check for updates periodically";
-
-/* No comment provided by engineer. */
-"Don’t send" = "Don’t send";
-
 /* Illustration: comparison.during */
 "During your trial" = "During your trial";
 
 /* No comment provided by engineer. */
-"e.g. com.example.app" = "e.g. com.example.app";
-
-/* No comment provided by engineer. */
-"e.g. Debug" = "e.g. Debug";
-
-/* No comment provided by engineer. */
 "End" = "End";
-
-/* No comment provided by engineer. */
-"Exceptions" = "Exceptions";
-
-/* No comment provided by engineer. */
-"Export settings…" = "Export settings…";
-
-/* No comment provided by engineer. */
-"Fade in animation of Preview" = "Fade in animation of Preview";
-
-/* No comment provided by engineer. */
-"Fade out animation of Switcher" = "Fade out animation of Switcher";
-
-/* No comment provided by engineer. */
-"Failed to import settings" = "Failed to import settings";
-
-/* No comment provided by engineer. */
-"Filtering" = "Filtering";
 
 /* Illustration: size.fixed */
 "Fixed size" = "Fixed size";
@@ -298,63 +163,27 @@
 /* No comment provided by engineer. */
 "General" = "General";
 
-/* No comment provided by engineer. */
-"Gesture" = "Gesture";
-
-/* No comment provided by engineer. */
-"Go back" = "Go back";
-
 /* Menubar callout button
    Permissions window button */
 "Grant permission" = "Grant permission";
 
 /* No comment provided by engineer. */
-"Group apps" = "Group apps";
-
-/* No comment provided by engineer. */
-"Group tabs" = "Group tabs";
-
-/* No comment provided by engineer. */
-"Help improve AltTab" = "Help improve AltTab";
-
-/* No comment provided by engineer. */
 "Hide" = "Hide";
-
-/* No comment provided by engineer. */
-"Hide colored circles on mouse hover" = "Hide colored circles on mouse hover";
-
-/* No comment provided by engineer. */
-"Hide Space number labels" = "Hide Space number labels";
-
-/* No comment provided by engineer. */
-"Hide status icons" = "Hide status icons";
-
-/* No comment provided by engineer. */
-"Hide windows" = "Hide windows";
 
 /* No comment provided by engineer. */
 "Hide/Show app" = "Hide/Show app";
 
-/* No comment provided by engineer. */
-"Hold" = "Hold";
-
 /* Onboarding popover, above the key to keep down */
 "hold" = "hold";
+
+/* No comment provided by engineer. */
+"Hold" = "Hold";
 
 /* LetsMove replacement alert */
 "I can move myself to the Applications folder if you'd like." = "I can move myself to the Applications folder if you'd like.";
 
-/* No comment provided by engineer. */
-"I think the app could be improved with…" = "I think the app could be improved with…";
-
 /* Illustration: window.ideas */
 "Ideas" = "Ideas";
-
-/* No comment provided by engineer. */
-"Ignore shortcuts" = "Ignore shortcuts";
-
-/* No comment provided by engineer. */
-"Import settings…" = "Import settings…";
 
 /* Illustration: search.query, window.japan */
 "Japan" = "Japan";
@@ -369,16 +198,7 @@
 "Japan trip" = "Japan trip";
 
 /* No comment provided by engineer. */
-"Language" = "Language";
-
-/* No comment provided by engineer. */
-"Language Change" = "Language Change";
-
-/* No comment provided by engineer. */
 "Large" = "Large";
-
-/* No comment provided by engineer. */
-"Later" = "Later";
 
 /* No comment provided by engineer. */
 "Light" = "Light";
@@ -401,9 +221,6 @@
 /* No comment provided by engineer. */
 "Minimize/Deminimize window" = "Minimize/Deminimize window";
 
-/* No comment provided by engineer. */
-"Miscellaneous" = "Miscellaneous";
-
 /* LetsMove replacement alert */
 "Move to Applications Folder" = "Move to Applications Folder";
 
@@ -411,13 +228,7 @@
 "Move to Applications folder?" = "Move to Applications folder?";
 
 /* No comment provided by engineer. */
-"Multiple screens" = "Multiple screens";
-
-/* No comment provided by engineer. */
 "Never" = "Never";
-
-/* No comment provided by engineer. */
-"Never send crash reports" = "Never send crash reports";
 
 /* Permissions window: a step the user hasn't reached yet */
 "Next" = "Next";
@@ -431,11 +242,8 @@
 /* No comment provided by engineer. */
 "Non-visible Spaces" = "Non-visible Spaces";
 
-/* Illustration: app.notes, window.checklist */
+/* Illustration: app.notes */
 "Notes" = "Notes";
-
-/* Illustration: window.checklist */
-"Notes — List" = "Notes — List";
 
 /* No comment provided by engineer. */
 "OK" = "OK";
@@ -446,35 +254,17 @@
 /* No comment provided by engineer. */
 "Only on different screen" = "Only on different screen";
 
-/* No comment provided by engineer. */
-"Open Trackpad Settings…" = "Open Trackpad Settings…";
-
-/* No comment provided by engineer. */
-"Order windows by" = "Order windows by";
-
-/* No comment provided by engineer. */
-"Ordering & Grouping" = "Ordering & Grouping";
-
-/* No comment provided by engineer. */
-"Overridden in Shortcut:" = "Overridden in Shortcut:";
-
 /* Illustration: window.photos */
 "Photos" = "Photos";
 
 /* LetsMove replacement alert */
 "Please drag AltTab into the Applications folder manually." = "Please drag AltTab into the Applications folder manually.";
 
-/* No comment provided by engineer. */
-"Please fill in the form" = "Please fill in the form";
-
 /* Onboarding popover, above the key to press */
 "press" = "press";
 
 /* Onboarding popover, once the shortcut was used; %@ is the keyboard shortcut */
 "Press %@ any time" = "Press %@ any time";
-
-/* No comment provided by engineer. */
-"Preview selected window" = "Preview selected window";
 
 /* %@ is AltTab */
 "Quit %@" = "Quit %@";
@@ -501,27 +291,6 @@
 "Red badge with number %@" = "Red badge with number %@";
 
 /* No comment provided by engineer. */
-"Remember my choice" = "Remember my choice";
-
-/* No comment provided by engineer. */
-"Report a bug" = "Report a bug";
-
-/* No comment provided by engineer. */
-"Report on current version" = "Report on current version";
-
-/* No comment provided by engineer. */
-"Reset settings and restart" = "Reset settings and restart";
-
-/* No comment provided by engineer. */
-"Restart Now" = "Restart Now";
-
-/* Illustration: window.recipes */
-"Safari — Food" = "Safari — Food";
-
-/* Illustration: window.japan */
-"Safari — Trip" = "Safari — Trip";
-
-/* No comment provided by engineer. */
 "Screen including menu bar" = "Screen including menu bar";
 
 /* No comment provided by engineer. */
@@ -542,29 +311,8 @@
 /* No comment provided by engineer. */
 "Select previous window" = "Select previous window";
 
-/* No comment provided by engineer. */
-"Select windows on mouse hover" = "Select windows on mouse hover";
-
-/* No comment provided by engineer. */
-"Select windows using arrow keys" = "Select windows using arrow keys";
-
-/* No comment provided by engineer. */
-"Select windows using vim keys" = "Select windows using vim keys";
-
-/* No comment provided by engineer. */
-"Send" = "Send";
-
-/* No comment provided by engineer. */
-"Send a crash report?" = "Send a crash report?";
-
-/* Menubar option */
-"Send feedback" = "Send feedback";
-
-/* No comment provided by engineer. */
-"Sending…" = "Sending…";
-
-/* No comment provided by engineer. */
-"Settings imported" = "Settings imported";
+/* Settings window title */
+"Settings" = "Settings";
 
 /* Menubar option */
 "Settings…" = "Settings…";
@@ -577,9 +325,6 @@
 
 /* No comment provided by engineer. */
 "Shortcut already assigned to: %@" = "Shortcut already assigned to: %@";
-
-/* No comment provided by engineer. */
-"Shortcuts when active" = "Shortcuts when active";
 
 /* Menubar option */
 "Show" = "Show";
@@ -603,9 +348,6 @@
 "Show minimized windows" = "Show minimized windows";
 
 /* No comment provided by engineer. */
-"Show on" = "Show on";
-
-/* No comment provided by engineer. */
 "Show one window per app" = "Show one window per app";
 
 /* No comment provided by engineer. */
@@ -615,19 +357,10 @@
 "Show single window for all tabs" = "Show single window for all tabs";
 
 /* No comment provided by engineer. */
-"Show titles" = "Show titles";
-
-/* No comment provided by engineer. */
-"Show windows from applications" = "Show windows from applications";
-
-/* No comment provided by engineer. */
 "Show windows from screens" = "Show windows from screens";
 
 /* No comment provided by engineer. */
 "Show windows from Spaces" = "Show windows from Spaces";
-
-/* No comment provided by engineer. */
-"Size" = "Size";
 
 /* No comment provided by engineer. */
 "Skipped" = "Skipped";
@@ -639,9 +372,6 @@
 "Something good." = "Something good.";
 
 /* No comment provided by engineer. */
-"Source code" = "Source code";
-
-/* No comment provided by engineer. */
 "Space Order" = "Space Order";
 
 /* No comment provided by engineer. */
@@ -650,17 +380,8 @@
 /* No comment provided by engineer. */
 "Start at login" = "Start at login";
 
-/* No comment provided by engineer. */
-"Suggest a change" = "Suggest a change";
-
-/* No comment provided by engineer. */
-"Support this project" = "Support this project";
-
-/* No comment provided by engineer. */
-"Switch between 3 different styles. You can customize them." = "Switch between 3 different styles. You can customize them.";
-
-/* No comment provided by engineer. */
-"Sync with global value" = "Sync with global value";
+/* Settings header. %@ is a shortcut, like ⌘⇥ */
+"Switch between windows with %@" = "Switch between windows with %@";
 
 /* No comment provided by engineer. */
 "System" = "System";
@@ -670,15 +391,6 @@
 
 /* Onboarding popover, once the shortcut was used */
 "That's it" = "That's it";
-
-/* No comment provided by engineer. */
-"The application needs to restart to apply the imported settings." = "The application needs to restart to apply the imported settings.";
-
-/* No comment provided by engineer. */
-"The application needs to restart to apply the language change." = "The application needs to restart to apply the language change.";
-
-/* No comment provided by engineer. */
-"The server didn't accept the submission. Check your internet connection and try again — your draft is preserved." = "The server didn't accept the submission. Check your internet connection and try again — your draft is preserved.";
 
 /* No comment provided by engineer. */
 "Theme" = "Theme";
@@ -692,17 +404,11 @@
 /* Menubar callout subject */
 "Thumbnails and window previews" = "Thumbnails and window previews";
 
-/* No comment provided by engineer. */
-"Title truncation" = "Title truncation";
-
 /* Illustration: style.titles */
 "Titles" = "Titles";
 
 /* Illustration: page.route */
 "Tokyo · Hakone · Kyoto" = "Tokyo · Hakone · Kyoto";
-
-/* No comment provided by engineer. */
-"Trackpad haptic feedback" = "Trackpad haptic feedback";
 
 /* No comment provided by engineer. */
 "Trigger" = "Trigger";
@@ -723,49 +429,19 @@
 "Up to 9 shortcuts" = "Up to 9 shortcuts";
 
 /* No comment provided by engineer. */
-"Update now" = "Update now";
-
-/* No comment provided by engineer. */
-"Updates policy" = "Updates policy";
-
-/* No comment provided by engineer. */
-"Usage" = "Usage";
-
-/* No comment provided by engineer. */
 "Version" = "Version";
-
-/* No comment provided by engineer. */
-"View existing discussions" = "View existing discussions";
 
 /* No comment provided by engineer. */
 "Vim keys" = "Vim keys";
 
 /* No comment provided by engineer. */
-"Vim keys already assigned to other actions:\n%@" = "Vim keys already assigned to other actions:\n%@";
-
-/* No comment provided by engineer. */
 "Visible Spaces" = "Visible Spaces";
-
-/* No comment provided by engineer. */
-"Website" = "Website";
 
 /* Illustration: window.weekend */
 "Weekend" = "Weekend";
 
 /* Illustration: window.recipes */
 "Weekend recipes" = "Weekend recipes";
-
-/* No comment provided by engineer. */
-"What did you expect? What happened? Steps to reproduce…" = "What did you expect? What happened? Steps to reproduce…";
-
-/* No comment provided by engineer. */
-"What happened, and what did you expect?" = "What happened, and what did you expect?";
-
-/* No comment provided by engineer. */
-"What would make AltTab more useful for you?" = "What would make AltTab more useful for you?";
-
-/* No comment provided by engineer. */
-"When disabled, avoids the macOS purple screen-recording indicator, and avoids flickers when playing DRM video. Thumbnails will be less up-to-date." = "When disabled, avoids the macOS purple screen-recording indicator, and avoids flickers when playing DRM video. Thumbnails will be less up-to-date.";
 
 /* No comment provided by engineer. */
 "When fullscreen" = "When fullscreen";
@@ -794,6 +470,9 @@
 /* No comment provided by engineer. */
 "Window title contains" = "Window title contains";
 
+/* Settings section: which windows the switcher lists */
+"Windows" = "Windows";
+
 /* No comment provided by engineer. */
 "Windows under the cursor" = "Windows under the cursor";
 
@@ -805,18 +484,6 @@
 
 /* Illustration: window.work */
 "Work" = "Work";
-
-/* No comment provided by engineer. */
-"You can’t undo this action." = "You can’t undo this action.";
-
-/* No comment provided by engineer. */
-"You may need to disable some conflicting system gestures" = "You may need to disable some conflicting system gestures";
-
-/* No comment provided by engineer. */
-"You're running v%1$@. v%2$@ is available. The bug you're seeing may already be fixed — please update first and check before reporting." = "You're running v%1$@. v%2$@ is available. The bug you're seeing may already be fixed — please update first and check before reporting.";
-
-/* No comment provided by engineer. */
-"Your feedback will be submitted as a public GitHub issue." = "Your feedback will be submitted as a public GitHub issue.";
 
 /* No comment provided by engineer. */
 "Your settings reset every time AltTab restarts." = "Your settings reset every time AltTab restarts.";

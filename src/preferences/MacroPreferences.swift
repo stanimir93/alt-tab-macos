@@ -1,27 +1,3 @@
-enum MenubarIconPreference: CaseIterable, MacroPreference {
-    // Persisted indices and menubar-N.pdf assets share this order; preserve it across icon redesigns.
-    case outlined
-    case filled
-    case colored
-    case legacyOutlined
-    case legacyFilled
-    case legacyColored
-
-    var isTemplate: Bool { self != .colored && self != .legacyColored }
-
-    var localizedString: LocalizedString {
-        switch self {
-            // NSPopUpButton requires unique titles, including the image-only choices.
-            case .outlined: return " "
-            case .filled: return " "
-            case .colored: return " "
-            case .legacyOutlined: return "  "
-            case .legacyFilled: return "  "
-            case .legacyColored: return "  "
-        }
-    }
-}
-
 enum GesturePreference: CaseIterable, MacroPreference {
     case disabled
     case threeFingerHorizontalSwipe
@@ -371,34 +347,6 @@ enum AppearanceThemePreference: CaseIterable, SfSymbolMacroPreference {
             case .light: return .sunMax
             case .dark: return .moonFill
             case .system: return .laptopcomputer
-        }
-    }
-}
-
-enum UpdatePolicyPreference: CaseIterable, MacroPreference {
-    case manual
-    case autoCheck
-    case autoInstall
-
-    var localizedString: LocalizedString {
-        switch self {
-            case .manual: return NSLocalizedString("Don’t check for updates periodically", comment: "")
-            case .autoCheck: return NSLocalizedString("Check for updates periodically", comment: "")
-            case .autoInstall: return NSLocalizedString("Auto-install updates periodically", comment: "")
-        }
-    }
-}
-
-enum CrashPolicyPreference: CaseIterable, MacroPreference {
-    case never
-    case ask
-    case always
-
-    var localizedString: LocalizedString {
-        switch self {
-            case .never: return NSLocalizedString("Never send crash reports", comment: "")
-            case .ask: return NSLocalizedString("Ask whether to send crash reports", comment: "")
-            case .always: return NSLocalizedString("Always send crash reports", comment: "")
         }
     }
 }

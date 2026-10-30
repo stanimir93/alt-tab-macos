@@ -184,8 +184,8 @@ final class CustomRecorderControlTests: XCTestCase {
 
     // MARK: - isWellFormedCandidateId
 
-    /// Regression guard for the conflict dialog that silently stopped appearing under the recycled
-    /// `ShortcutEditor`: the recorder handed the kernel a frozen placeholder id (`"nextWindowShortcut0"`,
+    /// Regression guard for the conflict dialog that silently stopped appearing when a recycled
+    /// recorder kept a stale id: the recorder handed the kernel a frozen placeholder id (`"nextWindowShortcut0"`,
     /// whose `nameToIndex` is -1), which matched no shortcut, so `isShortcutAcceptable` returned
     /// `.accepted` and no dialog showed. `isWellFormedCandidateId` rejects exactly that shape — and a
     /// `#if DEBUG` assert in `isShortcutAcceptable` now trips loudly if such an id ever reaches it.
@@ -207,8 +207,7 @@ final class CustomRecorderControlTests: XCTestCase {
     }
 
     // Note on `Shortcut.keyEquivalent` (defined in `CustomRecorderControlTestable.swift`):
-    // It's used in production by `ControlsTab.shortcutSummary` (not just "for testing" as the old
-    // comment claimed — see the corrected doc-comment on the getter). It shows as 0% coverage
+    // It's used in production by the Settings header (`SettingsWindow.refreshSubtitle`). It shows as 0% coverage
     // here because the getter calls ShortcutRecorder's `readableStringRepresentation(isASCII:)`
     // which throws `NSInternalInconsistencyException: Unable to find bundle with resources` when
     // the framework's bundle isn't loaded — i.e. in the unit-test target. Testing it would

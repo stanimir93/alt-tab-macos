@@ -25,39 +25,12 @@ extension NSAppearance {
         let appearance = NSApp.effectiveAppearance.name
         return appearance == .darkAqua || appearance == .vibrantDark ? .dark : .light
     }
-
-    /// Whether *this* appearance is a dark one (unlike `getThemeName()`, which always reads
-    /// `NSApp.effectiveAppearance`). Used by the dynamic-color provider so AppKit can resolve a
-    /// color for whatever appearance a view is drawing in.
-    var isDarkMode: Bool {
-        bestMatch(from: [.aqua, .darkAqua]) == .darkAqua
-    }
 }
 
 extension NSColor {
     /// Dynamically adapts to changes in System Settings; no need to listen to notifications.
     class var systemAccentColor: NSColor {
         NSColor.controlAccentColor
-    }
-
-    /// A color that resolves itself per-appearance, so AppKit re-renders it automatically on a
-    /// Dark/Light switch with no event observing and no manual repaint (as long as it's drawn by a
-    /// view that re-resolves `NSColor`s, e.g. `NSBox`, rather than baked into `layer.backgroundColor`
-    /// via `.cgColor`).
-    private static func dynamicAppearanceColor(light: NSColor, dark: NSColor) -> NSColor {
-        NSColor(name: nil) { $0.isDarkMode ? dark : light }
-    }
-
-    class var tableSeparatorColor: NSColor {
-        dynamicAppearanceColor(
-            light: NSColor(srgbRed: 231 / 255, green: 231 / 255, blue: 231 / 255, alpha: 0.8),  // #e7e7e7
-            dark: NSColor(srgbRed: 53 / 255, green: 53 / 255, blue: 53 / 255, alpha: 0.8))       // #353535
-    }
-
-    class var tableHoverColor: NSColor {
-        dynamicAppearanceColor(
-            light: NSColor(srgbRed: 235 / 255, green: 235 / 255, blue: 235 / 255, alpha: 0.8),  // #ebebeb
-            dark: NSColor(srgbRed: 54 / 255, green: 54 / 255, blue: 54 / 255, alpha: 0.8))       // #363636
     }
 }
 
@@ -102,17 +75,6 @@ extension NSView {
         subviews = subviews + views
     }
 
-    /// Observe key / resign-key on this view's CURRENT window. Call from `viewDidMoveToWindow` and store
-    /// the returned tokens: that override fires again on every window change, so the previous window's
-    /// observers have to be dropped first (hence `replacing:`) or they outlive the window they watch.
-    func observeWindowKeyChanges(replacing previous: [NSObjectProtocol], _ onChange: @escaping () -> Void) -> [NSObjectProtocol] {
-        previous.forEach { NotificationCenter.default.removeObserver($0) }
-        guard let window else { return [] }
-        return [NSWindow.didBecomeKeyNotification, NSWindow.didResignKeyNotification].map { name in
-            NotificationCenter.default.addObserver(forName: name, object: window, queue: .main) { _ in onChange() }
-        }
-    }
-
     func setSubviewAbove(_ view: NSView) {
         addSubview(view, positioned: .above, relativeTo: nil)
     }
@@ -143,75 +105,6 @@ extension DispatchQoS {
     }
 }
 
-extension NSView {
-    /// Wrap this view in a container that adds top padding above it. Used as a window's
-    /// `contentView` when the window has `.fullSizeContentView` — the content view extends
-    /// behind the traffic-light buttons, so the actual content needs a top inset to avoid
-    /// overlapping them.
-    func wrappedWithTitlebarPadding(_ padding: CGFloat = 10) -> NSView {
-        let wrapper = NSView()
-        wrapper.translatesAutoresizingMaskIntoConstraints = false
-        translatesAutoresizingMaskIntoConstraints = false
-        wrapper.addSubview(self)
-        NSLayoutConstraint.activate([
-            topAnchor.constraint(equalTo: wrapper.topAnchor, constant: padding),
-            leadingAnchor.constraint(equalTo: wrapper.leadingAnchor),
-            trailingAnchor.constraint(equalTo: wrapper.trailingAnchor),
-            bottomAnchor.constraint(equalTo: wrapper.bottomAnchor),
-        ])
-        return wrapper
-    }
-}
-
-extension NSImage {
-    // NSImage(named) caches/reuses NSImage objects; we force separate instances of images by using copy()
-    static func initCopy(_ name: String) -> NSImage {
-        return NSImage(named: name)!.copy() as! NSImage
-    }
-
-    /// Render an SF Symbol from the bundled `SF Pro Text` subset font as a template NSImage.
-    /// Tint at the call site via `NSImageView.contentTintColor` or by drawing into a tinted
-    /// container. The image is rasterised at `pointSize`; for crisp Retina output, pass the
-    /// displayed point size — AppKit handles @2x via the backing scale.
-    ///
-    /// The image is cropped to the glyph's ink bounds (the actual visible pixels), not the
-    /// font's typographic box. This makes `NSSegmentedControl` and similar containers center
-    /// the glyph correctly — math symbols like `+`/`−` sit on the math axis, which doesn't
-    /// match the typographic midline, so a typographic-box image renders visibly off-centre.
-    ///
-    /// `rotated180` flips the glyph 180° around the image centre — used e.g. for the override
-    /// indicator where the upright `arrow.triangle.branch` glyph reads better pointing
-    /// downward ("this value branches to other shortcuts").
-    ///
-    /// `margin` adds transparent room on every side, keeping the glyph centred. Anti-aliasing paints
-    /// up to one device pixel past the ink bounds, so with no margin the glyph's bottom and left
-    /// edges are shaved flat (measured on the 13pt moon phases: the bottom and left pixel rows are
-    /// fully opaque, the top one is not).
-    static func fromSymbol(_ symbol: Symbols, pointSize: CGFloat, rotated180: Bool = false, margin: CGFloat = 0) -> NSImage {
-        let font = NSFont(name: "SF Pro Text", size: pointSize)!
-        let attrs: [NSAttributedString.Key: Any] = [.font: font, .foregroundColor: NSColor.black]
-        let attrStr = NSAttributedString(string: symbol.rawValue, attributes: attrs)
-        let line = CTLineCreateWithAttributedString(attrStr)
-        let inkBounds = CTLineGetImageBounds(line, nil)
-        let imageSize = NSSize(width: ceil(inkBounds.width + 2 * margin), height: ceil(inkBounds.height + 2 * margin))
-        let image = NSImage(size: imageSize)
-        image.lockFocus()
-        if let ctx = NSGraphicsContext.current?.cgContext {
-            if rotated180 {
-                ctx.translateBy(x: imageSize.width / 2, y: imageSize.height / 2)
-                ctx.rotate(by: .pi)
-                ctx.translateBy(x: -imageSize.width / 2, y: -imageSize.height / 2)
-            }
-            ctx.translateBy(x: (imageSize.width - inkBounds.width) / 2 - inkBounds.origin.x,
-                y: (imageSize.height - inkBounds.height) / 2 - inkBounds.origin.y)
-            CTLineDraw(line, ctx)
-        }
-        image.unlockFocus()
-        image.isTemplate = true
-        return image
-    }
-}
-
 extension CGImage {
     func size() -> NSSize {
         return NSSize(width: width, height: height)
@@ -239,23 +132,6 @@ extension String {
 /// app the user is switching to (`App.hideTilesPanelWithoutChangingKeyWindow`).
 enum SecondaryWindows {
     static var canBecomeKey = true
-}
-
-extension NSTextView {
-    /// A read-only, selectable text view sized to one settings column, for the Markdown-rendered
-    /// panes. Text checking is off: these are static documents, so the checker would only ever
-    /// underline product names.
-    static func makeReadOnlyMarkdownView(_ columnWidth: CGFloat) -> NSTextView {
-        let textView = NSTextView()
-        textView.textContainer!.widthTracksTextView = true
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.drawsBackground = false
-        textView.isSelectable = true
-        textView.isEditable = false
-        textView.enabledTextCheckingTypes = 0
-        textView.frame.size.width = columnWidth
-        return textView
-    }
 }
 
 extension NSPanel {
@@ -324,7 +200,7 @@ extension NSWindow {
 
     /// Safe replacement for `setFrameAutosaveName`: that call doesn't just register a name, it
     /// immediately applies the frame persisted under "NSWindow Frame <name>". A corrupt persisted
-    /// frame makes that apply throw and aborts the app (FeedbackWindow crash f481d5b0). Drop the bad
+    /// frame makes that apply throw and aborts the app (crash f481d5b0). Drop the bad
     /// value first so AppKit never sees it. Returns whether a valid saved frame is present.
     @discardableResult
     func setFrameAutosaveNameSafely(_ name: NSWindow.FrameAutosaveName) -> Bool {

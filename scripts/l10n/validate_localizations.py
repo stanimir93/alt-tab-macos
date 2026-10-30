@@ -34,18 +34,13 @@ def validate():
     app = ROOT / 'resources/l10n'
     languages = {p.stem for p in app.glob('*.lproj')}
     tables = [(app, 'Localizable'),
-              (ROOT / 'vendor/ShortcutRecorder/Sources/ShortcutRecorder', 'ShortcutRecorder'),
-              (ROOT / 'vendor/Sparkle/Sources/Sparkle', 'Sparkle')]
+              (ROOT / 'vendor/ShortcutRecorder/Sources/ShortcutRecorder', 'ShortcutRecorder')]
     errors = []
     preferences = (ROOT / 'src/preferences/MacroPreferences.swift').read_text()
     language_metadata = preferences.split('enum LanguagePreference:', 1)[1].split('var localizedString:', 1)[0]
     selectable = set(re.findall(r'\("[^"\n]+", "([a-z]{2}(?:-[A-Z]{2})?)"\)', language_metadata))
     if languages != selectable or len(selectable) != 21:
         errors.append(f'Localizable: expected the 21 selectable languages; missing {sorted(selectable - languages)}; extra {sorted(languages - selectable)}')
-    updater = ROOT / 'vendor/Sparkle/Helpers/Updater.app/Contents/Info.plist'
-    declared = set(strings(updater).get('CFBundleLocalizations', []))
-    if declared != languages:
-        errors.append(f'Updater: missing languages {sorted(languages - declared)}; extra {sorted(declared - languages)}')
     if set(strings(app / 'Localizable.strings')) != extracted_keys():
         errors.append('Localizable: extracted source is stale; run scripts/l10n/extract_l10n_strings.sh')
     for folder, table in tables:
@@ -73,4 +68,4 @@ if __name__ == '__main__':
     if failures:
         print('\n'.join(failures), file=sys.stderr)
         sys.exit(1)
-    print(f'App, ShortcutRecorder and Sparkle: complete catalogs for {len(supported)} languages; formats match')
+    print(f'App and ShortcutRecorder: complete catalogs for {len(supported)} languages; formats match')

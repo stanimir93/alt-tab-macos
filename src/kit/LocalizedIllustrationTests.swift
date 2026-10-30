@@ -10,7 +10,7 @@ final class LocalizedIllustrationTests: XCTestCase {
 
     func testEveryIllustrationUsesReusableNativeVectorDrawing() throws {
         let drawer = try IllustrationDrawer(directory: resources)
-        XCTAssertEqual(drawer.archive.scenes.count, 29)
+        XCTAssertEqual(drawer.archive.scenes.count, 9)
         for name in drawer.archive.scenes.keys {
             let image = try XCTUnwrap(drawer.image(name), name)
             XCTAssertTrue(image.representations.contains { $0 is NSCustomImageRep }, name)

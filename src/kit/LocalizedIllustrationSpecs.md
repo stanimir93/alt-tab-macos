@@ -42,16 +42,16 @@ cached by bundle, resource, locale, appearance, direction and text overrides, bo
 48 entries. Shared drawer caches are bounded at four bundles. Drawing an existing image
 does not repeat string substitution or fitting. Illustrations stay outside switcher input.
 
-All Settings appearance cards, Customize previews and permission scenes use these resources.
-The feature comparisons are no longer shown in the app; they remain as the drawer tests' fixtures for
-dark fills and RTL transforms. The rabbit and app/menu icons remain branding; interactive keycaps,
+The permission scenes use these resources. The feature comparisons and the two remaining Settings style
+cards (App Icons, Titles) are no longer shown in the app; they remain as the drawer tests' fixtures for
+dark fills, RTL transforms and caching. The app/menu icons remain branding; interactive keycaps,
 success ticks, speech bubbles and ordinary controls remain native. Comparison headings and captions
 remain SVG text. An optional ID-to-string override replaces a text node's wording; overrides
 participate in the image cache key.
 
 Every compiled resource is checked for native vector drawing. The compiler rejects unsupported
 features and external resources. Canonical sources retain bounded text metadata. The two comparison desktops remain stationary;
-only the switcher is scaled for Auto Size. All three Settings styles are reviewed at native sizes.
+only the switcher is scaled for Auto Size.
 Switcher illustrations select the second item when available, consistently across Show/Hide
 and comparison variants. Search places its field inside the switcher above two matching
 Japan windows, compared with twelve smaller unfiltered windows. Shortcut captions sit
@@ -60,9 +60,7 @@ a 218-unit baseline. Search shows tightly bounded yellow query matches in the tw
 titles, without a caret in its query field. Permission scenes retain their content scale with 12 extra points of desktop padding
 on each side, and use the same centered shaft-and-chevron arrow as the comparisons.
 English example titles fit at their authored font sizes without truncation; use shorter examples
-instead of relying on localization fitting. Customize Show/Hide pairs retain the same scene.
-The visible state outlines the affected accessory in red; the hidden state removes both the
-accessory and its outline. Status and Space indicators are circled at the title's trailing edge.
+instead of relying on localization fitting.
 The recording permission comparison shows app icons and names before permission, then window
 previews and concrete window titles afterward.
 App Icons uses a 24-unit inset around the visible 60-unit icon silhouettes on every side.

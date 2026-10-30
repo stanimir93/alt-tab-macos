@@ -9,20 +9,14 @@ unit-tested (Humble Object pattern), so it doesn't appear here; that's by design
 
 | Line coverage | File |
 |---:|---|
-| 0% (0/6) | `src/kit/text/DynamicColorTextField.swift` |
-| 2% (14/664) | `src/preferences/settings-window/TableGroupView.swift` |
-| 18% (34/191) | `src/kit/text/LightLabel.swift` |
 | 49% (19/39) | `src/macos/api-wrappers/HelperExtensionsTestable.swift` |
 | 49% (248/506) | `src/preferences/PreferencesMigrations.swift` |
 | 62% (5/8) | `src/switcher/SwitcherSession.swift` |
 | 64% (63/98) | `src/_test-support/Mocks.swift` |
 | 65% (49/75) | `src/events/KeyboardEventsTestable.swift` |
 | 74% (17/23) | `src/preferences/PreferencesMigrationsTestSupport.swift` |
-| 76% (250/331) | `src/preferences/settings-window/SettingsSearch.swift` |
 | 78% (138/178) | `src/kit/CustomRecorderControlTestable.swift` |
 | 79% (15/19) | `src/switcher/AppearanceTestable.swift` |
-| 92% (206/225) | `src/preferences/settings-window/SettingsSearchHighlight.swift` |
-| 93% (13/14) | `src/preferences/settings-window/tabs/controls/OverrideClickResolver.swift` |
 | 93% (93/100) | `src/switcher/state/SelectionResolver.swift` |
 | 93% (109/117) | `src/switcher/ATShortcut.swift` |
 | 93% (28/30) | `src/util/UsageStatsTestable.swift` |

@@ -5,9 +5,9 @@ import ShortcutRecorder
 class CustomRecorderControlTestable {
     /// A `holdShortcut`/`nextWindowShortcut` candidate id must resolve to an in-range shortcut index;
     /// every other id (the static "when active" shortcuts, arrow, vim) is well-formed by definition.
-    /// This is the contract the recycled `ShortcutEditor` must uphold: the id handed to the conflict
-    /// check is the bound preference key, not a stale placeholder. The regression that hid the
-    /// conflict dialog was exactly a malformed id — the recorder's frozen `"nextWindowShortcut0"`,
+    /// This is the contract every recorder must uphold: the id handed to the conflict check is the
+    /// preference key it edits, not a stale placeholder. The regression that hid the conflict dialog
+    /// was exactly a malformed id — a recorder's frozen `"nextWindowShortcut0"`,
     /// whose `nameToIndex` is -1 — silently matching nothing and returning `.accepted`.
     static func isWellFormedCandidateId(_ id: String) -> Bool {
         guard id.hasPrefix("holdShortcut") || id.hasPrefix("nextWindowShortcut") else { return true }
@@ -203,9 +203,9 @@ extension Shortcut {
     /// returns the long form ("Command-Option-Tab"); this property rewrites that into the
     /// keyEquivalent glyphs.
     ///
-    /// Used in production by `ControlsTab.shortcutSummary(_:)` to render the sidebar row's
-    /// "summary" string ("⌘⌥ + ⇥"); also handy in tests for asserting against a recorded
-    /// shortcut's glyph form.
+    /// Used in production by the Settings header (`SettingsWindow.refreshSubtitle`) to name the
+    /// current shortcut ("⌘⇥"); also handy in tests for asserting against a recorded shortcut's
+    /// glyph form.
     var keyEquivalent: String {
         get {
             let readableStringRepresentation = self.readableStringRepresentation(isASCII: true).lowercased()

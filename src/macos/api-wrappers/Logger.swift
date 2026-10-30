@@ -40,7 +40,6 @@ class Logger {
     /// produces a capture that merely looks complete (#5785). Gate a noisy line instead of forking the
     /// stream.
     static var debugEnabled: Bool { minLevel <= .debug }
-    private static var tap: ((LogLevel, String) -> Void)?
     private static let ansiReset = "\u{001B}[0m"
     private static let writeQueue = DispatchQueue(label: "Logger.writeQueue", qos: .utility)
     private static let dateFormatter: DateFormatter = {
@@ -63,8 +62,6 @@ class Logger {
             default: return .error
         }
     }
-
-    static func setTap(_ tap: ((LogLevel, String) -> Void)?) { self.tap = tap }
 
     static func debug(_ message: () -> Any?, file: String = #fileID, function: String = #function, line: Int = #line) {
         emit(.debug, message, file, function, line)
@@ -107,10 +104,6 @@ class Logger {
             // Modern terminals (Terminal.app, iTerm2, VS Code, etc.) all render them; logs piped
             // to files keep the codes harmlessly inline.
             print("\(level.ansiColorStart)\(head)\(ansiReset) \(body)")
-            if let tap {
-                // DebugWindow already does its own per-level coloring; pass the uncolored line.
-                tap(level, "\(head) \(body)")
-            }
         }
     }
 

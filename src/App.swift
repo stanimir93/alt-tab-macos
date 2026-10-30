@@ -1,10 +1,8 @@
 import Cocoa
 import Darwin
 import ShortcutRecorder
-import AppCenterCrashes
-import Sparkle
 
-class App: AppCenterApplication {
+class App: NSApplication {
     /// Held for the process lifetime. `static let` is lazy, so `init` has to touch it or App Nap is never
     /// disabled.
     private static let activity = ProcessInfo.processInfo.beginActivity(options: .userInitiatedAllowingIdleSystemSleep,
@@ -13,8 +11,7 @@ class App: AppCenterApplication {
     static let bundleURL = Bundle.main.bundleURL
     static let name = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as! String
     static let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
-    static let licence = Bundle.main.object(forInfoDictionaryKey: "NSHumanReadableCopyright") as! String
-    static let repository = "https://github.com/lwouis/alt-tab-macos"
+    static let repository = "https://github.com/stanimir93/alt-tab-macos"
     static let appIcon: CGImage = {
         let url = Bundle.main.url(forResource: "app", withExtension: "png")!
         let source = CGImageSourceCreateWithURL(url as CFURL, nil)!
@@ -22,19 +19,12 @@ class App: AppCenterApplication {
     }()
 
     override class var shared: App { super.shared as! App }
-    static var supportProjectAction: Selector { #selector(App.supportProject) }
     static var isTerminating = false
     private static var isVeryFirstSummon = true
     /// How long the panel waits for the launch inventory when the very first summon arrives before it
     /// (`showUiOrCycleSelection`). One inventory lands ~280ms after it is asked for, measured.
     private static let launchInventoryGraceInMs = 400
     private static var pendingShowSettingsWindow = false
-    /// Written once and never read: AppCenter holds its delegate weakly, so this is the strong reference
-    /// that keeps the crash handler alive for the process lifetime.
-    // periphery:ignore
-    private static var appCenterDelegate: AppCenterCrash?
-    static var sparkleDelegate: SparkleDelegate?
-    static var updaterController: SPUStandardUpdaterController?
     private static var delayedDisplayWork: DispatchWorkItem?
     private static let switcherUiRepaintCoalescer = RepaintCoalescer()
 
@@ -146,50 +136,19 @@ class App: AppCenterApplication {
         focusSelectedWindow(selectedWindow)
     }
 
-    @objc static func checkForUpdatesNow(_ sender: NSMenuItem) {
-        GeneralTab.checkForUpdatesNow(sender)
-    }
-
-    // periphery:ignore:parameters sender - NSMenuItem target/action signature
-    @objc static func checkPermissions(_ sender: NSMenuItem) {
-        showPermissionsWindow()
-    }
-
-    @objc static func supportProject() {
-        NSWorkspace.shared.open(URL(string: Endpoints.supportUrl)!)
-    }
-
-    @objc static func showFeedbackPanel() {
-        let wasFresh = FeedbackWindow.shared == nil
-        initializeFeedbackWindowIfNeeded()
-        // Fresh init already runs reset(); skip the redundant second call so we don't
-        // double-fire the Sparkle preflight on the first ever open.
-        if !wasFresh { FeedbackWindow.shared?.reset() }
-        showSecondaryWindow(FeedbackWindow.shared!)
-    }
-
-    @objc static func showDebugWindow() {
-        initializeDebugWindowIfNeeded()
-        showSecondaryWindow(DebugWindow.shared!)
-    }
-
     @objc static func showSettingsWindow() {
         guard Menubar.statusItem != nil else {
             pendingShowSettingsWindow = true
             return
         }
-        initializeSettingsWindowIfNeeded()
-        showSecondaryWindow(SettingsWindow.shared!)
-        if SettingsWindow.shared!.isVisible != true {
-            let window = SettingsWindow()
-            showSecondaryWindow(window)
-            window.orderFrontRegardless()
+        let window = SettingsWindow.shared ?? SettingsWindow()
+        showSecondaryWindow(window)
+        // A window still closing (its teardown runs on the next turn) doesn't come back on screen.
+        if !window.isVisible {
+            let fresh = SettingsWindow()
+            showSecondaryWindow(fresh)
+            fresh.orderFrontRegardless()
         }
-    }
-
-    @objc static func showAboutWindow() {
-        initializeAboutWindowIfNeeded()
-        showSecondaryWindow(AboutWindow.shared!)
     }
 
     static func showSecondaryWindow(_ window: NSWindow) {
@@ -207,22 +166,6 @@ class App: AppCenterApplication {
             // Use the center function to continue to center, the `repositionPanel` function cannot center, it may be a system bug
             window.center()
         }
-    }
-
-    private static func initializeSettingsWindowIfNeeded() {
-        if SettingsWindow.shared == nil { _ = SettingsWindow() }
-    }
-
-    private static func initializeAboutWindowIfNeeded() {
-        if AboutWindow.shared == nil { _ = AboutWindow() }
-    }
-
-    private static func initializeFeedbackWindowIfNeeded() {
-        if FeedbackWindow.shared == nil { _ = FeedbackWindow() }
-    }
-
-    private static func initializeDebugWindowIfNeeded() {
-        if DebugWindow.shared == nil { _ = DebugWindow() }
     }
 
     private static func initializePermissionsWindowIfNeeded() {
@@ -244,10 +187,9 @@ class App: AppCenterApplication {
         Preferences.markSettingsWindowShownOnFirstLaunch()
     }
 
-    /// `showSettingsWindow()` relies on a saved autosave frame to position the window. On first
-    /// launch there's no saved frame, and `showSecondaryWindow`'s fallback centering doesn't always
-    /// stick (the window has been observed at the lower-left corner). Force a center pass after
-    /// showing so the user sees the window in the middle of the screen.
+    /// `showSecondaryWindow`'s centering doesn't always stick on first launch (the window has been
+    /// observed at the lower-left corner). Force a center pass after showing so the user sees the
+    /// window in the middle of the screen.
     static func showAndCenterSettingsWindow() {
         showSettingsWindow()
         if let window = SettingsWindow.shared {
@@ -532,8 +474,6 @@ class App: AppCenterApplication {
         // Needs the AX runloop `BackgroundWork.start()` created, so it cannot go with the launch-time setup.
         AxObserverRegistry.shared.startRecoveryTicks()
         CliEvents.observe()
-        // Personal build: no Sparkle updater, so the official release never replaces this build.
-        // `updaterController` stays nil; every caller already treats it as optional.
         PreferencesEvents.initialize()
         #if DEBUG
         BenchmarkRunner.startIfNeeded()
@@ -561,7 +501,9 @@ class App: AppCenterApplication {
 
 extension App: NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        App.appCenterDelegate = AppCenterCrash()
+        // An NSException that reaches AppKit ends the process instead of being logged and skipped, which
+        // would leave the model half-updated.
+        UserDefaults.standard.register(defaults: ["NSApplicationCrashOnExceptions": true])
         App.shared.disableRelaunchOnLogin()
         Logger.initialize()
         MainThreadStall.observe()
@@ -584,8 +526,7 @@ extension App: NSApplicationDelegate {
         // Same reasoning as the queues above: a preference the user never changed lives only in the
         // registration domain, so reading one before `registerDefaults()` traps on the force-unwrap in
         // `CachedUserDefaults.getThenConvertOrReset`. The "move to /Applications" modal below drains the
-        // main queue, and the crash-report attachment delegate hops to main there to build the debug
-        // profile, which reads `showOnScreen` / `appearanceStyle`. Migrations must keep running before
+        // main queue, so anything queued there that reads a preference runs first. Migrations must keep running before
         // `registerDefaults()` (they read raw plist values), which `initialize()` already guarantees.
         // This only touches UserDefaults + TIS (main-thread), so it depends on nothing below.
         Preferences.initialize()

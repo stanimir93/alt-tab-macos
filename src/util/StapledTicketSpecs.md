@@ -52,7 +52,7 @@ new language.
 - **The app copied while it runs**, e.g. to another Mac: the copy carries the ticket parked. If it arrives
   quarantined, Gatekeeper fetches the ticket online at first launch, so an offline first launch there is
   refused. Re-downloading AltTab fixes it.
-- **Updates** (Sparkle, Homebrew) replace the whole bundle, parked ticket included, and the new version brings
+- **Updates** (Homebrew, a new download) replace the whole bundle, parked ticket included, and the new version brings
   its own ticket.
 - **App Management**: macOS lets code signed by the same team modify an app bundle, so AltTab may rename files
   in its own bundle.

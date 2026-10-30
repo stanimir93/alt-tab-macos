@@ -75,9 +75,9 @@ final class OnActionExtensionTests: XCTestCase {
         XCTAssertNil(control.onAction)
     }
 
-    // MARK: - Wrap pattern (the AppearanceTab use case)
+    // MARK: - Wrap pattern
 
-    /// AppearanceTab reads `let original = control.onAction` and writes a new onAction that falls
+    /// A caller reads `let original = control.onAction` and writes a new onAction that falls
     /// through to `original?(control)`. This is the exact shape that was broken.
     func testWrapPatternInvokesPreviousClosureOnFallthrough() {
         let control = NSControl()
@@ -101,7 +101,7 @@ final class OnActionExtensionTests: XCTestCase {
     }
 
     /// When the wrap returns early (it handled the click itself), the original closure must NOT fire —
-    /// otherwise `controlWasChanged` would still write the clicked value to `Preferences`.
+    /// otherwise the original's write would still store the clicked value in `Preferences`.
     func testWrapPatternSkipsPreviousClosureOnEarlyReturn() {
         let control = NSControl()
         var originalCalls = 0

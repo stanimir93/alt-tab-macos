@@ -1,8 +1,7 @@
 import Cocoa
-import Sparkle
 
 /// Side-effect dispatcher for preference changes. Each branch of `preferenceChanged(_:)`
-/// calls into a domain-specific owner (Menubar, TrackpadEvents, SparkleDelegate, LoginItem)
+/// calls into a domain-specific owner (Menubar, TrackpadEvents, LoginItem, the Settings window)
 /// rather than implementing the side effect inline. Over time each call-site
 /// should subscribe directly to its own preference; this file is a transition scaffold.
 class PreferencesEvents {
@@ -16,7 +15,7 @@ class PreferencesEvents {
 
     /// True if `key` is an indexed override of one of the 5 overridable appearance prefs
     /// (e.g. `appearanceStyleOverride2`). Used to trigger a UI reset and override-label refresh
-    /// when an override changes, so the switcher and Settings UI both pick up the new value.
+    /// when an override changes, so the switcher picks up the new value.
     private static func isOverrideKey(_ key: String) -> Bool {
         for baseName in Preferences.appearanceOverrideBaseNames {
             for i in 0...Preferences.maxShortcutCount {
@@ -41,17 +40,7 @@ class PreferencesEvents {
     static func initialize() {
         guard !initialized else { return }
         initialized = true
-        #if DEBUG
-        if !Preferences.qaPristine { UserDefaultsEvents.observe() }
-        #else
-        UserDefaultsEvents.observe()
-        #endif
         ControlsTab.initializePreferencesDependentState()
-        #if DEBUG
-        if !Preferences.qaPristine && !QaLifecycle.enabled { applyUpdatePolicyPreference() }
-        #else
-        applyUpdatePolicyPreference()
-        #endif
         TrackpadEvents.toggle(Preferences.nextWindowGesture != .disabled)
         #if DEBUG
         guard !Preferences.qaPristine && !QaLifecycle.enabled else { return }
@@ -71,11 +60,11 @@ class PreferencesEvents {
             return
         }
         ControlsTab.preferenceChanged(key)
+        SettingsWindow.shared?.preferenceChanged(key)
         switch key {
-        case "menubarIcon", "menubarIconShown": applyMenubarPreferencesIfReady()
+        case "menubarIconShown": applyMenubarPreferencesIfReady()
         case "nextWindowGesture": TrackpadEvents.toggle(Preferences.nextWindowGesture != .disabled)
         case "startAtLogin": LoginItem.applyCurrentPreference()
-        case "updatePolicy": applyUpdatePolicyPreference()
         case let k where preferencesRequiringUiReset.contains(k): App.resetPreferencesDependentComponents()
         case let k where isOverrideKey(k) || isPerShortcutGroupingKey(k): App.resetPreferencesDependentComponents()
         default: break
@@ -84,14 +73,6 @@ class PreferencesEvents {
 
     private static func applyMenubarPreferencesIfReady() {
         guard Menubar.statusItem != nil else { return }
-        Menubar.menubarIconCallback(nil)
-    }
-
-    private static func applyUpdatePolicyPreference() {
-        GeneralTab.policyLock = true
-        let policy = Preferences.updatePolicy
-        App.updaterController?.updater.automaticallyDownloadsUpdates = policy == .autoInstall
-        App.updaterController?.updater.automaticallyChecksForUpdates = policy == .autoInstall || policy == .autoCheck
-        GeneralTab.policyLock = false
+        Menubar.menubarIconCallback()
     }
 }

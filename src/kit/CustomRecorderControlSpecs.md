@@ -30,8 +30,8 @@ existing AltTab shortcut or a macOS-reserved one.
 - Regression (#5585): a Cmd-based hold shortcut is **no longer blocked** by the macOS 26 Game Overlay
   reservation — that specific over-broad rejection was removed.
 - The `candidateId` handed in must be a **well-formed bound preference key** (`isWellFormedCandidateId`):
-  a `holdShortcut`/`nextWindowShortcut` id has to resolve to an in-range shortcut index. The recycled
-  `ShortcutEditor` regression fed a frozen placeholder (`"nextWindowShortcut0"`, index -1) that matched
+  a `holdShortcut`/`nextWindowShortcut` id has to resolve to an in-range shortcut index. A recycled
+  recorder once fed a frozen placeholder (`"nextWindowShortcut0"`, index -1) that matched
   nothing and silently returned `.accepted`, so the conflict dialog stopped appearing. A `#if DEBUG`
   assert now trips loudly if a malformed id ever reaches the check.
 
@@ -52,8 +52,8 @@ Mirrors `CustomRecorderControlTests.swift` 1:1.
 - **testIsShortcutAcceptable_cmdHoldShortcutNoLongerBlockedByGameOverlay** — regression #5585: a Cmd hold shortcut is accepted (Game Overlay no longer blocks it).
 
 ### isWellFormedCandidateId
-Guards the recycled-`ShortcutEditor` regression where a stale recorder id (id/identifier drift) reached the conflict check and silently suppressed the dialog.
+Guards the recycled-recorder regression where a stale recorder id (id/identifier drift) reached the conflict check and silently suppressed the dialog.
 - **testIsWellFormedCandidateId** — hold/next ids must resolve to an in-range index; the `"…Shortcut0"` placeholders (index -1) and out-of-range ids are rejected; static/arrow/vim ids are always well-formed.
 
 ### Not tested: `Shortcut.keyEquivalent` (in `CustomRecorderControlTestable.swift`)
-This getter is used in production by `ControlsTab.shortcutSummary` (to render the Settings sidebar row summary) — not "for testing only" as the older comment in the source incorrectly claimed (now fixed). It's effectively untestable from the `unit-tests` target: it calls ShortcutRecorder's `readableStringRepresentation(isASCII:)`, which throws `NSInternalInconsistencyException: Unable to find bundle with resources` when the framework's bundle isn't loaded (the case for unit tests). Testing it would need either bundle-loading test setup or extracting the formatting logic away from `readableStringRepresentation`. Left alone for now; recorded here so the 0% line coverage on this getter isn't mistaken for a forgotten gap.
+This getter is used in production by `SettingsWindow.refreshSubtitle` (the Settings header names the current shortcut). It's effectively untestable from the `unit-tests` target: it calls ShortcutRecorder's `readableStringRepresentation(isASCII:)`, which throws `NSInternalInconsistencyException: Unable to find bundle with resources` when the framework's bundle isn't loaded (the case for unit tests). Testing it would need either bundle-loading test setup or extracting the formatting logic away from `readableStringRepresentation`. Left alone for now; recorded here so the 0% line coverage on this getter isn't mistaken for a forgotten gap.

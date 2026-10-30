@@ -156,9 +156,9 @@ These do IPC and are allowed to block: nothing the user is mid-gesture for waits
 - `SystemPermissions` — `TCCAccessCheckAuditToken`, `CGPreflightScreenCaptureAccess` (tccd),
   `CGWindowListCopyWindowInfo`, `SCShareableContent` (WindowServer). All on `permissionsCheckQueue`. What the show path reads
   (`ScreenRecordingPermission.status`) is a cached static.
-- `ExceptionsTab`, `MoveToApplicationsFolder` — `NSWorkspace.icon(forFile:)`, `urlForApplication`,
-  `runningApplications`, `Bundle(url:)` (LaunchServices + disk). Settings UI.
-- `NSWorkspace.shared.open` for the support URL (LaunchServices). Menu actions.
+- `MoveToApplicationsFolder` — `NSWorkspace.icon(forFile:)`, `urlForApplication`, `Bundle(url:)`
+  (LaunchServices + disk). Launch only.
+- `NSWorkspace.shared.open` for the GitHub link in Settings (LaunchServices). Button action.
 - `Application.fetchAppIcon`, `Applications.updateAppIcons` — `NSRunningApplication.icon` (IconServices).
   Already on `screenshotsQueue`, which the class's documented thread safety makes correct rather than lucky.
   Measured at 56ms for the first `bundleURL` + `isHidden` + `icon` read of a process, so it must stay there.

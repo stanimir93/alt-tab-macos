@@ -15,9 +15,8 @@ import Cocoa
 //   --qa-close           put everything away
 //
 // Whatever would change between two runs is held still, so a difference in the pictures is a difference in
-// AltTab: the usage numbers are pinned, the update check answers "up to date" without the network, windows
-// open at their default size rather than the one they were last left at, and no text field keeps a blinking
-// caret.
+// AltTab: the usage numbers are pinned, windows open at their default size rather than the one they were last
+// left at, and no text field keeps a blinking caret.
 enum QaSurfaces {
     struct Info: Codable {
         let id: String
@@ -133,7 +132,7 @@ enum QaSurfaces {
         }
         let byNumber = Dictionary(numbered, uniquingKeysWith: { first, _ in first })
         // An alert running modally is the window that has to be key, whatever the screen order of the new
-        // windows (the feedback confirmation also brings its form window forward).
+        // windows.
         let modal = NSApp.modalWindow.flatMap { m in wids.contains { $0 == UInt32(exactly: m.windowNumber) } ? m : nil }
         let generation = renderGeneration
         guard !wids.isEmpty else { return Shown(wids: [], pages: pages) }
@@ -189,115 +188,49 @@ enum QaSurfaces {
         popovers.allObjects.forEach { $0.close() }
         AnchoredPopover.qaPositioningView = nil
         visualPopoverAnchor?.orderOut(nil)
-        Popover.shared.hide()
         if SwitcherSession.isActive { App.hideUi() }
-        for parent in [SettingsWindow.shared, FeedbackWindow.shared].compactMap({ $0 }) {
-            guard let sheet = parent.attachedSheet else { continue }
+        if let settings = SettingsWindow.shared, let sheet = settings.attachedSheet {
             sheet.animationBehavior = .none
             QaSheetAnimation.disable(on: sheet)
-            parent.endSheet(sheet)
+            settings.endSheet(sheet)
             sheet.orderOut(nil)
         }
         if !keepSettings { SettingsWindow.qaDiscard() }
-        let windows: [NSWindow?] = [AboutWindow.shared, FeedbackWindow.shared, PermissionsWindow.shared]
-        windows.compactMap { $0 }.filter { $0.isVisible }.forEach { $0.close() }
+        if let permissions = PermissionsWindow.shared, permissions.isVisible { permissions.close() }
         PermissionsWindow.qaForcedStatus = nil
         current = nil
     }
 
     // MARK: - the surfaces
 
-    private static let surfaces: [Surface] = settingsSurfaces() + controlsSurfaces() + sheetSurfaces()
+    private static let surfaces: [Surface] = [Surface(id: "settings", inSettings: true) { settings() }]
         + windowSurfaces() + alertSurfaces() + menubarSurfaces()
-
-    private static func settingsSurfaces() -> [Surface] {
-        ["appearance", "general", "exceptions"].map { section in
-            Surface(id: "settings.\(section)", inSettings: true) { settings(section) }
-        }
-    }
-
-    private static func controlsSurfaces() -> [Surface] {
-        let segments = ["filtering", "appearance", "ordering"]
-        return [false, true].flatMap { gesture in
-            segments.enumerated().map { segment, name in
-                Surface(id: "settings.controls.\(gesture ? "gesture" : "shortcut").\(name)", inSettings: true) {
-                    _ = settings("controls")
-                    ControlsTab.qaSelect(gesture: gesture, segment: segment)
-                    return settings("controls")
-                }
-            }
-        } + [Surface(id: "popover.gesture-info", inSettings: true) {
-            _ = settings("controls")
-            ControlsTab.qaSelect(gesture: true, segment: 0)
-            hoverInfoButton(in: SettingsWindow.shared)
-            return Target()
-        }]
-    }
-
-    private static func sheetSurfaces() -> [Surface] {
-        let sheets: [(String, () -> Void)] = [
-            ("customize-style", { AppearanceTab.showCustomizeStyleSheet() }),
-            ("animations", { AppearanceTab.showAnimationsSheet() }),
-            ("shortcuts-when-active", { ControlsTab.showShortcutsSettings() }),
-            ("additional-controls", { ControlsTab.showAdditionalControlsSettings() }),
-        ]
-        return sheets.map { name, show in
-            Surface(id: "sheet.\(name)", inSettings: true) {
-                _ = settings(nil)
-                show()
-                return Target(windows: { [SettingsWindow.shared?.attachedSheet].compactMap { $0 } })
-            }
-        } + [Surface(id: "popover.hide-status-icons-info", inSettings: true) {
-            _ = settings(nil)
-            AppearanceTab.showCustomizeStyleSheet()
-            hoverInfoButton(in: SettingsWindow.shared?.attachedSheet)
-            return Target()
-        }]
-    }
 
     private static func windowSurfaces() -> [Surface] {
         [
-            Surface(id: "about", inSettings: false) {
-                App.showAboutWindow()
-                return target(AboutWindow.shared) { AboutWindow.shared.flatMap { documentPager($0.contentView as? NSScrollView) } }
-            },
-            Surface(id: "feedback", inSettings: false) { feedback(nil) },
-            Surface(id: "feedback.bug", inSettings: false) { feedback("selectBug") },
-            Surface(id: "feedback.suggestion", inSettings: false) { feedback("selectEnhancement") },
             Surface(id: "permissions", inSettings: false) { permissions(granted: true) },
             Surface(id: "permissions.missing", inSettings: false) { permissions(granted: false) },
         ]
     }
 
     /// Alerts are opened on the next turn of the main loop: some run a modal loop of their own. The launch-time
-    /// ones are app-modal, and the harness finds their window among the ones that appeared. The others are sheets
-    /// on the Settings section they belong to, or on Feedback. `closeAll` aborts any loop and ends the sheets, and
-    /// every caller here reads that as neither of its buttons, so nothing is reset, activated or sent.
+    /// ones are app-modal, and the harness finds their window among the ones that appeared. The other is a sheet
+    /// on Settings. `closeAll` aborts any loop and ends the sheets, and every caller here reads that as neither
+    /// of its buttons, so nothing is reset or activated.
     private static func alertSurfaces() -> [Surface] {
         let appModal: [(String, () -> Void)] = [
             ("settings-not-saved.symlink", { PreferencesPersistenceCheck.debugShowDialog(symlinked: true) }),
             ("settings-not-saved.unwritable", { PreferencesPersistenceCheck.debugShowDialog(symlinked: false) }),
-        ]
-        let settingsSheets: [(String, String?, () -> Void)] = [
-            ("reset-settings", "general", { GeneralTab.resetPreferences() }),
-            ("language-change", "general", { GeneralTab.setLanguageCallback(NSControl()) }),
-            ("conflicting-shortcut", "controls", { _ = ControlsTab.confirmUnassigningConflict("• " + NSLocalizedString("Show", comment: "Menubar option")) }),
         ]
         return appModal.map { name, show in
             Surface(id: "alert.\(name)", inSettings: false) {
                 later(show)
                 return Target()
             }
-        } + settingsSheets.map { name, section, show in
-            Surface(id: "alert.\(name)", inSettings: true) {
-                _ = settings(section)
-                later(show)
-                return Target(windows: { [SettingsWindow.shared?.attachedSheet].compactMap { $0 } })
-            }
-        } + [Surface(id: "alert.feedback-confirm", inSettings: false) {
-            _ = feedback("selectEnhancement")
-            later { _ = FeedbackWindow.shared?.perform(NSSelectorFromString("sendCallback")) }
-            return Target(windows: { [FeedbackWindow.shared?.attachedSheet].compactMap { $0 } })
+        } + [Surface(id: "alert.conflicting-shortcut", inSettings: true) {
+            _ = settings()
+            later { _ = ControlsTab.confirmUnassigningConflict("• " + NSLocalizedString("Show", comment: "Menubar option")) }
+            return Target(windows: { [SettingsWindow.shared?.attachedSheet].compactMap { $0 } })
         }]
     }
 
@@ -326,20 +259,13 @@ enum QaSurfaces {
         RunLoop.main.perform(inModes: [.default], block: body)
     }
 
-    private static func settings(_ section: String?) -> Target {
+    private static func settings() -> Target {
         let window = SettingsWindow.shared ?? SettingsWindow()
         App.showSecondaryWindow(window)
         window.orderFrontRegardless()
-        window.qaShow(section)
+        window.qaShow()
         return Target(windows: { [SettingsWindow.shared].compactMap { $0 } },
-                      pager: { SettingsWindow.shared?.qaPager(section) })
-    }
-
-    private static func feedback(_ selector: String?) -> Target {
-        App.sparkleDelegate?.cachedResult = .upToDate
-        App.showFeedbackPanel()
-        if let selector { _ = FeedbackWindow.shared?.perform(NSSelectorFromString(selector)) }
-        return target(FeedbackWindow.shared)
+                      pager: { SettingsWindow.shared?.qaPager() })
     }
 
     /// Every permission check repaints the statuses, so "missing" is forced rather than set.
@@ -350,33 +276,8 @@ enum QaSurfaces {
         return target(PermissionsWindow.shared)
     }
 
-    private static func target(_ window: NSWindow?, pager: (() -> Pager?)? = nil) -> Target {
-        Target(windows: { [window].compactMap { $0 } }, pager: pager)
-    }
-
-    private static func documentPager(_ scrollView: NSScrollView?) -> Pager? {
-        guard let scrollView, let document = scrollView.documentView else { return nil }
-        scrollView.layoutSubtreeIfNeeded()
-        return Pager(scrollView: scrollView, top: 0, bottom: document.frame.height)
-    }
-
-    /// The two info popovers open on hover. Their button is found rather than named, and hovered through
-    /// the closure the pointer would have run.
-    private static func hoverInfoButton(in window: NSWindow?) {
-        guard let root = window?.contentView, let button = firstInfoButton(root) else { return }
-        let event = NSEvent.mouseEvent(with: .mouseMoved, location: .zero, modifierFlags: [], timestamp: 0,
-            windowNumber: window?.windowNumber ?? 0, context: nil, eventNumber: 0, clickCount: 0, pressure: 0)
-        if let event { button.onMouseEntered?(event, button) }
-    }
-
-    private static func firstInfoButton(_ view: NSView) -> ClickHoverImageView? {
-        if let button = view as? ClickHoverImageView, button.onMouseEntered != nil, !button.isHiddenOrHasHiddenAncestor {
-            return button
-        }
-        for subview in view.subviews {
-            if let found = firstInfoButton(subview) { return found }
-        }
-        return nil
+    private static func target(_ window: NSWindow?) -> Target {
+        Target(windows: { [window].compactMap { $0 } })
     }
 
     // MARK: - holding things still
@@ -413,7 +314,6 @@ enum QaSurfaces {
         // differently whether the event exactly one week ago belongs to "the past week".
         let triggers = (0..<4600).map { now - 60 - 300 * $0 }
         UsageStats.qaPinned = ["triggers": triggers]
-        App.sparkleDelegate?.cachedResult = .upToDate
     }
 
     private static func observePopovers() {
@@ -456,10 +356,8 @@ enum QaSurfaces {
         alignToBackingPixels(window)
         window.disableScreenUpdatesUntilFlush()
         settleLayout(window)
-        if window is SettingsWindow {
-            ControlsTab.qaClearHover()
-            ExceptionsTab.qaClearHover()
-            (window as? SettingsWindow)?.qaHideScrollers()
+        if let settings = window as? SettingsWindow {
+            settings.qaHideScrollers()
             settleLayout(window)
         }
     }

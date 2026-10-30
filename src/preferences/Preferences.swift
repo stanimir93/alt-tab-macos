@@ -31,12 +31,9 @@ class Preferences {
             "fadeOutAnimation": "false",
             "previewFadeInAnimation": "true",
             "startAtLogin": "true",
-            "menubarIcon": MenubarIconPreference.outlined.indexAsString,
             "menubarIconShown": "false",
             "language": LanguagePreference.systemDefault.indexAsString,
             "exceptions": defaultExceptions(),
-            "updatePolicy": UpdatePolicyPreference.autoCheck.indexAsString,
-            "crashPolicy": CrashPolicyPreference.ask.indexAsString,
             "hideThumbnails": "false",
             "hideSpaceNumberLabels": "true",
             "hideStatusIcons": "false",
@@ -124,8 +121,6 @@ class Preferences {
     static var showOnScreen: ShowOnScreenPreference { CachedUserDefaults.macroPref("showOnScreen", ShowOnScreenPreference.allCases) }
     static var titleTruncation: TitleTruncationPreference { CachedUserDefaults.macroPref("titleTruncation", TitleTruncationPreference.allCases) }
     static var showTitles: ShowTitlesPreference { CachedUserDefaults.macroPref("showTitles", ShowTitlesPreference.allCases) }
-    static var updatePolicy: UpdatePolicyPreference { CachedUserDefaults.macroPref("updatePolicy", UpdatePolicyPreference.allCases) }
-    static var crashPolicy: CrashPolicyPreference { CachedUserDefaults.macroPref("crashPolicy", CrashPolicyPreference.allCases) }
     static var appsToShow: [AppsToShowPreference] { (0...maxShortcutCount).map { CachedUserDefaults.macroPref(indexToName("appsToShow", $0), AppsToShowPreference.allCases) } }
     static var spacesToShow: [SpacesToShowPreference] { (0...maxShortcutCount).map { CachedUserDefaults.macroPref(indexToName("spacesToShow", $0), SpacesToShowPreference.allCases) } }
     static var screensToShow: [ScreensToShowPreference] { (0...maxShortcutCount).map { CachedUserDefaults.macroPref(indexToName("screensToShow", $0), ScreensToShowPreference.allCases) } }
@@ -142,7 +137,6 @@ class Preferences {
     static func groupApps(_ i: Int) -> GroupAppsPreference { CachedUserDefaults.macroPref(indexToName("showAppsOrWindows", i), GroupAppsPreference.allCases) }
     static func groupTabs(_ i: Int) -> GroupTabsPreference { CachedUserDefaults.macroPref(indexToName("showTabsAsWindows", i), GroupTabsPreference.allCases) }
     static var shortcutStyle: ShortcutStylePreference { CachedUserDefaults.macroPref("shortcutStyle", ShortcutStylePreference.allCases) }
-    static var menubarIcon: MenubarIconPreference { CachedUserDefaults.macroPref("menubarIcon", MenubarIconPreference.allCases) }
     static var menubarIconShown: Bool { CachedUserDefaults.bool("menubarIconShown") }
     static var language: LanguagePreference { CachedUserDefaults.macroPref("language", LanguagePreference.allCases) }
 
@@ -158,11 +152,6 @@ class Preferences {
         PreferencesMigrations.removeCorruptedPreferences()
         PreferencesMigrations.migratePreferences()
         registerDefaults()
-    }
-
-    static func resetAll() {
-        UserDefaults.standard.removePersistentDomain(forName: App.bundleIdentifier)
-        invalidateAllCache()
     }
 
     static func registerDefaults() {
@@ -236,7 +225,7 @@ class Preferences {
     /// `persistentDomain(forName:)` rebuilds a full snapshot dictionary on every call, which adds
     /// up: every `hasOverride` / `effectiveAppearanceStyle` consults `all`, and the switcher show
     /// path triggers a cascade of these per show. Cache the filtered snapshot; the only paths that
-    /// mutate the domain (`set`, `setShortcut`, `remove`, `resetAll`) clear `cachedAll` below.
+    /// mutate the domain (`set`, `setShortcut`, `remove`) clear `cachedAll` below.
     private static var cachedAll: [String: Any]?
 
     static var all: [String: Any] {
@@ -278,22 +267,6 @@ class Preferences {
     /// an untouched override correctly reports `false` even though its key has a registered default.
     static func hasOverride(_ baseName: String, _ index: Int) -> Bool {
         all[indexToName(baseName, index)] != nil
-    }
-
-    /// Remove an override (the user "unlinks" it from the global).
-    static func removeOverride(_ baseName: String, _ index: Int) {
-        remove(indexToName(baseName, index))
-    }
-
-    /// Indices (0..shortcutCount) whose stored override value differs from the current global.
-    /// Used to render "Overridden in Shortcut: 1, 3" labels in AppearanceTab.
-    static func shortcutIndicesWithDifferentValue(_ baseName: String, globalKey: String) -> [Int] {
-        let globalValue = UserDefaults.standard.string(forKey: globalKey)
-        return (0..<shortcutCount).filter { index in
-            let key = indexToName(baseName, index)
-            guard let overrideValue = all[key] as? String else { return false }
-            return overrideValue != globalValue
-        }
     }
 
     static func effectiveAppearanceStyle(_ index: Int) -> AppearanceStylePreference {

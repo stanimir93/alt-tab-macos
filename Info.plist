@@ -34,7 +34,7 @@
 	<key>LSUIElement</key>
 	<string>true</string>
 	<key>NSPrincipalClass</key>
-	<string>AppCenterApplication</string>
+	<string>$(PRODUCT_MODULE_NAME).App</string>
 	<key>NSSupportsAutomaticTermination</key>
 	<string>false</string>
 	<key>NSSupportsSuddenTermination</key>
@@ -42,24 +42,5 @@
 	<key>ATSApplicationFontsPath</key>
 	<string></string>
 
-	<!-- ===== Sparkle (auto-update framework — reads these directly from the bundle) ===== -->
-	<key>SUPublicEDKey</key>
-	<string>2e9SQOBoaKElchSa/4QDli/nvYkyuDNfynfzBF6vJK4=</string>
-	<key>SUEnableAutomaticChecks</key>
-	<string>true</string>
-	<key>SUScheduledCheckInterval</key>
-	<string>604800</string>
-
-	<!-- ===== AppCenter (crash reporter — read by AppCenterApplication superclass at init) ===== -->
-	<key>AppCenterApplicationForwarderEnabled</key>
-	<string>0</string>
-
-	<!-- ===== Build-time secrets (substituted from xcconfig; override per-dev via config/local.xcconfig) ===== -->
-	<key>AppCenterSecret</key>
-	<string>$(APPCENTER_SECRET)</string>
-	<key>Domain</key>
-	<string>$(DOMAIN)</string>
-	<key>ApiDomain</key>
-	<string>$(API_DOMAIN)</string>
 </dict>
 </plist>

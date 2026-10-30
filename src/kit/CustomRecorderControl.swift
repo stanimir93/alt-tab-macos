@@ -5,9 +5,8 @@ import ShortcutRecorder
 class CustomRecorderControl: RecorderControl {
     static let allowedModifiers = NSEvent.ModifierFlags(arrayLiteral: [.command, .control, .option, .shift])
     var clearable: Bool!
-    /// The preference key this recorder edits. Derived from `identifier` (set in `init` and re-aimed
-    /// by `TriggerBinding.bind` as the recycled editor switches shortcuts) so it can never drift out
-    /// of sync with the key the write path (`controlWasChanged`) and the conflict detector key off.
+    /// The preference key this recorder edits. Derived from `identifier` so it can never drift out of
+    /// sync with the key the write path (`persist`) and the conflict detector key off.
     var id: String { identifier!.rawValue }
 
     convenience init(_ shortcut: Shortcut?, _ clearable: Bool, _ id: String) {
@@ -40,14 +39,14 @@ class CustomRecorderControl: RecorderControl {
     // pass: it now routes them through `+[NSApplication _crashOnException:]`, turning a thrown
     // NSException into a hard SIGTRAP. `RecorderControl`'s `updateActiveConstraints` /
     // `updateLabelConstraints` can throw when the control is laid out before it's in a window
-    // (e.g. the `mainRow.fittingSize` snapshot in `TableGroupView.setMainRow` while building the
-    // Settings window): the alignment guide's frame isn't resolved yet, so `updateLabelConstraints`
+    // (e.g. a `fittingSize` measurement while building the Settings window): the alignment guide's
+    // frame isn't resolved yet, so `updateLabelConstraints`
     // can compute a non-finite label width, and `-[NSLayoutConstraint setConstant:]` rejects NaN
     // with an NSException. We catch it here, one frame below AppKit's crash-on-exception wrapper,
     // so the worst case is a momentarily mis-sized label instead of a crash. Both calls still
     // return normally, so `RecorderControl.updateConstraints` reaches its `[super updateConstraints]`
     // and the pass completes (no relayout loop). Seen via applicationShouldHandleReopen building
-    // the Settings window's Controls tab (TableGroupView.setMainRow -> ShortcutEditor trigger row).
+    // the Settings window's shortcut recorders.
     override func updateActiveConstraints() {
         ObjCExceptionCatcher.catching { super.updateActiveConstraints() }
     }
@@ -61,8 +60,8 @@ class CustomRecorderControl: RecorderControl {
     }
 
     /// How to clear the conflicting shortcut when the user picks "Unassign and continue". Resolved
-    /// from the id alone — arrow/vim are toggled off via their checkboxes; everything else is cleared
-    /// through `Preferences` by id (so a shortcut that isn't on screen is handled correctly). The
+    /// from the id alone — arrow/vim keys are turned off through their preference; everything else is
+    /// cleared through `Preferences` by id (so a shortcut that isn't on screen is handled correctly). The
     /// human-readable label shown in the dialog comes separately from `ControlsTab.conflictLabel`.
     private enum ShortcutConflict {
         case arrow
@@ -88,17 +87,9 @@ class CustomRecorderControl: RecorderControl {
         guard ControlsTab.confirmUnassigningConflict(informativeText, in: window) else { return false }
         switch conflict {
         case .arrow:
-            if let cb = ControlsTab.arrowKeysCheckbox {
-                cb.state = .off
-                ControlsTab.arrowKeysEnabledCallback(cb)
-                LabelAndControl.controlWasChanged(cb, nil)
-            }
+            Preferences.set("arrowKeysEnabled", "false")
         case .vim:
-            if let cb = ControlsTab.vimKeysCheckbox {
-                cb.state = .off
-                ControlsTab.vimKeysEnabledCallback(cb)
-                LabelAndControl.controlWasChanged(cb, nil)
-            }
+            Preferences.set("vimKeysEnabled", "false")
         case .regular(let conflictingId):
             ControlsTab.unassignShortcut(conflictingId)
         }
@@ -106,9 +97,9 @@ class CustomRecorderControl: RecorderControl {
         return true
     }
 
-    func updateShortcut(_ control: CustomRecorderControl, _ objectValue: Shortcut?, _ senderControl: NSControl, _ id: String) {
+    func updateShortcut(_ control: CustomRecorderControl, _ objectValue: Shortcut?, _ senderControl: CustomRecorderControl, _ id: String) {
         control.objectValue = objectValue
-        LabelAndControl.controlWasChanged(senderControl, id)
+        senderControl.persist()
         ControlsTab.shortcutChangedCallback(senderControl)
     }
 
@@ -129,17 +120,19 @@ class CustomRecorderControl: RecorderControl {
         return true
     }
 
-    func save() {
-        LabelAndControl.controlWasChanged(self, id)
-        // shortcutChangedCallback is called automatically here
-        // setting objectValue also happens automatically
+    /// Writes the displayed shortcut to the preference `id`, unless it is already stored.
+    func persist() {
+        let oldValue = Preferences.shortcut(id)
+        if oldValue == nil && objectValue == nil { return }
+        if let oldValue, let objectValue, oldValue.isEqual(objectValue) { return }
+        Preferences.setShortcut(id, objectValue, stringRepresentation: stringValue)
     }
 }
 
 extension CustomRecorderControl: RecorderControlDelegate {
     func recorderControl(_ control: RecorderControl, canRecord shortcut: Shortcut) -> Bool {
         switch CustomRecorderControlTestable.isShortcutAcceptable(id, shortcut) {
-        case .accepted: save()
+        case .accepted: persist()
         case .modifiersOnlyButContainsKeycode: return false
         case .conflictWithExistingShortcut(let s): return alertIfSameShortcutAlreadyAssigned(shortcut, s)
         case .reservedByMacos(let s): return alertIfShortcutReservedByMacos(shortcut, s)

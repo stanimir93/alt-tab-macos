@@ -117,11 +117,10 @@ enum OnboardingPopover {
         ConfettiBurst.fire(around: window.convertToScreen(tick.convert(tick.bounds, to: nil)), above: window)
     }
 
-    fileprivate static func chooseStyle() {
+    fileprivate static func openSettings() {
         close()
         Preferences.markSettingsWindowShownOnFirstLaunch()
         App.showAndCenterSettingsWindow()
-        SettingsWindow.shared?.navigateToSection("appearance")
     }
 
     private static func close() {
@@ -178,8 +177,8 @@ enum OnboardingPopover {
     private static func makeDoneView() -> NSView {
         let title = OnboardingLayout.title(NSLocalizedString("That's it", comment: "Onboarding popover, once the shortcut was used"))
         let reminder = pressAnyTime()
-        let button = AccentButton(NSLocalizedString("Choose a style", comment: "Onboarding popover; opens Settings on Appearance")) {
-            chooseStyle()
+        let button = AccentButton(NSLocalizedString("Settings…", comment: "Menubar option")) {
+            openSettings()
         }
         let tick = SuccessTickView()
         Self.tick = tick
