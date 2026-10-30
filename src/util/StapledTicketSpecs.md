@@ -15,8 +15,8 @@ serialized in the OS, so this sets how fast all thumbnails can refresh.
 
 The ticket itself only serves Gatekeeper's first look at a downloaded copy, and Gatekeeper has already let
 AltTab run by the time this code executes. The ticket lives at `Contents/CodeResources`, outside the
-signature's seal, so moving it changes no code signature: the Screen Recording grant, the Keychain license
-items and Gatekeeper's record of the app are all untouched.
+signature's seal, so moving it changes no code signature: the Screen Recording grant and Gatekeeper's record
+of the app are both untouched.
 
 ## Where it is parked
 

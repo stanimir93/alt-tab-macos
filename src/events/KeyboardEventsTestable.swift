@@ -26,8 +26,6 @@ enum DismissalInput {
             cancel()
             return false
         }
-        // The gate takes no focus, so AltTab can be the app receiving the Escape meant to close it.
-        if event.type == .keyDown && event.keyCode == kVK_Escape { Day15HardGatePopover.dismissOnEscape() }
         Logger.debug { "discarded key during switcher dismissal" }
         return true
     }
@@ -37,8 +35,6 @@ enum DismissalInput {
 func handleKeyboardEvent(_ globalId: Int?, _ shortcutState: ShortcutState?, _ keyCode: UInt32?,
                          _ modifiers: NSEvent.ModifierFlags?, _ isARepeat: Bool, _ event: NSEvent? = nil,
                          _ recordedHoldRelease: Bool = false) -> Bool {
-    // The Escape absorption tap can consume the key before NSEvent dismissal monitors see it.
-    if keyCode == UInt32(kVK_Escape) { Day15HardGatePopover.dismissOnEscape() }
     if let event, shouldAbsorbSearchEditingKeyDown(event) {
         switch TilesView.handleSearchEditingKeyDown(event) {
         case .handled: return true

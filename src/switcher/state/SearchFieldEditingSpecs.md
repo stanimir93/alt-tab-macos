@@ -45,7 +45,7 @@ at once, and it is what the method's doc comment already claimed ("a no-op once 
   field are all no-ops, exactly as in any macOS text field.
 - **Grapheme clusters**: one Delete removes a whole emoji, ZWJ sequence, composed accent or CJK character.
   AppKit's doing; pinned here because it's what the user sees.
-- **Not modeled here**: mode transitions, key routing and the Pro gate (`SearchModeResolver`); the deferral
+- **Not modeled here**: mode transitions and key routing (`SearchModeResolver`); the deferral
   and first-responder calls themselves (`TilesView`); how the resulting text ranks windows (`Search`).
 
 ---

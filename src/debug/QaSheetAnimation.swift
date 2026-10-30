@@ -6,7 +6,7 @@ import ObjectiveC.runtime
 // returns ~275ms after it was called, and `endSheet` ~270ms, measured on macOS 27 (2026-09-19). Nothing
 // public shortens it: `animationBehavior = .none` on either window, an `NSAnimationContext` of duration 0
 // around the call, and `NSAutomaticWindowAnimationsEnabled` in the argument domain all leave the same 275ms,
-// spent once per sheet per look and per license: a quarter of VR-01's run (107.8s -> 81.3s without it).
+// spent once per sheet per look: a quarter of VR-01's run (107.8s -> 81.3s without it).
 //
 // `-[NSWindow _setDisableSheetAnimation:]` is what actually turns it off: 275ms becomes 12ms to show and 3ms
 // to put away, and the pictures come out byte for byte what they were with the animation on. It is private,

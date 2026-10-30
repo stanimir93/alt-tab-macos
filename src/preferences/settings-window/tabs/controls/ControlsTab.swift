@@ -103,7 +103,6 @@ class ControlsTab {
     private static var shortcutCountButtons: NSSegmentedControl?
     private static var shortcutRowsScrollView: NSScrollView?
     private static var shortcutRowsScrollObserver: NSObjectProtocol?
-    private static var proLockObserver: NSObjectProtocol?
 
     // MARK: - Initialization / teardown
 
@@ -134,21 +133,10 @@ class ControlsTab {
         let initialBindIndex = (selectedShortcutIndex == gestureSelectionIndex) ? 0 : selectedShortcutIndex
         editor.bind(toShortcut: initialBindIndex)
         (0..<Preferences.shortcutCount).forEach { initializeShortcutRecorderState($0) }
-
-        if proLockObserver == nil {
-            proLockObserver = NotificationCenter.default.addObserver(
-                forName: ProTransitionManager.proLockStateDidChangeNotification,
-                object: nil, queue: .main
-            ) { _ in
-                refreshShortcutUi()
-                editor?.refreshFromCurrentBind()
-            }
-        }
         return view
     }
 
     static func cleanup() {
-        NotificationCenter.default.removeObserver(&proLockObserver)
         NotificationCenter.default.removeObserver(&shortcutRowsScrollObserver)
         shortcutsWhenActiveSheet = nil
         additionalControlsSheet = nil
@@ -200,7 +188,7 @@ class ControlsTab {
             editor?.refreshFromCurrentBind()
             AppearanceTab.refreshAllOverrideInfoLabels()
         case let k where isOverrideKey(k):
-            // An override key changed (e.g. user picked a different value, or remembered-restore wrote).
+            // An override key changed (e.g. the user picked a different value).
             editor?.refreshFromCurrentBind()
             AppearanceTab.refreshAllOverrideInfoLabels()
         case "arrowKeysEnabled" where arrowKeysCheckbox == nil:
@@ -472,8 +460,8 @@ class ControlsTab {
         clearArrangedSubviews(rows)
         // Recycle the row instances: grow/shrink the pool to `count`, creating new `SidebarListRow`s
         // only when the count actually increases. Reusing instances avoids rebuilding the
-        // label/observer machinery on every refresh (this runs on +/- clicks, recorder edits,
-        // input-source changes, and the pro-lock observer). The search index is re-published below
+        // label/observer machinery on every refresh (this runs on +/- clicks, recorder edits and
+        // input-source changes). The search index is re-published below
         // regardless, so added/removed rows stay correct.
         while shortcutRows.count < count {
             shortcutRows.append(makeShortcutRow(index: shortcutRows.count))
@@ -485,7 +473,6 @@ class ControlsTab {
             let row = shortcutRows[index]
             row.setContent(shortcutTitle(index), shortcutSummary(index))
             row.setSelected(index == selectedShortcutIndex && selectedShortcutIndex != gestureSelectionIndex)
-            row.setProBadge(index >= 1)
             rows.addArrangedSubview(row)
             // Re-create the row↔stack width constraint each layout: AppKit drops it when the row is
             // removed from the stack by `clearArrangedSubviews`. The row's height constraint is
@@ -559,10 +546,6 @@ class ControlsTab {
     private static func addShortcutSlot() {
         let currentCount = Preferences.shortcutCount
         guard currentCount < Preferences.maxShortcutCount else { return }
-        if currentCount >= 1 && LicenseManager.shared.isProLocked {
-            UpgradeTab.navigateToUpgradeTab(for: .shortcuts)
-            return
-        }
         resetShortcutPreferences(currentCount)
         setAddedShortcutTriggerDefaults(currentCount)
         selectedShortcutIndex = currentCount

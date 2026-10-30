@@ -42,15 +42,15 @@ cached by bundle, resource, locale, appearance, direction and text overrides, bo
 48 entries. Shared drawer caches are bounded at four bundles. Drawing an existing image
 does not repeat string substitution or fitting. Illustrations stay outside switcher input.
 
-All Settings appearance cards, Customize previews, Day 4 cards, Pro feature comparisons,
-and permission scenes use these resources. The rabbit and app/menu icons remain branding;
-interactive keycaps, success ticks, speech bubbles and ordinary controls remain native.
-Pro badges are native ProBadgeView overlays, never part of SVG artwork. Comparison headings
-and captions remain SVG text. An optional ID-to-string override supplies evidence-dependent
-wording (such as “With Pro”); overrides participate in the image cache key.
+All Settings appearance cards, Customize previews and permission scenes use these resources.
+The feature comparisons are no longer shown in the app; they remain as the drawer tests' fixtures for
+dark fills and RTL transforms. The rabbit and app/menu icons remain branding; interactive keycaps,
+success ticks, speech bubbles and ordinary controls remain native. Comparison headings and captions
+remain SVG text. An optional ID-to-string override replaces a text node's wording; overrides
+participate in the image cache key.
 
 Every compiled resource is checked for native vector drawing. The compiler rejects unsupported
-features and external resources. Canonical sources retain bounded text metadata and no Pro badge. The two comparison desktops remain stationary;
+features and external resources. Canonical sources retain bounded text metadata. The two comparison desktops remain stationary;
 only the switcher is scaled for Auto Size. All three Settings styles are reviewed at native sizes.
 Switcher illustrations select the second item when available, consistently across Show/Hide
 and comparison variants. Search places its field inside the switcher above two matching

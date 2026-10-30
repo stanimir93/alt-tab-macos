@@ -169,20 +169,20 @@ final class AnchoredPopoverTests: XCTestCase {
         popover.close()
     }
 
-    func testRejectedFallbackReleasesThePromptSlotWithoutAcknowledgingOrRetrying() {
+    func testRejectedFallbackReleasesTheContentWithoutAcknowledgingOrRetrying() {
         let popover = TestPopover()
         let anchor = NSView()
         popover.readiness = .unavailable
         popover.acceptsShow = false
-        var announcements = 0
-        popover.present(NSView(), from: anchor, onShown: { announcements += 1 })
+        var shownCalls = 0
+        popover.present(NSView(), from: anchor, onShown: { shownCalls += 1 })
         drainMainQueue()
         XCTAssertFalse(popover.isWaitingForAnchor)
         XCTAssertNil(popover.contentViewController)
         NotificationCenter.default.post(name: NSApplication.didUpdateNotification, object: nil)
         drainMainQueue()
         XCTAssertEqual(popover.unanchoredShowCount, 1)
-        XCTAssertEqual(announcements, 0)
+        XCTAssertEqual(shownCalls, 0)
         popover.close()
     }
 
@@ -210,49 +210,49 @@ final class AnchoredPopoverTests: XCTestCase {
         popover.close()
     }
 
-    func testTheTrialAnnouncementIsConsumedOnlyAfterThePopoverAppears() {
+    func testTheShownCallbackRunsOnlyAfterThePopoverAppears() {
         let popover = TestPopover()
         let anchor = NSView()
-        var announcements = 0
+        var shownCalls = 0
         popover.readiness = .ready
-        popover.present(NSView(), from: anchor, onShown: { announcements += 1 })
+        popover.present(NSView(), from: anchor, onShown: { shownCalls += 1 })
         NotificationCenter.default.post(name: NSPopover.didShowNotification, object: popover)
-        XCTAssertEqual(announcements, 0, "An obsolete show notification must not consume the pending announcement")
+        XCTAssertEqual(shownCalls, 0, "An obsolete show notification must not run the pending callback")
         drainMainQueue()
-        XCTAssertEqual(announcements, 0)
+        XCTAssertEqual(shownCalls, 0)
         NotificationCenter.default.post(name: NSPopover.didShowNotification, object: popover)
         NotificationCenter.default.post(name: NSPopover.didShowNotification, object: popover)
-        XCTAssertEqual(announcements, 1)
+        XCTAssertEqual(shownCalls, 1)
         popover.close()
     }
 
     func testAButtonActionBeforeTheAppearanceAnimationFinishesAcknowledgesOnlyOnce() {
         let popover = TestPopover()
         let anchor = NSView()
-        var announcements = 0
+        var shownCalls = 0
         popover.readiness = .ready
-        popover.present(NSView(), from: anchor, onShown: { announcements += 1 })
+        popover.present(NSView(), from: anchor, onShown: { shownCalls += 1 })
         popover.acknowledgePresentation()
-        XCTAssertEqual(announcements, 0, "A queued presentation has not appeared yet")
+        XCTAssertEqual(shownCalls, 0, "A queued presentation has not appeared yet")
         drainMainQueue()
         popover.acknowledgePresentation()
         NotificationCenter.default.post(name: NSPopover.didShowNotification, object: popover)
         popover.acknowledgePresentation()
-        XCTAssertEqual(announcements, 1)
+        XCTAssertEqual(shownCalls, 1)
         popover.close()
     }
 
-    func testClosingAQueuedReminderPreventsItFromAppearingAfterPurchase() {
+    func testClosingAQueuedPopoverPreventsItFromAppearing() {
         let popover = TestPopover()
         let anchor = NSView()
-        var announcements = 0
+        var shownCalls = 0
         popover.readiness = .ready
-        popover.present(NSView(), from: anchor, onShown: { announcements += 1 })
+        popover.present(NSView(), from: anchor, onShown: { shownCalls += 1 })
         popover.close()
         drainMainQueue()
         NotificationCenter.default.post(name: NSPopover.didShowNotification, object: popover)
         XCTAssertEqual(popover.showCount, 0)
-        XCTAssertEqual(announcements, 0)
+        XCTAssertEqual(shownCalls, 0)
         XCTAssertNil(popover.contentViewController)
     }
 

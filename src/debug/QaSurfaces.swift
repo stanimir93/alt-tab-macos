@@ -7,24 +7,20 @@ import Cocoa
 // every run, unless AltTab itself changed.
 //
 // The suite drives it through the CLI port (`CliServer`):
-//   --qa-surfaces        the ids, and the license states each one is worth photographing in
+//   --qa-surfaces        the ids
 //   --qa-look=<l>        light or dark, for the whole app
-//   --qa-license=<s>     trial, expired or pro
 //   --qa-open=<id>       put that surface on screen, closing whatever the previous one left
 //   --qa-shown           the window numbers to photograph, and how many pages of scrolling it holds
 //   --qa-page=<n>        scroll the surface to its n-th page (0-based)
 //   --qa-close           put everything away
 //
 // Whatever would change between two runs is held still, so a difference in the pictures is a difference in
-// AltTab: the usage numbers are pinned, the update check answers "up to date" without the network, the Pro
-// prompts are marked seen so none schedules itself mid-run, windows open at their default size rather than
-// the one they were last left at, and no text field keeps a blinking caret.
+// AltTab: the usage numbers are pinned, the update check answers "up to date" without the network, windows
+// open at their default size rather than the one they were last left at, and no text field keeps a blinking
+// caret.
 enum QaSurfaces {
     struct Info: Codable {
         let id: String
-        /// Nil for "all three": most surfaces look the same in every license state, but that is exactly the
-        /// kind of thing the suite is there to notice.
-        let licenses: [String]?
     }
 
     struct Shown: Codable {
@@ -64,14 +60,11 @@ enum QaSurfaces {
 
     private struct Surface {
         let id: String
-        let licenses: [String]?
         /// Surfaces that live in the Settings window keep it open between them, rather than rebuilding it.
         let inSettings: Bool
         let open: () -> Target
     }
 
-    private static let trial = ["trial"]
-    private static let expired = ["expired"]
     private static var current: Target?
     private static var currentId: String?
     private static var windowsBefore = Set<UInt32>()
@@ -95,7 +88,6 @@ enum QaSurfaces {
         switch parts[0] {
             case "--qa-open": return open(parts[1]) ? CliServer.noOutput : CliServer.error
             case "--qa-look": setLook(parts[1])
-            case "--qa-license": setLicense(parts[1])
             case "--qa-page": page(Int(parts[1]) ?? 0)
             default: return nil
         }
@@ -103,10 +95,9 @@ enum QaSurfaces {
     }
 
     static func list() -> [Info] {
-        ProGradient.animationsDisabledForQa = true
         observePopovers()
         disableAnimations()
-        return surfaces.map { Info(id: $0.id, licenses: $0.licenses) }
+        return surfaces.map { Info(id: $0.id) }
     }
 
     static func open(_ id: String) -> Bool {
@@ -188,25 +179,7 @@ enum QaSurfaces {
         Menubar.menu.appearance = appearance
     }
 
-    /// Day 4 of the trial and a long-expired one, rather than whatever day the machine happens to be on: the
-    /// day count is printed in the Upgrade button, the menubar menu and the prompts.
-    static func setLicense(_ license: String) {
-        QaLifecycleEnvironment.visualNow = Calendar(identifier: .gregorian).date(from:
-            DateComponents(year: 2026, month: 10, day: 21, hour: 12))
-        SettingsWindow.qaDiscard()
-        switch license {
-            case "trial":
-                LicenseManager.shared.mockTrialDay(4)
-            case "expired":
-                LicenseManager.shared.mockTrialDay(40)
-            default:
-                LicenseManager.shared.mockProUser()
-        }
-        Menubar.menubarIconCallback(nil)
-    }
-
     static func closeAll(keepSettings: Bool = false) {
-        ProPromptHost.windowPresentation.cancel()
         renderGeneration += 1
         settlingGeneration = nil
         readyGeneration = nil
@@ -226,8 +199,7 @@ enum QaSurfaces {
             sheet.orderOut(nil)
         }
         if !keepSettings { SettingsWindow.qaDiscard() }
-        let windows: [NSWindow?] = [AboutWindow.shared, FeedbackWindow.shared, PermissionsWindow.shared,
-            Day15FullUpgradeWindow.shared, Day35FinalWindow.shared]
+        let windows: [NSWindow?] = [AboutWindow.shared, FeedbackWindow.shared, PermissionsWindow.shared]
         windows.compactMap { $0 }.filter { $0.isVisible }.forEach { $0.close() }
         PermissionsWindow.qaForcedStatus = nil
         current = nil
@@ -236,25 +208,25 @@ enum QaSurfaces {
     // MARK: - the surfaces
 
     private static let surfaces: [Surface] = settingsSurfaces() + controlsSurfaces() + sheetSurfaces()
-        + windowSurfaces() + proSurfaces() + alertSurfaces() + menubarSurfaces()
+        + windowSurfaces() + alertSurfaces() + menubarSurfaces()
 
     private static func settingsSurfaces() -> [Surface] {
         ["appearance", "general", "exceptions"].map { section in
-            Surface(id: "settings.\(section)", licenses: nil, inSettings: true) { settings(section) }
-        } + [Surface(id: "settings.upgrade", licenses: nil, inSettings: true) { settings(nil) }]
+            Surface(id: "settings.\(section)", inSettings: true) { settings(section) }
+        }
     }
 
     private static func controlsSurfaces() -> [Surface] {
         let segments = ["filtering", "appearance", "ordering"]
         return [false, true].flatMap { gesture in
             segments.enumerated().map { segment, name in
-                Surface(id: "settings.controls.\(gesture ? "gesture" : "shortcut").\(name)", licenses: nil, inSettings: true) {
+                Surface(id: "settings.controls.\(gesture ? "gesture" : "shortcut").\(name)", inSettings: true) {
                     _ = settings("controls")
                     ControlsTab.qaSelect(gesture: gesture, segment: segment)
                     return settings("controls")
                 }
             }
-        } + [Surface(id: "popover.gesture-info", licenses: nil, inSettings: true) {
+        } + [Surface(id: "popover.gesture-info", inSettings: true) {
             _ = settings("controls")
             ControlsTab.qaSelect(gesture: true, segment: 0)
             hoverInfoButton(in: SettingsWindow.shared)
@@ -270,12 +242,12 @@ enum QaSurfaces {
             ("additional-controls", { ControlsTab.showAdditionalControlsSettings() }),
         ]
         return sheets.map { name, show in
-            Surface(id: "sheet.\(name)", licenses: nil, inSettings: true) {
+            Surface(id: "sheet.\(name)", inSettings: true) {
                 _ = settings(nil)
                 show()
                 return Target(windows: { [SettingsWindow.shared?.attachedSheet].compactMap { $0 } })
             }
-        } + [Surface(id: "popover.hide-status-icons-info", licenses: nil, inSettings: true) {
+        } + [Surface(id: "popover.hide-status-icons-info", inSettings: true) {
             _ = settings(nil)
             AppearanceTab.showCustomizeStyleSheet()
             hoverInfoButton(in: SettingsWindow.shared?.attachedSheet)
@@ -285,58 +257,16 @@ enum QaSurfaces {
 
     private static func windowSurfaces() -> [Surface] {
         [
-            Surface(id: "about", licenses: nil, inSettings: false) {
+            Surface(id: "about", inSettings: false) {
                 App.showAboutWindow()
                 return target(AboutWindow.shared) { AboutWindow.shared.flatMap { documentPager($0.contentView as? NSScrollView) } }
             },
-            Surface(id: "feedback", licenses: nil, inSettings: false) { feedback(nil) },
-            Surface(id: "feedback.bug", licenses: nil, inSettings: false) { feedback("selectBug") },
-            Surface(id: "feedback.suggestion", licenses: nil, inSettings: false) { feedback("selectEnhancement") },
-            Surface(id: "permissions", licenses: nil, inSettings: false) { permissions(granted: true) },
-            Surface(id: "permissions.missing", licenses: nil, inSettings: false) { permissions(granted: false) },
+            Surface(id: "feedback", inSettings: false) { feedback(nil) },
+            Surface(id: "feedback.bug", inSettings: false) { feedback("selectBug") },
+            Surface(id: "feedback.suggestion", inSettings: false) { feedback("selectEnhancement") },
+            Surface(id: "permissions", inSettings: false) { permissions(granted: true) },
+            Surface(id: "permissions.missing", inSettings: false) { permissions(granted: false) },
         ]
-    }
-
-    private static func proSurfaces() -> [Surface] {
-        let reasons: [(String, HardGateReason?)] = [
-            ("not-engaged", nil),
-            ("extra-shortcut", .feature(.extraShortcut(index: 1))),
-            ("search", .feature(.searchInSwitcher)),
-            ("app-icons", .proPreferences(appearanceStyle: .appIcons, shortcut: false)),
-            ("titles", .proPreferences(appearanceStyle: .titles, shortcut: false)),
-        ]
-        return [
-            Surface(id: "pro.welcome.new", licenses: trial, inSettings: false) { welcome(freshInstall: true) },
-            Surface(id: "pro.welcome.upgrade", licenses: trial, inSettings: false) { welcome(freshInstall: false) },
-            Surface(id: "pro.day4-tour", licenses: trial, inSettings: false) { Day4TourPopover.show(); return Target() },
-            Surface(id: "pro.day35-final", licenses: expired, inSettings: false) {
-                ProPromptWindow.showWithTrialEvidence { evidence in
-                    let window = Day35FinalWindow(evidence: evidence, preferred: ProTransitionManager.shared.state.lastIntent)
-                    Day35FinalWindow.shared = window
-                    App.showSecondaryWindow(window)
-                }
-                return Target()
-            },
-        ] + reasons.flatMap { name, reason in
-            [
-                Surface(id: "pro.day15-full-upgrade.\(name)", licenses: expired, inSettings: false) {
-                    // A Pro style kept until expiry is one the trial adopted, so the window opens on it.
-                    // The evidence is read synchronously when it is set, so it can be restored right after.
-                    let previous = UsageStats.qaEvidence
-                    if case let .proPreferences(style?, _) = reason {
-                        UsageStats.qaEvidence = ProJourneyEvidence(searches: UsageStats.qaPinned?["searches"]?.count,
-                            extraShortcuts: UsageStats.qaPinned?["triggersExtraShortcuts"]?.count, adoptedStyle: style.index)
-                    }
-                    Day15FullUpgradeWindow.show(for: reason)
-                    UsageStats.qaEvidence = previous
-                    return target(Day15FullUpgradeWindow.shared)
-                },
-                Surface(id: "pro.day15-hard-gate.\(name)", licenses: expired, inSettings: false) {
-                    Day15HardGatePopover.show(for: reason)
-                    return Target()
-                },
-            ]
-        }
     }
 
     /// Alerts are opened on the next turn of the main loop: some run a modal loop of their own. The launch-time
@@ -348,32 +278,23 @@ enum QaSurfaces {
             ("settings-not-saved.symlink", { PreferencesPersistenceCheck.debugShowDialog(symlinked: true) }),
             ("settings-not-saved.unwritable", { PreferencesPersistenceCheck.debugShowDialog(symlinked: false) }),
         ]
-        // A nil section is the Upgrade page.
         let settingsSheets: [(String, String?, () -> Void)] = [
             ("reset-settings", "general", { GeneralTab.resetPreferences() }),
             ("language-change", "general", { GeneralTab.setLanguageCallback(NSControl()) }),
             ("conflicting-shortcut", "controls", { _ = ControlsTab.confirmUnassigningConflict("• " + NSLocalizedString("Show", comment: "Menubar option")) }),
-            ("activate-license", nil, { UpgradeTab.presentActivationSheet() }),
-            ("activation-failed", nil, { UpgradeTab.presentActivationSheet(prefilledKey: "QA-LICENSE-KEY", autoFailedHint: true) }),
-            ("seat-limit", nil, { UpgradeTab.presentSeatLimitSheet(key: "QA-LICENSE-KEY", instances: seats) }),
-            ("license-error", nil, { UpgradeTab.presentLicenseError(NSLocalizedString("Activation failed", comment: ""), LicenseAPIError.invalidKey) }),
-            ("license-error.details", nil, {
-                UpgradeTab.presentLicenseError(NSLocalizedString("Activation failed", comment: ""),
-                    LicenseAPIError.invalidResponse(debugInfo: "HTTP 500\n{\"error\": \"qa\"}"))
-            }),
         ]
         return appModal.map { name, show in
-            Surface(id: "alert.\(name)", licenses: nil, inSettings: false) {
+            Surface(id: "alert.\(name)", inSettings: false) {
                 later(show)
                 return Target()
             }
         } + settingsSheets.map { name, section, show in
-            Surface(id: "alert.\(name)", licenses: nil, inSettings: true) {
+            Surface(id: "alert.\(name)", inSettings: true) {
                 _ = settings(section)
                 later(show)
                 return Target(windows: { [SettingsWindow.shared?.attachedSheet].compactMap { $0 } })
             }
-        } + [Surface(id: "alert.feedback-confirm", licenses: nil, inSettings: false) {
+        } + [Surface(id: "alert.feedback-confirm", inSettings: false) {
             _ = feedback("selectEnhancement")
             later { _ = FeedbackWindow.shared?.perform(NSSelectorFromString("sendCallback")) }
             return Target(windows: { [FeedbackWindow.shared?.attachedSheet].compactMap { $0 } })
@@ -384,13 +305,11 @@ enum QaSurfaces {
     /// laptop the notch hides it more often than not.
     private static func menubarSurfaces() -> [Surface] {
         [
-            Surface(id: "menubar.menu", licenses: nil, inSettings: false) {
+            Surface(id: "menubar.menu", inSettings: false) {
                 later { Menubar.popUpMenu() }
                 return Target()
             },
-            // Pro only: once the license lapses, the Pro styles give way to thumbnails, and the suite relaunches
-            // AltTab once per style to photograph them.
-            Surface(id: "switcher", licenses: ["pro"], inSettings: false) {
+            Surface(id: "switcher", inSettings: false) {
                 App.showUi(0)
                 return target(TilesPanel.shared)
             },
@@ -429,11 +348,6 @@ enum QaSurfaces {
         App.showPermissionsWindow()
         PermissionsWindow.updatePermissionViews()
         return target(PermissionsWindow.shared)
-    }
-
-    private static func welcome(freshInstall: Bool) -> Target {
-        Day1WelcomeLetterPopover.show(forceFreshInstall: freshInstall)
-        return Target()
     }
 
     private static func target(_ window: NSWindow?, pager: (() -> Pager?)? = nil) -> Target {
@@ -492,25 +406,13 @@ enum QaSurfaces {
         return window
     }
 
-    private static let seats = [
-        ActiveInstance(id: "qa-instance-1", machineName: "MacBook Pro", lastSeenAt: Date(timeIntervalSince1970: 1_767_225_600)),
-        ActiveInstance(id: "qa-instance-2", machineName: "Mac mini", lastSeenAt: Date(timeIntervalSince1970: 1_769_904_000)),
-    ]
-
     /// Relative to now, and re-pinned before every surface, so a week's count cannot drift as the run goes on.
     private static func pinVolatileContent() {
-        // Each capture is an independent presentation, regardless of earlier captures' daily budget.
-        ProTransitionState.defaults.removeObject(forKey: "proJourney.lastMessageAt")
         let now = Int(Date().timeIntervalSince1970)
         // A minute clear of both ends: a count made a few milliseconds after this pin must not decide
         // differently whether the event exactly one week ago belongs to "the past week".
         let triggers = (0..<4600).map { now - 60 - 300 * $0 }
-        UsageStats.qaPinned = [
-            "triggers": triggers,
-            "triggersAppIcons": triggers.enumerated().filter { $0.offset % 4 == 0 }.map { $0.element },
-            "triggersExtraShortcuts": triggers.enumerated().filter { $0.offset % 7 == 0 }.map { $0.element },
-            "searches": triggers.enumerated().filter { $0.offset % 10 == 0 }.map { $0.element },
-        ]
+        UsageStats.qaPinned = ["triggers": triggers]
         App.sparkleDelegate?.cachedResult = .upToDate
     }
 

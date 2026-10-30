@@ -3,8 +3,8 @@ import Foundation
 /// **Parks the notarization ticket while AltTab runs, and puts it back when it quits.**
 ///
 /// `stapler` writes the ticket to `Contents/CodeResources`, the one path the signature does not seal, so moving
-/// it changes neither the code signature nor anything tied to it: the Screen Recording grant, the Keychain
-/// license items, Gatekeeper's record of the app. The ticket is for Gatekeeper's first look at a downloaded
+/// it changes neither the code signature nor anything tied to it: the Screen Recording grant, Gatekeeper's
+/// record of the app. The ticket is for Gatekeeper's first look at a downloaded
 /// copy, which has already happened by the time AltTab runs.
 ///
 /// It is worth moving because macOS validates AltTab's bundle from disk for every permission check, three per

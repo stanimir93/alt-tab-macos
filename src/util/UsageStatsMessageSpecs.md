@@ -4,7 +4,7 @@
 
 ## Summary
 
-The Pro windows and the switcher show usage counts ("Search uses during your trial: 1,234").
+The About window and the switcher show counts (summons this week, a Dock badge number).
 `UsageStatsTestable` formats those counts for display.
 
 ## Behavior & edge cases

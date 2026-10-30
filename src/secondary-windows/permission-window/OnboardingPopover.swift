@@ -4,8 +4,8 @@ import ShortcutRecorder
 
 /// The end of the first-run flow, off the menubar icon, in two beats. First it hands over the
 /// shortcut and waits for it to be used, lighting each key as the user presses it. It steps aside
-/// while the switcher is up, then comes back as "That's it": the shortcut restated, the trial
-/// announced when it stands in for the welcome letter, and one button into Settings.
+/// while the switcher is up, then comes back as "That's it": the shortcut restated, and one button
+/// into Settings.
 ///
 /// Neither beat can be dismissed: the only way past the first is the shortcut, the only way past the
 /// second is the button. Each beat activates AltTab and makes the popover key, since a popover washes
@@ -20,7 +20,6 @@ enum OnboardingPopover {
     static func showForQa(completion: Bool) {
         guard Menubar.statusItem != nil else { return }
         close()
-        announcesTrial = true
         if completion {
             stage = .done
             presentCompletion()
@@ -31,7 +30,6 @@ enum OnboardingPopover {
     #endif
     private static var popover: AnchoredPopover?
     private static var stage = Stage.waitingForShortcut
-    private static var announcesTrial = false
     private static var keyMonitors = [Any]()
     private static var pendingDone: DispatchWorkItem?
     private static weak var holdKey: KeycapView?
@@ -40,13 +38,12 @@ enum OnboardingPopover {
 
     /// Returns false before the menubar exists, so the caller can fall back. A hidden or unplaced icon is not a
     /// reason to: the popover then shows under the menu bar (`StatusItemAnchor`).
-    static func show(announcesTrial: Bool) -> Bool {
+    static func show() -> Bool {
         guard Menubar.statusItem != nil else {
             Logger.debug { "no menubar yet" }
             return false
         }
         close()
-        Self.announcesTrial = announcesTrial
         if UserDefaults.standard.bool(forKey: "onboardingShortcutUsed") {
             stage = .done
             presentCompletion()
@@ -98,17 +95,7 @@ enum OnboardingPopover {
         popover?.close()
         popover = makePopover()
         Preferences.set("onboardingShortcutUsed", "true", false)
-        LicenseManager.shared.refreshState()
-        let trialEnd = completionTrialEnd()
-        present(makeDoneView(trialEnd)) {
-            if trialEnd != nil { ProTransitionManager.shared.hasSeenWelcome = true }
-            celebrate()
-        }
-    }
-
-    private static func completionTrialEnd() -> Date? {
-        guard announcesTrial, case .trial = LicenseManager.shared.state else { return nil }
-        return LicenseManager.shared.trialEndDate
+        present(makeDoneView()) { celebrate() }
     }
 
     private static func makePopover() -> AnchoredPopover {
@@ -133,8 +120,6 @@ enum OnboardingPopover {
     fileprivate static func chooseStyle() {
         close()
         Preferences.markSettingsWindowShownOnFirstLaunch()
-        ProTransitionManager.shared.state.onboardingInProgress = false
-        ProTransitionManager.shared.onAppLaunchComplete()
         App.showAndCenterSettingsWindow()
         SettingsWindow.shared?.navigateToSection("appearance")
     }
@@ -189,25 +174,20 @@ enum OnboardingPopover {
         return OnboardingLayout.root(stack)
     }
 
-    /// Second beat: confirms the keypress landed, announces the trial, and leads into Settings.
-    private static func makeDoneView(_ trialEnd: Date?) -> NSView {
+    /// Second beat: confirms the keypress landed and leads into Settings.
+    private static func makeDoneView() -> NSView {
         let title = OnboardingLayout.title(NSLocalizedString("That's it", comment: "Onboarding popover, once the shortcut was used"))
         let reminder = pressAnyTime()
         let button = AccentButton(NSLocalizedString("Choose a style", comment: "Onboarding popover; opens Settings on Appearance")) {
             chooseStyle()
         }
-        let trial = trialEnd.map { TrialCard($0) }
         let tick = SuccessTickView()
         Self.tick = tick
-        let stack = NSStackView(views: [tick, title, reminder, trial, button].compactMap { $0 })
+        let stack = NSStackView(views: [tick, title, reminder, button])
         stack.spacing = 8
         stack.setCustomSpacing(14, after: stack.views[0])
         stack.setCustomSpacing(14, after: title)
-        stack.setCustomSpacing(18, after: reminder)
-        if let trial {
-            trial.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
-        }
-        stack.setCustomSpacing(22, after: trial ?? reminder)
+        stack.setCustomSpacing(22, after: reminder)
         // wider when the sentence needs it (French, Russian), rather than cutting it off
         return OnboardingLayout.root(stack, width: max(290, reminder.fittingSize.width + 2 * OnboardingLayout.horizontalInset))
     }
@@ -264,8 +244,7 @@ private enum OnboardingLayout {
         return title
     }
 
-    /// `width` nil hugs the content. The second beat needs one: its wrapping trial text has no width
-    /// of its own.
+    /// `width` nil hugs the content.
     static func root(_ stack: NSStackView, width: CGFloat? = nil) -> NSView {
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.orientation = .vertical
@@ -313,51 +292,6 @@ private enum OnboardingLayout {
     /// are spelled out anyway, for the same reason as ⌥.
     static func keyName(_ glyphs: String) -> String? {
         ["⌘": "command", "⌥": "option", "⌃": "control", "⇧": "shift", "⇥": "tab"][glyphs]
-    }
-}
-
-/// The trial, announced the moment the switcher has just worked. It replaces the welcome letter for
-/// new users, so it carries the letter's one promise: the switcher itself stays free.
-private class TrialCard: NSView {
-    private let gradient = ProGradient.makeLayer(alpha: 0.12)
-
-    init(_ trialEnd: Date) {
-        super.init(frame: .zero)
-        translatesAutoresizingMaskIntoConstraints = false
-        wantsLayer = true
-        layer!.cornerRadius = 8
-        layer!.masksToBounds = true
-        layer!.addSublayer(gradient)
-        let title = NSTextField(wrappingLabelWithString: ProFeatureCopy.includedUntil(trialEnd))
-        title.translatesAutoresizingMaskIntoConstraints = false
-        title.font = .systemFont(ofSize: 12, weight: .semibold)
-        title.isSelectable = false
-        let body = NSTextField(wrappingLabelWithString: ProFeatureCopy.trialPromise)
-        body.translatesAutoresizingMaskIntoConstraints = false
-        body.font = .systemFont(ofSize: 11)
-        body.textColor = .secondaryLabelColor
-        body.isSelectable = false
-        let stack = NSStackView(views: [title, body])
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.orientation = .vertical
-        stack.alignment = .leading
-        stack.spacing = 4
-        addSubview(stack)
-        NSLayoutConstraint.activate([
-            stack.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            stack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            stack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
-            stack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
-        ])
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("Class only supports programmatic initialization")
-    }
-
-    override func layout() {
-        super.layout()
-        gradient.frame = bounds
     }
 }
 

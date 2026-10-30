@@ -1,24 +1,6 @@
 import Cocoa
 import ShortcutRecorder
 
-// Stubs so ProBadgeView.swift compiles in the test target. The real Symbols
-// enum and NSImage.fromSymbol live in TileFontIconView.swift and
-// HelperExtensions.swift respectively, neither of which is in the test
-// target's source membership. Tests never actually render an icon, so a
-// minimal stub satisfying the signatures is enough — isTemplate = true
-// matches the production contract that ProBadgeViewSegmentTests asserts on.
-enum Symbols: String {
-    case stub = ""
-}
-
-extension NSImage {
-    static func fromSymbol(_ symbol: Symbols, pointSize: CGFloat, rotated180: Bool = false, margin: CGFloat = 0) -> NSImage {
-        let image = NSImage()
-        image.isTemplate = true
-        return image
-    }
-}
-
 // Stub so SwitcherSession.swift's Preview-frame cache compiles in the test target. The real enum
 // lives in LightImageView.swift (not in the test target); the session only stores and returns
 // values, so mirroring the cases without the helper methods is enough.

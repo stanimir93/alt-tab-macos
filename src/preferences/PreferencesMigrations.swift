@@ -17,7 +17,7 @@ class PreferencesMigrations {
     static func migratePreferences() {
         let preferencesKey = "preferencesVersion"
         let existingVersion = Self.defaults.string(forKey: preferencesKey)
-        ProTransitionState.markFreshInstallIfUnknown(existingVersion == nil)
+        markFreshInstallIfUnknown(existingVersion == nil)
         if let versionInPlist = existingVersion {
             if versionInPlist != "#VERSION#" && versionInPlist.compare(App.version, options: .numeric) != .orderedDescending {
                 updateToNewPreferences(versionInPlist)
@@ -25,6 +25,22 @@ class PreferencesMigrations {
         }
         Self.defaults.set(App.version, forKey: preferencesKey)
     }
+
+    /// True when the first launch of this install found no `preferencesVersion`, i.e. a new user rather
+    /// than one upgrading. Later launches can't tell, since `migratePreferences()` writes the version.
+    static var isFreshInstall: Bool { defaults.bool(forKey: freshInstallKey) }
+    private static let freshInstallKey = "isFreshInstall"
+
+    private static func markFreshInstallIfUnknown(_ value: Bool) {
+        guard defaults.object(forKey: freshInstallKey) == nil else { return }
+        defaults.set(value, forKey: freshInstallKey)
+    }
+
+    #if DEBUG
+    static func overrideFreshInstallForQa(_ value: Bool) {
+        defaults.set(value, forKey: freshInstallKey)
+    }
+    #endif
 
     static func updateToNewPreferences(_ versionInPlist: String) {
         Logger.debug { "App-version:\(App.version), Plist-version:\(versionInPlist)" }

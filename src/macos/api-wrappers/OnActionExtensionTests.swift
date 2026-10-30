@@ -100,8 +100,8 @@ final class OnActionExtensionTests: XCTestCase {
             "regression: the wrapper must be able to call through to the previously-set closure")
     }
 
-    /// When the wrap returns early (the Pro-click branch), the original closure must NOT fire —
-    /// otherwise `controlWasChanged` would still write the Pro value to `Preferences`.
+    /// When the wrap returns early (it handled the click itself), the original closure must NOT fire —
+    /// otherwise `controlWasChanged` would still write the clicked value to `Preferences`.
     func testWrapPatternSkipsPreviousClosureOnEarlyReturn() {
         let control = NSControl()
         var originalCalls = 0
@@ -109,7 +109,7 @@ final class OnActionExtensionTests: XCTestCase {
         let original = control.onAction
 
         control.onAction = { _ in
-            // simulate the "isProLocked + isProSegment" branch: do side effect, return early
+            // simulate a wrap that handles the click itself: do side effect, return early
             // original?(c) is NOT called here
         }
         _ = original

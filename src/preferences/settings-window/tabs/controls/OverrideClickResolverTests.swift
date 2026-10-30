@@ -98,8 +98,8 @@ final class OverrideClickResolverTests: XCTestCase {
     }
 
     /// Regression for the user-reported scenario: Override is UNSET, global = Focus (0), segment
-    /// displays Focus. User clicks Hold (1). The override must be SET to Hold even though the
-    /// registered default for `shortcutStyleOverride` happens to be Hold too.
+    /// displays Focus. User clicks Hold (1). The override must be SET to Hold even when the override
+    /// key's registered default (what `UserDefaults` returns while it is unset) is Hold too.
     func testWritesOverrideWhenClickValueEqualsRegisteredDefault() {
         let decision = OverrideClickResolver.decide(
             newIndex: 1,                    // user clicks Hold

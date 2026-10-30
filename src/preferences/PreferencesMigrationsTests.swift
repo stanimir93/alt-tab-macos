@@ -347,10 +347,6 @@ extension App {
     static let version = "99.99.99"
 }
 
-extension ProTransitionState {
-    static func markFreshInstallIfUnknown(_ value: Bool) {}
-}
-
 // Preferences encoding surface used by the migrations
 
 extension Preferences {

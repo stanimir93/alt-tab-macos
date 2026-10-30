@@ -1,9 +1,3 @@
-/* No comment provided by engineer. */
-"%@ now has a Pro tier" = "%@ now has a Pro tier";
-
-/* No comment provided by engineer. */
-"%@ — last seen %@" = "%1$@ — last seen %2$@";
-
 /* Illustration: search.browse */
 "12 windows to browse" = "12 windows to browse";
 
@@ -38,15 +32,6 @@
 "Accessibility" = "Accessibility";
 
 /* No comment provided by engineer. */
-"Activate" = "Activate";
-
-/* No comment provided by engineer. */
-"Activate your Pro license" = "Activate your Pro license";
-
-/* No comment provided by engineer. */
-"Activation failed" = "Activation failed";
-
-/* No comment provided by engineer. */
 "Active app" = "Active app";
 
 /* Illustration: shortcut.active */
@@ -70,14 +55,8 @@
 /* No comment provided by engineer. */
 "After keys are released" = "After keys are released";
 
-/* What remains free after the Pro trial */
-"After that, window switching and thumbnails stay free. Search, extra styles, Auto Size, and additional shortcuts require Pro." = "After that, window switching and thumbnails stay free. Search, extra styles, Auto Size, and additional shortcuts require Pro.";
-
 /* No comment provided by engineer. */
 "All apps" = "All apps";
-
-/* No comment provided by engineer. */
-"All Macs covered by this team license are in use. Ask your license manager to free a place in My Account." = "All Macs covered by this team license are in use. Ask your license manager to free a place in My Account.";
 
 /* No comment provided by engineer. */
 "All screens" = "All screens";
@@ -109,9 +88,6 @@
 /* No comment provided by engineer. */
 "AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:" = "AltTab preferences file isn’t writable by your account. Please fix ownership and permissions of the file here:";
 
-/* No comment provided by engineer. */
-"AltTab Pro" = "AltTab Pro";
-
 /* Permissions window title */
 "AltTab requires some permissions" = "AltTab requires some permissions";
 
@@ -138,9 +114,6 @@
 
 /* Illustration: style.app-icons */
 "App Icons" = "App Icons";
-
-/* No comment provided by engineer. */
-"App Icons & Titles styles" = "App Icons & Titles styles";
 
 /* No comment provided by engineer. */
 "App is hidden" = "App is hidden";
@@ -182,13 +155,7 @@
 "Auto Size" = "Auto Size";
 
 /* No comment provided by engineer. */
-"Auto Size — larger previews with few windows, more at once with many" = "Auto Size — larger previews with few windows, more at once with many";
-
-/* No comment provided by engineer. */
 "Auto-install updates periodically" = "Auto-install updates periodically";
-
-/* No comment provided by engineer. */
-"Automatic activation failed" = "Automatic activation failed";
 
 /* Illustration: window.breakfast */
 "Breakfast" = "Breakfast";
@@ -223,9 +190,6 @@
 /* Onboarding popover; opens Settings on Appearance */
 "Choose a style" = "Choose a style";
 
-/* No comment provided by engineer. */
-"Choose which windows to switch between" = "Choose which windows to switch between";
-
 /* Permissions window button */
 "Close" = "Close";
 
@@ -235,9 +199,6 @@
 /* No comment provided by engineer. */
 "Conflicting shortcut" = "Conflicting shortcut";
 
-/* No comment provided by engineer. */
-"Continue" = "Continue";
-
 /* Permissions window */
 "Continue without thumbnails" = "Continue without thumbnails";
 
@@ -246,12 +207,6 @@
 
 /* LetsMove replacement alert */
 "Could not move to Applications folder" = "Could not move to Applications folder";
-
-/* No comment provided by engineer. */
-"Couldn't deactivate that machine" = "Couldn't deactivate that machine";
-
-/* No comment provided by engineer. */
-"Couldn't save your license to the macOS Keychain. Please share the details below with the developer." = "Couldn't save your license to the macOS Keychain. Please share the details below with the developer.";
 
 /* No comment provided by engineer. */
 "Couldn't submit feedback" = "Couldn't submit feedback";
@@ -271,24 +226,6 @@
 /* No comment provided by engineer. */
 "Dark" = "Dark";
 
-/* No comment provided by engineer. */
-"Dark Mode, live preview, window controls, trackpad gestures, and more" = "Dark Mode, live preview, window controls, trackpad gestures, and more";
-
-/* No comment provided by engineer. */
-"Deactivate and activate here" = "Deactivate and activate here";
-
-/* No comment provided by engineer. */
-"Deactivate license" = "Deactivate license";
-
-/* No comment provided by engineer. */
-"Deactivate license on this machine" = "Deactivate license on this machine";
-
-/* No comment provided by engineer. */
-"Deactivation failed" = "Deactivation failed";
-
-/* No comment provided by engineer. */
-"Deactivation was rejected by the server." = "Deactivation was rejected by the server.";
-
 /* Menubar option */
 "Debug tools" = "Debug tools";
 
@@ -306,12 +243,6 @@
 
 /* No comment provided by engineer. */
 "Don't hide" = "Don't hide";
-
-/* Stops reminders about Pro */
-"Don't mention again" = "Don't mention again";
-
-/* No comment provided by engineer. */
-"Don't show discovery tips again" = "Don't show discovery tips again";
 
 /* No comment provided by engineer. */
 "Done" = "Done";
@@ -334,20 +265,11 @@
 /* No comment provided by engineer. */
 "End" = "End";
 
-/* Closes the celebration after a Pro license is activated */
-"Enjoy!" = "Enjoy!";
-
-/* No comment provided by engineer. */
-"Enter license key" = "Enter license key";
-
 /* No comment provided by engineer. */
 "Exceptions" = "Exceptions";
 
 /* No comment provided by engineer. */
 "Export settings…" = "Export settings…";
-
-/* No comment provided by engineer. */
-"Extra shortcut uses during your trial: %@" = "Extra shortcut uses during your trial: %@";
 
 /* No comment provided by engineer. */
 "Fade in animation of Preview" = "Fade in animation of Preview";
@@ -359,13 +281,7 @@
 "Failed to import settings" = "Failed to import settings";
 
 /* No comment provided by engineer. */
-"Feature" = "Feature";
-
-/* No comment provided by engineer. */
 "Filtering" = "Filtering";
-
-/* No comment provided by engineer. */
-"Find a window by typing" = "Find a window by typing";
 
 /* Illustration: size.fixed */
 "Fixed size" = "Fixed size";
@@ -377,9 +293,6 @@
 "Focus selected window" = "Focus selected window";
 
 /* No comment provided by engineer. */
-"Free" = "Free";
-
-/* No comment provided by engineer. */
 "Fullscreen/Defullscreen window" = "Fullscreen/Defullscreen window";
 
 /* No comment provided by engineer. */
@@ -387,24 +300,6 @@
 
 /* No comment provided by engineer. */
 "Gesture" = "Gesture";
-
-/* No comment provided by engineer. */
-"Get more from AltTab with Pro" = "Get more from AltTab with Pro";
-
-/* Menubar option */
-"Get Pro" = "Get Pro";
-
-/* No comment provided by engineer. */
-"Get Pro for this version" = "Get Pro for this version";
-
-/* No comment provided by engineer. */
-"Get Pro to keep these features" = "Get Pro to keep these features";
-
-/* No comment provided by engineer. */
-"Give different groups of windows their own shortcuts." = "Give different groups of windows their own shortcuts.";
-
-/* No comment provided by engineer. */
-"Give your previews more room" = "Give your previews more room";
 
 /* No comment provided by engineer. */
 "Go back" = "Go back";
@@ -461,12 +356,6 @@
 /* No comment provided by engineer. */
 "Import settings…" = "Import settings…";
 
-/* No comment provided by engineer. */
-"Invalid license key." = "Invalid license key.";
-
-/* No comment provided by engineer. */
-"It's still here whenever you need it" = "It's still here whenever you need it";
-
 /* Illustration: search.query, window.japan */
 "Japan" = "Japan";
 
@@ -478,12 +367,6 @@
 
 /* Illustration: page.japan, window.japan, window.japan-trip */
 "Japan trip" = "Japan trip";
-
-/* No comment provided by engineer. */
-"Keep holding %@ then press %@" = "Keep holding %1$@ then press %2$@";
-
-/* No comment provided by engineer. */
-"Keep Thumbnails" = "Keep Thumbnails";
 
 /* No comment provided by engineer. */
 "Language" = "Language";
@@ -498,31 +381,13 @@
 "Later" = "Later";
 
 /* No comment provided by engineer. */
-"License doesn't cover this version" = "License doesn't cover this version";
-
-/* No comment provided by engineer. */
-"License will remain valid and usable to activate AltTab on any machine" = "License will remain valid and usable to activate AltTab on any machine";
-
-/* No comment provided by engineer. */
 "Light" = "Light";
-
-/* No comment provided by engineer. */
-"Lost your license key?" = "Lost your license key?";
 
 /* Illustration: window.lunch */
 "Lunch" = "Lunch";
 
 /* No comment provided by engineer. */
-"Machine %@" = "Machine %@";
-
-/* No comment provided by engineer. */
 "macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. AltTab cannot use them.\n\nYour change would assign one of these to: %@." = "macOS reserves ⌘⌥⎋, ⌘⌥⇧⎋, and ⌘⌥⇧⌃⎋ for Force Quit and they cannot be unbound. AltTab cannot use them.\n\nYour change would assign one of these to: %@.";
-
-/* No comment provided by engineer. */
-"Manage activations, view receipts, etc" = "Manage activations, view receipts, etc";
-
-/* No comment provided by engineer. */
-"Maybe later" = "Maybe later";
 
 /* No comment provided by engineer. */
 "Medium" = "Medium";
@@ -549,9 +414,6 @@
 "Multiple screens" = "Multiple screens";
 
 /* No comment provided by engineer. */
-"My Account" = "My Account";
-
-/* No comment provided by engineer. */
 "Never" = "Never";
 
 /* No comment provided by engineer. */
@@ -559,9 +421,6 @@
 
 /* Permissions window: a step the user hasn't reached yet */
 "Next" = "Next";
-
-/* No comment provided by engineer. */
-"No response from server." = "No response from server.";
 
 /* No comment provided by engineer. */
 "No Window" = "No Window";
@@ -581,9 +440,6 @@
 /* No comment provided by engineer. */
 "OK" = "OK";
 
-/* Purchase terms shown before opening the website */
-"One-time purchase" = "One-time purchase";
-
 /* Illustration: shortcut.free-count */
 "Only 1 shortcut" = "Only 1 shortcut";
 
@@ -602,14 +458,8 @@
 /* No comment provided by engineer. */
 "Overridden in Shortcut:" = "Overridden in Shortcut:";
 
-/* No comment provided by engineer. */
-"Paste your license key:" = "Paste your license key:";
-
 /* Illustration: window.photos */
 "Photos" = "Photos";
-
-/* No comment provided by engineer. */
-"Pick a machine to deactivate so you can activate here." = "Pick a machine to deactivate so you can activate here.";
 
 /* LetsMove replacement alert */
 "Please drag AltTab into the Applications folder manually." = "Please drag AltTab into the Applications folder manually.";
@@ -620,35 +470,11 @@
 /* Onboarding popover, above the key to press */
 "press" = "press";
 
-/* Window search hint; placeholder is the configured keyboard shortcut */
-"Press %@" = "Press %@";
-
 /* Onboarding popover, once the shortcut was used; %@ is the keyboard shortcut */
 "Press %@ any time" = "Press %@ any time";
 
 /* No comment provided by engineer. */
 "Preview selected window" = "Preview selected window";
-
-/* No comment provided by engineer. */
-"Pro" = "Pro";
-
-/* No comment provided by engineer. */
-"Pro activated" = "Pro activated";
-
-/* %@ is the localized trial end date */
-"Pro is included until %@." = "Pro is included until %@.";
-
-/* No comment provided by engineer. */
-"Pro is ready" = "Pro is ready";
-
-/* No comment provided by engineer. */
-"Pro license activated for %@" = "Pro license activated for %@";
-
-/* No comment provided by engineer. */
-"Pro Lifetime activated" = "Pro Lifetime activated";
-
-/* No comment provided by engineer. */
-"Pro Lifetime license activated for %@" = "Pro Lifetime license activated for %@";
 
 /* %@ is AltTab */
 "Quit %@" = "Quit %@";
@@ -668,17 +494,11 @@
 /* Illustration: window.recipes */
 "Recipes" = "Recipes";
 
-/* No comment provided by engineer. */
-"Recognize your apps at a glance" = "Recognize your apps at a glance";
-
 /* VoiceOver description of an app notification badge */
 "Red badge" = "Red badge";
 
 /* VoiceOver description of an app notification badge */
 "Red badge with number %@" = "Red badge with number %@";
-
-/* No comment provided by engineer. */
-"Reliable, fast window switching with high-quality thumbnails" = "Reliable, fast window switching with high-quality thumbnails";
 
 /* No comment provided by engineer. */
 "Remember my choice" = "Remember my choice";
@@ -715,15 +535,6 @@
 
 /* No comment provided by engineer. */
 "Search" = "Search";
-
-/* No comment provided by engineer. */
-"Search — find a window by typing" = "Search — find a window by typing";
-
-/* No comment provided by engineer. */
-"Searches started during your trial: %@" = "Searches started during your trial: %@";
-
-/* No comment provided by engineer. */
-"See your windows in a compact list" = "See your windows in a compact list";
 
 /* No comment provided by engineer. */
 "Select next window" = "Select next window";
@@ -768,9 +579,6 @@
 "Shortcut already assigned to: %@" = "Shortcut already assigned to: %@";
 
 /* No comment provided by engineer. */
-"Shortcuts" = "Shortcuts";
-
-/* No comment provided by engineer. */
 "Shortcuts when active" = "Shortcuts when active";
 
 /* Menubar option */
@@ -784,9 +592,6 @@
 
 /* No comment provided by engineer. */
 "Show at the end" = "Show at the end";
-
-/* No comment provided by engineer. */
-"Show details (for support)" = "Show details (for support)";
 
 /* No comment provided by engineer. */
 "Show fullscreen windows" = "Show fullscreen windows";
@@ -804,16 +609,10 @@
 "Show one window per app" = "Show one window per app";
 
 /* No comment provided by engineer. */
-"Show only %@ windows (active app)" = "Show only %@ windows (active app)";
-
-/* No comment provided by engineer. */
 "Show separate window for each tab" = "Show separate window for each tab";
 
 /* No comment provided by engineer. */
 "Show single window for all tabs" = "Show single window for all tabs";
-
-/* No comment provided by engineer. */
-"Show the search hint" = "Show the search hint";
 
 /* No comment provided by engineer. */
 "Show titles" = "Show titles";
@@ -852,12 +651,9 @@
 "Start at login" = "Start at login";
 
 /* No comment provided by engineer. */
-"Styles" = "Styles";
-
-/* No comment provided by engineer. */
 "Suggest a change" = "Suggest a change";
 
-/* Menubar option */
+/* No comment provided by engineer. */
 "Support this project" = "Support this project";
 
 /* No comment provided by engineer. */
@@ -887,15 +683,6 @@
 /* No comment provided by engineer. */
 "Theme" = "Theme";
 
-/* No comment provided by engineer. */
-"This license is already activated elsewhere" = "This license is already activated elsewhere";
-
-/* No comment provided by engineer. */
-"This license is already activated on the maximum number of machines. Deactivate one to continue." = "This license is already activated on the maximum number of machines. Deactivate one to continue.";
-
-/* No comment provided by engineer. */
-"This version needs a newer license" = "This version needs a newer license";
-
 /* LetsMove replacement alert */
 "This will keep your Downloads folder uncluttered." = "This will keep your Downloads folder uncluttered.";
 
@@ -918,12 +705,6 @@
 "Trackpad haptic feedback" = "Trackpad haptic feedback";
 
 /* No comment provided by engineer. */
-"Trial expired" = "Trial expired";
-
-/* No comment provided by engineer. */
-"Trial: %d days remaining" = "Trial: %d days remaining";
-
-/* No comment provided by engineer. */
 "Trigger" = "Trigger";
 
 /* Illustration: window.checklist */
@@ -932,35 +713,11 @@
 /* Illustration: window.checklist */
 "Trip list" = "Trip list";
 
-/* No comment provided by engineer. */
-"Try a different window style" = "Try a different window style";
-
-/* No comment provided by engineer. */
-"Try all four Pro features." = "Try all four Pro features.";
-
 /* Onboarding popover */
 "Try it right now" = "Try it right now";
 
 /* No comment provided by engineer. */
 "Unassign existing shortcut and continue" = "Unassign existing shortcut and continue";
-
-/* No comment provided by engineer. */
-"Unexpected response from server." = "Unexpected response from server.";
-
-/* No comment provided by engineer. */
-"Unlimited access to all four Pro features" = "Unlimited access to all four Pro features";
-
-/* No comment provided by engineer. */
-"Unlock extra shortcuts with Pro" = "Unlock extra shortcuts with Pro";
-
-/* No comment provided by engineer. */
-"Unlock Search with Pro" = "Unlock Search with Pro";
-
-/* No comment provided by engineer. */
-"Unlock the App Icons style with Pro" = "Unlock the App Icons style with Pro";
-
-/* No comment provided by engineer. */
-"Unlock the Titles style with Pro" = "Unlock the Titles style with Pro";
 
 /* Illustration: shortcut.count */
 "Up to 9 shortcuts" = "Up to 9 shortcuts";
@@ -973,12 +730,6 @@
 
 /* No comment provided by engineer. */
 "Usage" = "Usage";
-
-/* No comment provided by engineer. */
-"Use App Icons" = "Use App Icons";
-
-/* No comment provided by engineer. */
-"Use Titles" = "Use Titles";
 
 /* No comment provided by engineer. */
 "Version" = "Version";
@@ -1003,9 +754,6 @@
 
 /* Illustration: window.recipes */
 "Weekend recipes" = "Weekend recipes";
-
-/* No comment provided by engineer. */
-"Welcome to %@" = "Welcome to %@";
 
 /* No comment provided by engineer. */
 "What did you expect? What happened? Steps to reproduce…" = "What did you expect? What happened? Steps to reproduce…";
@@ -1052,17 +800,11 @@
 /* Permissions window */
 "Windows will show as app icons" = "Windows will show as app icons";
 
-/* No comment provided by engineer. */
-"With Pro" = "With Pro";
-
 /* Illustration: comparison.without */
 "Without Pro" = "Without Pro";
 
 /* Illustration: window.work */
 "Work" = "Work";
-
-/* No comment provided by engineer. */
-"You can change it anytime in Settings" = "You can change it anytime in Settings";
 
 /* No comment provided by engineer. */
 "You can’t undo this action." = "You can’t undo this action.";
@@ -1071,19 +813,10 @@
 "You may need to disable some conflicting system gestures" = "You may need to disable some conflicting system gestures";
 
 /* No comment provided by engineer. */
-"You reached for AltTab Pro this week" = "You reached for AltTab Pro this week";
-
-/* No comment provided by engineer. */
 "You're running v%1$@. v%2$@ is available. The bug you're seeing may already be fixed — please update first and check before reporting." = "You're running v%1$@. v%2$@ is available. The bug you're seeing may already be fixed — please update first and check before reporting.";
 
 /* No comment provided by engineer. */
-"Your AltTab Pro trial has ended" = "Your AltTab Pro trial has ended";
-
-/* No comment provided by engineer. */
 "Your feedback will be submitted as a public GitHub issue." = "Your feedback will be submitted as a public GitHub issue.";
-
-/* Permissions setup is not finished */
-"Your Pro trial starts when AltTab is ready" = "Your Pro trial starts when AltTab is ready";
 
 /* No comment provided by engineer. */
 "Your settings reset every time AltTab restarts." = "Your settings reset every time AltTab restarts.";
